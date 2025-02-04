@@ -1,0 +1,3140 @@
+<!DOCTYPE html>
+<!-- saved from url=(0024)http://localhost/mrunal/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<!-- Title -->
+		<title>Home</title>
+
+		<!-- Required Meta Tags Always Come First -->
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!-- Favicon -->
+		<link rel="shortcut icon" href="http://localhost/mrunal//themes/default/img/icon.png">
+		
+		<meta name="title" content="Home">
+		<meta name="description" content="DeepSound is a PHP Audio Sharing Script, DeepSound is the best way to start your own audiosharing script!">
+		<meta name="keywords" content="deepsound,video sharing">
+
+
+		</head><body class="modal-open" data-lang="ltr" style="padding-right: 22px;"><ink rel="canonical" href="http://localhost/mrunal/"><ink rel="home" href="http://localhost/mrunal/"><meta property="og:title" content="Ultra"><meta property="og:image" content="http://localhost/mrunal//themes/default/img/logo.png"><meta property="og:image:width" content="500"><meta property="og:image:height" content="500"><meta property="og:description" content="DeepSound is a PHP Audio Sharing Script, DeepSound is the best way to start your own audiosharing script!"><meta property="og:url" content="http://localhost/mrunal/">
+
+		<!-- Google Fonts -->
+		<link href="./register pageOMSP_files/css" rel="stylesheet">
+		<link href="./register pageOMSP_files/css(1)" rel="stylesheet">
+		
+		<script src="./register pageOMSP_files/jquery.min.js.download"></script>
+		<link rel="stylesheet" href="./register pageOMSP_files/jquery-ui.css">
+		<script src="./register pageOMSP_files/jquery-ui.min.js.download"></script>
+		<!-- CSS -->
+		<link rel="stylesheet" href="./register pageOMSP_files/bootstrap.min.css">
+		<link rel="stylesheet" href="./register pageOMSP_files/owl.carousel.min.css">
+		<link rel="stylesheet" href="./register pageOMSP_files/style.css">
+		<script src="./register pageOMSP_files/wavesurfer.min.js.download"></script>
+
+		<script type="text/javascript" src="./register pageOMSP_files/tag-it.min.js.download"></script>
+		<link rel="stylesheet" href="./register pageOMSP_files/jquery.tagit.css">
+		<link rel="stylesheet" href="./register pageOMSP_files/bootstrap-colorpicker.min.css">
+		<script src="./register pageOMSP_files/bootstrap-colorpicker.min.js.download"></script>
+		<script type="text/javascript" src="./register pageOMSP_files/fastclick.js.download"></script>
+		<!--  Scripts-->
+		<script>
+			function ajaxUrl() {
+				return 'http://localhost/mrunal//endpoints';
+			}
+			function siteUrl() {
+				return 'http://localhost/mrunal//';
+			}
+		</script>
+		<!-- <script src="https://unpkg.com/wavesurfer.js"></script> -->
+				<script src="./register pageOMSP_files/emojionearea.min.js.download"></script>
+
+		<link rel="stylesheet" href="./register pageOMSP_files/emojionearea.min.css">
+		 		<script>
+			window.run_station = null;
+            $(document).ready(function() {
+                // $(".emoji_comment_btn").emojioneArea({
+                //     standalone: true,
+                //     autocomplete: false,
+                //     pickerPosition: "bottom",
+                //     emojiPlaceholder: "",
+                //     inline: true,
+                //     dir            : "ltr",
+                //     placement : 'absright'
+                // 	// container: "#container",
+                // 	// hideSource: false,
+                // 	// useSprite: false
+                // });
+                window.init_emojioneArea = function() {
+                    $(".comment_input").emojioneArea({
+                        useInternalCDN: true,
+                        events: {
+                            keyup: function (editor, event) {
+                            	                            	id = $( $(this)[0].source[0]).attr('data-audio-id');
+                                $($(".comment_input")).limit("640", '#charsLeft_'+id);
+                                c_id = $( $(this)[0].source[0]).attr('data-comment-id');
+                                if ($('#write_comment_'+c_id).length) {
+                                	$($('#write_comment_'+c_id)).limit("640", '#charsLeft_r_'+c_id);
+                                }
+                                                                let emojioneArea = this; //this is instance of EmojioneArea
+                                if (event.which === 13 && !event.shiftKey) {
+                                    // $scope.onPressKeyTextarea(event);
+									var audioid = $( $(this)[0].source[0]).attr('data-audio-id');
+									var commentid = $( $(this)[0].source[0]).attr('data-comment-id');
+									if(typeof commentid !== 'undefined'){
+										registerCommentreplay(emojioneArea.getText(), audioid, commentid, event, $(this));
+									}else{
+										registerComment(emojioneArea.getText(), audioid, event, $(this));
+									}
+                                    emojioneArea.setText('');
+                                    emojioneArea.hidePicker();
+                                    emojioneArea.editor.focus();
+                                    event.preventDefault();
+                                }
+                            }
+                        },
+                        search: false,
+                        recentEmojis: false,
+                        filtersPosition: "bottom",
+                        tones: false,
+                        autocomplete: false,
+                        filters: {animals_nature: false, food_drink: false, activity: false, travel_places: false, objects: false, symbols: false, flags: false}
+                    });
+                }
+				window.init_emojioneArea();
+
+				window.init_emojioneArea_replay = function(id) {
+					$('#write_comment_'+id).emojioneArea({
+						useInternalCDN: true,
+						events: {
+							keyup: function (editor, event) {
+								let _emojioneArea = this; //this is instance of EmojioneArea
+								if (event.which === 13 && !event.shiftKey) {
+									var _audioid = $( $(this)[0].source[0]).attr('data-audio-id');
+									var _commentid = $( $(this)[0].source[0]).attr('data-comment-id');
+										registerCommentreplay(_emojioneArea.getText(), _audioid, _commentid, event, $(this));
+										_emojioneArea.setText('');
+										_emojioneArea.hidePicker();
+										_emojioneArea.editor.focus();
+										event.preventDefault();
+								}
+							}
+						},
+						search: false,
+						recentEmojis: false,
+						filtersPosition: "bottom",
+						tones: false,
+						autocomplete: false,
+						filters: {animals_nature: false, food_drink: false, activity: false, travel_places: false, objects: false, symbols: false, flags: false}
+					});
+				}
+
+				window.init_blogemojioneArea = function() {
+                    $(".blog_comment_input").emojioneArea({
+                        useInternalCDN: true,
+                        events: {
+                            keyup: function (editor, event) {
+                                let emojioneArea = this; //this is instance of EmojioneArea
+                                if (event.which === 13 && !event.shiftKey) {
+                                    // $scope.onPressKeyTextarea(event);
+									var audioid = $( $(this)[0].source[0]).attr('data-article-id');
+                                    registerBlogComment(emojioneArea.getText(), audioid, event, $(this));
+                                    emojioneArea.setText('');
+                                    emojioneArea.hidePicker();
+                                    emojioneArea.editor.focus();
+                                    event.preventDefault();
+                                }
+                            }
+                        },
+                        search: false,
+                        recentEmojis: false,
+                        filtersPosition: "bottom",
+                        tones: false,
+                        autocomplete: false,
+                        filters: {animals_nature: false, food_drink: false, activity: false, travel_places: false, objects: false, symbols: false, flags: false}
+                    });
+                }
+                window.init_blogemojioneArea();
+            });
+		</script>
+
+		<script>
+		$(document).ready(function() {
+		  $.ajaxSetup({ 
+		    data: {
+		        hash_id: getHashID()
+		    },
+		    cache: false 
+		  });
+		});
+		$(window).on("popstate", function () {
+			if (history.state.ajax_url) {
+				goToAjaxLink(history.state.ajax_url);
+			}
+		});
+		window.search_url = 'http://localhost/mrunal//search/songs/';
+        window.chatfetch = false;
+			$(document).on('click', '[data-load]', function(event) {
+				if ($(this).attr('data-load') == '') {window.open($(this).attr('href'), '_blank'); 
+					if (parseInt($('.ss_track_play_pause').attr('data_is_ad')) > 0) {
+				 		is_sent = 1;
+				 		song_id = $('#current-track').attr('value');
+				 		onTimesUp(song_id);
+				 		return false;
+				 	}
+					return false;
+				}
+				  //$('.sections li').removeClass('active');
+			      $('#bar_loading').show().animate({width:20 + 80 * Math.random() + "%"}, 200);
+			      event.preventDefault();
+			      var url = $(this).attr('data-load');
+			      $.ajax({
+			        url: siteUrl() + '/ajax-load.php?path=' + url,
+			        type: 'GET',
+			        dataType: 'html'
+			      })
+			      .done(function(data_html, textStatus, request) {
+			      	if (request.status == 201) {
+			      		$('#login_box').modal('show');
+			      	} else {
+			      	    if(window.run_station !== null){
+                            window.run_station.pause();
+						}
+                        data = JSON.parse($(data_html).filter('#json-data').val());
+
+
+
+				        window.history.pushState({state:'new', ajax_url: url},'', data.url);
+
+                        if(data.page_name == 'messages'){
+                            window.chatfetch = true;
+						}else{
+                            window.chatfetch = false;
+						}
+
+				        if(data.page_name !== 'search'){
+				            $('#search_keyword').val('');
+						}
+
+				        $('#container_content').html(data_html);
+				        $('meta[name=title]').attr('content', data.site_title);
+				        $('#page').attr('data-page', data.page_name);
+				        $('meta[name=description]').attr('content', data.description);
+				        $('meta[name=keywords]').attr('content', data.keyword);
+				        $('title').html(data.site_title);
+				        if (data.page_name) {
+				        	setTimeout(function () {
+				        		updateWaves = false;
+				        		if ($('#current-track').val()) {
+				        			if (Amplitude.getActiveSongMetadata().id == $('#current-track').val()) {
+					        			updateWaves = true;
+					        		} else {
+					        			$('body').removeClass('player_running');
+					        		}
+				        		} else {
+				        			updateWaves = true;
+				        		}
+				        		if (updateWaves == true) {
+				        			var getCurrentPlaying = Number($('.amplitude-song-played-progress').attr('value')) * 100;
+					        		$('#light-wave').width(getCurrentPlaying + '%');
+					        		updateWaveForm();
+				        		}
+				        	}, 100);
+				        	if( data.page_name == 'blogs' ){
+                                window.search_url = 'http://localhost/mrunal//blogs/tag/';
+							}
+				        }
+				        if (Amplitude.getActiveSongMetadata().id && $('#page').attr('data-page') == 'track') {
+				        	if (Amplitude.getActiveSongMetadata().id == $('#current-track').val()) {
+				        		$('body').addClass('player_running');
+				        	}
+				        }
+				        if (Amplitude.getActiveSongMetadata().u_id && $('#page').attr('data-page') != 'track') {
+				        	$('.playlist-list-song[data-id=' + Amplitude.getActiveSongMetadata().u_id + ']').addClass('playing');
+				        	$('.list-recommended[data-id=' + Amplitude.getActiveSongMetadata().u_id + ']').addClass('playlist-list-song playing');
+				        	if ($('.feed_post[data-id="' + Amplitude.getActiveSongMetadata().u_id + '"]').length > 0) {
+				        		$.get('http://localhost/mrunal//endpoints/get-song-info', {id: Amplitude.getActiveSongMetadata().id}, function(data) {
+				        			if (data.status == 200) {
+				        				$('body').attr('song-duration', data.duration);
+				        				if (data.songWaves.length > 0) {
+											$('.feed_post[data-id="' + data.songID + '"]:first').find('.waveform-small').html(data.songWaves);
+											$('#light-wave img').width($('#dark-wave').width() + 'px');
+											$('.feed_post[data-id="' + data.songID + '"]:first').find('.post-actions').removeClass('hidden');
+											$('.feed_post[data-id="' + data.songID + '"]:first').find('.ssong_comments').removeClass('hidden');
+											$('.feed_post[data-id="' + data.songID + '"]:first').find('.art-info').removeClass('hidden');
+				    						$('.feed_post[data-id="' + data.songID + '"]:first').find('.comment_list').html(data.comments);
+				    						$('.feed_post[data-id="' + data.songID + '"]:first').find('.comment-waves').html(data.waves);
+				    						var getCurrentPlaying = Number($('.amplitude-song-played-progress').attr('value')) * 100;
+					        		        $('#light-wave').width(getCurrentPlaying + '%');
+				    						updateWaveForm();
+										}
+				        			}
+				        		});
+				        	}
+				        }
+                        $('#music-user-ads-table').find('[type="checkbox"]').each(function(index, el) {
+                            $(el).bootstrapToggle();
+                        });
+
+                        if( data.page_name === 'station'){
+                            setTimeout(function () {
+                            	$('body').addClass('player_running');
+                            }, 100);
+                        }
+
+			      	}
+			        
+			      })
+			      .fail(function() {
+			         window.location.href = siteUrl()+'/404';
+			      })
+			      .always(function() {
+			      	if (typeof data !== 'undefined') {
+			      		if (data.page_name == 'user' && data.scroll == true) {
+				        	$('html,body').animate({
+						        scrollTop: $('#myTab').offset().top - 350
+						    });
+				        } else {
+				        	$('html,body').animate({
+						        scrollTop: $('body').offset().top
+						    });
+				        }
+                        window.init_emojioneArea();
+			      	}
+			        $('#bar_loading').animate({width:"100%"}, 200).fadeOut(300, function() {
+			           $(this).width("0");
+			        });
+			      });
+			  });
+			window.artist_sell = 'on';
+		</script>
+
+		<script src="./register pageOMSP_files/header.js.download"></script>
+
+		
+		<link rel="stylesheet" href="./register pageOMSP_files/custom.style.css" id="custom.style.css">
+		
+
+		<link href="./register pageOMSP_files/bootstrap-toggle.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="./register pageOMSP_files/sweetalert2.min.css">
+		<link rel="stylesheet" type="text/css" href="./register pageOMSP_files/dataTables.bootstrap4.min.css">
+		<link rel="stylesheet" href="./register pageOMSP_files/bootstrap-select.min.css">
+		<style>
+			.ui-menu-item img { padding-right: 10px; width: 32px; height: 32px; }
+			.ui-menu-item span { color: #444; font-size: 12px; vertical-align: top }
+		</style>
+
+					<script src="./register pageOMSP_files/saved_resource"></script>
+			
+	
+		
+		
+		<div class="music_app">
+			<div class="ma_container" id="page" data-page="home">
+				<!-- Start Sidebar  -->	
+				
+				<!-- End Sidebar  -->	
+
+				<!-- Header  -->
+				<div id="main-header">
+					
+				</div>
+				<div id="bar_loading"></div>
+				<!-- End Header  -->
+
+				<!-- Content  -->
+				<div id="container_content">
+					<div class="ma_home_nav">
+	<nav class="navbar">
+		<div class="container">
+			<a class="navbar-brand" href="http://localhost/mrunal/">
+				<img src="./register pageOMSP_files/home-logo.png" alt="">
+			</a>
+			<div class="navbar-right">
+				<a href="http://localhost/mrunal/#" data-toggle="modal" data-target="#login_box" class="btn btn-outline-light">Login</a>
+								<a href="http://localhost/mrunal/#" data-toggle="modal" data-target="#signup_box" class="btn btn-light">Register</a>
+							</div>
+		</div>
+	</nav>
+</div>
+<div class="ma_home_head">
+	<div class="container">
+		<h1 class="heading">Listen to Songs</h1>
+		<p class="sub_heading">Discover, stream, and share a constantly expanding mix of music from emerging and major artists around the world.</p>
+		<div class="link_holder">
+						<button data-toggle="modal" data-target="#signup_box" class="btn btn-light">
+				Signup Now
+				<svg viewBox="0 0 19 14" xmlns="http://www.w3.org/2000/svg" width="18" height="18">
+					<path fill="currentColor" d="M18.6 6.9v-.5l-6-6c-.3-.3-.9-.3-1.2 0-.3.3-.3.9 0 1.2l5 5H1c-.5 0-.9.4-.9.9s.4.8.9.8h14.4l-4 4.1c-.3.3-.3.9 0 1.2.2.2.4.2.6.2.2 0 .4-.1.6-.2l5.2-5.2h.2c.5 0 .8-.4.8-.8 0-.3 0-.5-.2-.7z"></path>
+				</svg>
+			</button>
+						<a class="link" href="http://localhost/mrunal//discover">Explore</a>
+		</div>
+		<div class="ma_home_search">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3"></div>
+					<div class="col-md-6">
+						<form onsubmit="event.preventDefault();window.location = &#39;http://localhost/mrunal//search/songs/&#39; + $(&#39;#search_keyword&#39;).val();">
+							<input class="form-control" placeholder="Search for artists, tracks" type="search" autocomplete="off" name="search_keyword" id="search_keyword">
+							<button class="btn" type="submit">search</button>
+						</form>
+					</div>
+					<div class="col-md-3"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<ul class="bg_bubbles">
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+</div>
+
+<div class="jumbotron ma_home_features">
+	<div class="container">
+		<div class="feature_list">
+			<img src="./register pageOMSP_files/music.svg">
+			<div class="feature_info">
+				<h2>Listen Music Everywhere, Anytime</h2>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+			</div>
+		</div>
+		<div class="feature_list">
+			<div class="feature_info">
+				<h2>Create Playlists with any song, On-The-Go</h2>
+				<p>Second Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, 2</p>
+			</div>
+			<img src="./register pageOMSP_files/playlist.svg">
+		</div>
+	</div>
+</div>
+<div class="jumbotron ma_home_jumbo_w">
+	<div class="container ma_home_artist">
+		<h2 class="light main text-center">Top Trending Artists</h2>
+		<div class="artist_section">
+			<div class="artist_list">
+    <div class="cover_art">
+
+        <a href="http://localhost/mrunal///admin">
+            <img src="./register pageOMSP_files/gEPjX7G4KJ7YQbJwFg1x_21_86b25aee94fd378f44e74c9375c459fa_image.png">
+        </a>
+    </div>
+    <div class="track_info">
+        <a href="http://localhost/mrunal///admin"><span class="artist">admin</span></a>
+    </div>
+</div>		</div>
+	</div>
+</div>
+<div class="jumbotron ma_home_creator">
+	<div class="container">
+		<div class="creator_content">
+			<h2>Calling all creators</h2>
+			<p>Get on Music to connect with fans, share your sounds, and grow your audience.</p>
+			<ul class="icon_features list-unstyled">
+				<li>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-reactid="1231">
+						<polyline points="16 16 12 12 8 16"></polyline>
+						<line x1="12" y1="12" x2="12" y2="21"></line>
+						<path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path>
+						<polyline points="16 16 12 12 8 16"></polyline>
+					</svg>
+					<h5>Upload Songs</h5>
+				</li>
+				<li>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+						<path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
+						<path d="M22 12A10 10 0 0 0 12 2v10z"></path>
+					</svg>
+					<h5>Check Stats</h5>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="jumbotron ma_home_jumbo_w">
+	<div class="container text-center final_step_info">
+		<h1 class="light">Ready to rock your world.</h1>
+		<div class="final_step">
+						<a href="http://localhost/mrunal/#" data-toggle="modal" data-target="#signup_box" class="btn btn-primary btn-mat">Register</a>
+						<span>OR</span>
+			<a href="http://localhost/mrunal/#" data-toggle="modal" data-target="#login_box" class="btn btn-outline-primary">Login</a>
+		</div>
+	</div>
+</div>
+<footer class="full_footer">
+	<p class="copyright">
+	Copyright © 2024 Music.	</p>
+	<ul class="list-unstyled mb-0 imp_links">
+		<li><a href="http://localhost/mrunal//blogs">Blogs</a></li>
+
+		<li><a href="http://localhost/mrunal//terms/about">About Us</a></li>
+		<li><a href="http://localhost/mrunal//terms/terms">Terms</a></li>
+		<li><a href="http://localhost/mrunal//contact">Contact</a></li>
+		<li><a href="http://localhost/mrunal//terms/privacy">Privacy Policy</a></li>
+	</ul>
+	<div class="lang_select dropup">
+		<button type="button" class="btn dropdown-toggle" data-display="static" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">English</button>
+		<div class="dropdown-menu dropdown-menu-right mat-dropdown">
+			<ul class="list-unstyled mb-0">
+									<li><a href="http://localhost/mrunal/?lang=english">English</a></li>
+									<li><a href="http://localhost/mrunal/?lang=arabic">Arabic</a></li>
+									<li><a href="http://localhost/mrunal/?lang=dutch">Dutch</a></li>
+									<li><a href="http://localhost/mrunal/?lang=french">French</a></li>
+									<li><a href="http://localhost/mrunal/?lang=german">German</a></li>
+									<li><a href="http://localhost/mrunal/?lang=russian">Russian</a></li>
+									<li><a href="http://localhost/mrunal/?lang=spanish">Spanish</a></li>
+									<li><a href="http://localhost/mrunal/?lang=turkish">Turkish</a></li>
+							</ul>
+		</div>
+	</div>
+</footer>
+				</div>
+				<!-- End Content  -->
+			</div>
+			<!-- Player  -->
+			
+			<!-- End Player  -->
+		</div>
+		
+		<!-- Login Modal  -->
+		<!-- Modal -->
+<div class="modal fade" id="login_box" tabindex="-1" role="dialog" aria-labelledby="login_box" style="display: none;" aria-hidden="true">
+	<div class="modal-dialog auth_box" role="document">
+		<div class="modal-content">
+			<div class="left_combo" style="background-image: url(http://localhost/mrunal//themes/default/img/music.svg);">
+				<h2>Login</h2>
+				<p>Get access to your music, playlists and account</p>
+			</div>
+			<div class="right_combo">
+				<div class="alert alert-danger alert-empty" id="output-errors"></div>
+				<form method="post" action="http://localhost/mrunal/" id="login-form">
+					<div class="form-group mat_input">
+						<input type="text" class="form-control" placeholder="Username" autofocus="" name="username">
+					</div>
+					<div class="form-group mat_input">
+						<input type="password" class="form-control" placeholder="Password" name="password">
+					</div>
+					<div class="forgot_password">
+						<a href="http://localhost/mrunal//forgot-password">Forgot your password?</a>
+					</div>
+					<button type="submit" class="btn btn-primary btn-mat" id="btn-submit">Login</button>
+				</form>
+								<div class="signup_">
+					<span>Don't have an account?</span>
+					<a href="http://localhost/mrunal/#" data-dismiss="modal" data-toggle="modal" data-target="#signup_box">Sign Up</a>
+				</div>
+												<div class="ma_social_login">
+																													</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+$(document).ready(function() { 
+    var options = { 
+    	url: "http://localhost/mrunal//endpoints/auth/login?hash_id=" + getHashID(),
+        beforeSubmit:  function () {
+        	$('#output-errors').empty();
+        	$("#btn-submit").text("Please wait..");
+        }, 
+        success: function (data) {
+        	$("#btn-submit").text("Login");
+        	if (data.status == 200) {
+        		if ($('#page').attr('data-page') != 'home' && $('#page').attr('data-page') != 'forgot' && $('#page').attr('data-page') != 'reset') {
+        			$('#main-header').html(data.header);
+        			$('#login_box').modal('hide');
+        			if (Amplitude.getActiveSongMetadata().price > 0) {
+        				location.href = window.location.href;
+        			} else {
+        				location.href = window.location.href;
+        			}
+        		} else {
+        			location.href = window.location.href;
+        		}
+        	} else if (data.status == 400) {
+        		var errros = data.errors.join("<br>");
+        		$('#output-errors').html(errros);
+        	} else if (data.status == 600) {
+                location.href = data.location;
+            }
+        }
+    }; 
+
+    $('#login-form').ajaxForm(options); 
+}); 
+
+
+</script>
+		<!-- End Login Modal  -->
+		
+		<!-- Signup Modal  -->
+		<!-- Modal -->
+<div class="modal fade show" id="signup_box" tabindex="-1" role="dialog" aria-labelledby="signup_box" style="padding-right: 22px; display: block;">
+	<div class="modal-dialog auth_box" role="document">
+		<div class="modal-content">
+			<div class="left_combo" style="background-image: url(http://localhost/mrunal//themes/default/img/music.svg);">
+				<h2>Signup</h2>
+				<p>Get access to your music, playlists and account</p>
+			</div>
+			<div class="right_combo">
+				<div class="alert alert-danger alert-empty" id="output-singup-errors"></div>
+				<form method="post" action="http://localhost/mrunal/POST" id="signup-form">
+					<div class="form-group mat_input">
+						<input type="text" name="name" class="form-control" placeholder="Full Name" autofocus="">
+					</div>
+					<div class="form-group mat_input">
+						<input type="text" name="username" class="form-control" placeholder="Username">
+					</div>
+					<div class="form-group mat_input">
+						<input type="email" name="email" class="form-control" placeholder="Email address">
+					</div>
+					<div class="form-group mat_input">
+						<input type="password" name="password" class="form-control" placeholder="Password">
+					</div>
+					<div class="form-group mat_input">
+						<input type="password" name="c_password" class="form-control" placeholder="Confirm Password">
+					</div>
+										<div class="recaptcha">
+											</div>
+					<button type="submit" class="btn btn-primary btn-mat" id="btn-singup-submit">Signup</button>
+				</form>
+				<div class="signup_">
+					<span>Already have an account?</span>
+					<a href="http://localhost/mrunal/#" data-dismiss="modal" data-toggle="modal" data-target="#login_box">Login</a>
+				</div>
+				<div class="terms_check">
+					<span>By signing up, you agree to our</span>
+					<a href="http://localhost/mrunal//terms/terms">Terms</a>
+					<span>and</span>
+					<a href="http://localhost/mrunal//terms/privacy">Privacy Policy</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+</style>
+<script>
+$(document).ready(function() { 
+    var options = { 
+    	url: "http://localhost/mrunal//endpoints/auth/signup?hash_id=" + getHashID()+ '',
+        beforeSubmit:  function () {
+        	$('#output-singup-errors').removeClass("alert-success").addClass('alert-danger');
+        	$('#output-singup-errors').empty();
+        	$("#btn-singup-submit").text("Please wait..");
+        }, 
+        success: function (data) {
+        	$("#btn-singup-submit").text("Signup");
+        	if (data.status == 200) {
+
+                if( typeof data.link !== "undefined" ){
+                    location.href = 'http://localhost/mrunal/';
+                }
+
+        		if ($('#page').attr('data-page') != 'home' && $('#page').attr('data-page') != 'forgot' && $('#page').attr('data-page') != 'reset') {
+        			$('#main-header').html(data.header);
+        			$('#signup_box').modal('hide');
+
+        			if (Amplitude.getActiveSongMetadata().price > 0) {
+        				location.href = 'http://localhost/mrunal//interest';//window.location.href;
+        			} else {
+        				ajaxRedirect('interest');
+        			}
+        		} else {
+        			location.href = 'http://localhost/mrunal//interest';//window.location.href;
+        		}
+        	} else if (data.status == 400) {
+        		var errros = data.errors.join("<br>");
+        		$('#output-singup-errors').html(errros);
+        	} else if (data.status == 403) {
+        		$('#output-singup-errors').removeClass("alert-danger").addClass('alert-success');
+        		$('#output-singup-errors').html(data.message);
+        	}
+        }
+    }; 
+
+    $('#signup-form').ajaxForm(options); 
+}); 
+</script>
+		<!-- End Signup Modal  -->
+
+		<!-- Modals -->
+		<div class="modal fade" id="delete-song" tabindex="-1" role="dialog" aria-labelledby="delete-song" aria-hidden="true" data-id="0">
+	<div class="modal-dialog mat_box" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Delete your track</h5>
+			</div>
+			<div class="modal-body">
+				Are you sure you want to delete this track?
+			</div>	
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-danger btn-mat" onclick="deleteSong();">Delete</button>
+			</div>
+		</div>
+	</div>
+</div>		<div class="modal fade" id="delete-comment" tabindex="-1" role="dialog" aria-labelledby="delete-comment" aria-hidden="true" data-id="0">
+	<div class="modal-dialog mat_box" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Delete comment</h5>
+			</div>
+			<div class="modal-body">
+				Are you sure you want to delete this comment?
+			</div>	
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-danger btn-mat" onclick="deleteComment();">Delete</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="delete-comment-replay" tabindex="-1" role="dialog" aria-labelledby="delete-comment-replay" aria-hidden="true" data-id="0">
+	<div class="modal-dialog mat_box" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Delete comment</h5>
+			</div>
+			<div class="modal-body">
+				Are you sure you want to delete this comment?
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-danger btn-mat" onclick="deleteCommentReplay(this);">Delete</button>
+			</div>
+		</div>
+	</div>
+</div>		<div class="modal fade" id="delete-post" tabindex="-1" role="dialog" aria-labelledby="delete-post" aria-hidden="true" data-id="0">
+	<div class="modal-dialog mat_box" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Delete your post</h5>
+			</div>
+			<div class="modal-body">
+				Are you sure you want to delete this post?
+			</div>	
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-danger btn-mat" onclick="deletePost();">Delete</button>
+			</div>
+		</div>
+	</div>
+</div>		<div class="modal fade" id="reposted" tabindex="-1" role="dialog" aria-labelledby="reposted" aria-hidden="true" data-id="0">
+	<div class="modal-dialog mat_box" role="document">
+		<div class="modal-content">
+			<div class="modal-body">
+				<div class="no-track-found" style="padding: 30px 10px;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M10,17L5,12L6.41,10.58L10,14.17L17.59,6.58L19,8M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"></path></svg> The song was successfully shared on your timeline.</div>
+			</div>	
+		</div>
+	</div>
+</div>		<div class="modal fade" id="purchase-song" role="dialog" aria-labelledby="purchase-song" aria-hidden="true" data-id="0">
+	<div class="modal-dialog mat_box" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Purchase Required</h5>
+			</div>
+			<div class="modal-body">
+				To continue listening to this track, you need to purchase the song.
+			</div>	
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-primary btn-mat" onclick="purchaseTrack($(this));">Purchase $<span class="price"></span></button>
+			</div>
+		</div>
+	</div>
+</div>		<div class="modal fade" id="age-restricted" role="dialog" aria-labelledby="age-restricted" aria-hidden="true" data-id="0">
+	<div class="modal-dialog mat_box" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Age restricted track</h5>
+			</div>
+			<div class="modal-body">
+				This track is age restricted for viewers under 18, Create an account or login to confirm your age.			</div>	
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>		<div class="modal fade" id="create_copyright_box" tabindex="-1" role="dialog" aria-labelledby="create_copyright_box" aria-hidden="true">
+	<div class="modal-dialog mat_box create_playlist" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Create DMCA take down notice</h5>
+			</div>
+			<form method="post" action="http://localhost/mrunal/" id="copyright-form">
+				<div class="alert alert-danger alert-empty" id="output-copyright-errors"></div>
+				<div class="create_playlist_innr">
+					<div class="play_info">
+						<div class="form-group mat_input" style="text-align: initial;">
+							<textarea name="description" id="description" rows="6" style="width: 100%;"></textarea><br>
+							<small>Please describe your request carefully and as much as you can, note that false DMCA requests can lead to account termination.</small>
+						</div>
+						<hr>
+						<div class="custom-control custom-radio">
+							<input type="checkbox" id="confirm_1" name="confirm_1" class="custom-control-input">
+							<label class="custom-control-label" for="confirm_1">I have a good faith belief that use of the copyrighted work described above is not authorized by the copyright owner, its agent or the law</label>
+						</div>
+						<div class="custom-control custom-radio">
+							<input type="checkbox" id="confirm_2" name="confirm_2" class="custom-control-input">
+							<label class="custom-control-label" for="confirm_2">I confirm that I am the copyright owner or am authorised to act on behalf of the owner of an exclusive right that is allegedly infringed.</label>
+						</div>
+					</div>
+				</div>
+				<input type="hidden" id="song-copyright-id" name="id">
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					<button type="submit" class="btn btn-primary btn-mat" id="btn-copyright-submit">Submit</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+$(document).ready(function() { 
+    var options = { 
+    	url: "http://localhost/mrunal//endpoints/copyright-create?hash_id=" + getHashID(),
+        beforeSubmit:  function () {
+        	$('#output-copyright-errors').removeClass('alert-success').addClass('alert-danger');
+        	$('#output-copyright-errors').empty();
+        	$("#btn-copyright-submit").text("Please wait..");
+        }, 
+        success: function (data) {
+        	$("#btn-copyright-submit").text("Submit");
+        	if (data.status == 200) {
+        		$('#output-copyright-errors').addClass('alert-success').removeClass('alert-danger');
+        		$('#output-copyright-errors').text("Thanks for your submission, we will review your request shortly.");
+        		setTimeout(function () {
+        			$('#copyright-form')[0].reset();
+	        		$('#create_copyright_box').modal('hide');
+	        		closeModal();
+	        		$('#output-copyright-errors').empty();
+        		}, 3000);
+        	} else if (data.status == 400) {
+        		var errros = data.errors.join("<br>");
+        		$('#output-copyright-errors').html(errros);
+        	}
+        }
+    }; 
+
+    $('#copyright-form').ajaxForm(options); 
+}); 
+</script>		<div class="modal fade" id="comment_unreported" tabindex="-1" role="dialog" aria-labelledby="comment_unreported" aria-hidden="true" data-id="0">
+    <div class="modal-dialog mat_box" role="document">
+        <div class="modal-content">
+			<div class="modal-body">
+				<div class="no-track-found" style="padding: 30px 10px;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M10,17L5,12L6.41,10.58L10,14.17L17.59,6.58L19,8M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"></path></svg> The comment report was successfully deleted.</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="report_comment" tabindex="-1" role="dialog" aria-labelledby="report_comment" aria-hidden="true">
+    <div class="modal-dialog mat_box create_playlist" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Report comment.</h5>
+            </div>
+            <form method="post" action="http://localhost/mrunal/" id="comment-report-form">
+                <div class="alert alert-danger alert-empty" id="output-report-comment-errors"></div>
+                <div class="create_playlist_innr">
+                    <div class="play_info">
+                        <div class="form-group mat_input" style="text-align: initial;">
+                            <textarea name="comment_description" id="comment_description" rows="5" style="width: 100%;"></textarea><br>
+                            <small>Please describe whey you want to report this comment.</small>
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" id="comment_id" name="id">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary btn-mat" id="btn-report-comment-submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        var options = {
+            url: "http://localhost/mrunal//endpoints/report-comment?hash_id=" + getHashID(),
+            beforeSubmit:  function () {
+                $('#output-report-comment-errors').removeClass('alert-success').addClass('alert-danger');
+                $('#output-report-comment-errors').empty();
+                $("#btn-report-comment-submit").text("Please wait..");
+            },
+            success: function (data) {
+                $("#bbtn-report-comment-submit").text("Submit");
+                if (data.status == 200) {
+                    $('#output-report-comment-errors').addClass('alert-success').removeClass('alert-danger');
+                    $('#output-report-comment-errors').text("Thanks for your submission, we will review your request shortly.");
+                    setTimeout(function () {
+                        $('#comment-report-form')[0].reset();
+                        $('#report_comment').modal('hide');
+                        closeModal();
+                        var comment_id = $('#comment_id').val();
+                        $('.comment_report[data-comment-id="'+comment_id+'"]').hide();
+                        $('.comment_unreport[data-comment-id="'+comment_id+'"]').css({'visibility':'inherit'});
+                        $('.comment_unreport[data-comment-id="'+comment_id+'"]').show();
+
+                        $('#output-report-comment-errors').empty();
+                    }, 3000);
+                } else if (data.status == 400) {
+                    var errros = data.errors.join("<br>");
+                    $('#output-report-comment-errors').html(errros);
+                }
+            }
+        };
+
+        $('#comment-report-form').ajaxForm(options);
+    });
+</script>		<div class="modal fade" id="blog_comment_unreported" tabindex="-1" role="dialog" aria-labelledby="comment_unreported" aria-hidden="true" data-id="0">
+    <div class="modal-dialog mat_box" role="document">
+        <div class="modal-content">
+			<div class="modal-body">
+				<div class="no-track-found" style="padding: 30px 10px;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M10,17L5,12L6.41,10.58L10,14.17L17.59,6.58L19,8M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"></path></svg> The comment report was successfully deleted.</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="blog_report_comment" tabindex="-1" role="dialog" aria-labelledby="blog_report_comment" aria-hidden="true">
+    <div class="modal-dialog mat_box create_playlist" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Report comment.</h5>
+            </div>
+            <form method="post" action="http://localhost/mrunal/" id="blog-comment-report-form">
+                <div class="alert alert-danger alert-empty" id="output-blog-report-comment-errors"></div>
+                <div class="create_playlist_innr">
+                    <div class="play_info">
+                        <div class="form-group mat_input" style="text-align: initial;">
+                            <textarea name="comment_description" id="blog_comment_description" rows="5" style="width: 100%;"></textarea><br>
+                            <small>Please describe whey you want to report this comment.</small>
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" id="blog_comment_id" name="id">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary btn-mat" id="btn-blog-report-comment-submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        var options = {
+            url: "http://localhost/mrunal//endpoints/blog-report-comment?hash_id=" + getHashID(),
+            beforeSubmit:  function () {
+                $('#output-blog-report-comment-errors').removeClass('alert-success').addClass('alert-danger');
+                $('#output-blog-report-comment-errors').empty();
+                $("#btn-blog-report-comment-submit").text("Please wait..");
+            },
+            success: function (data) {
+                $("#btn-blog-report-comment-submit").text("Submit");
+                if (data.status == 200) {
+                    $('#output-blog-report-comment-errors').addClass('alert-success').removeClass('alert-danger');
+                    $('#output-blog-report-comment-errors').text("Thanks for your submission, we will review your request shortly.");
+                    setTimeout(function () {
+                        $('#blog-comment-report-form')[0].reset();
+                        $('#blog_report_comment').modal('hide');
+                        closeModal();
+                        var comment_id = $('#blog_comment_id').val();
+                        $('.blog_comment_report[data-comment-id="'+comment_id+'"]').hide();
+                        $('.blog_comment_unreport[data-comment-id="'+comment_id+'"]').css({'visibility':'inherit'});
+                        $('.blog_comment_unreport[data-comment-id="'+comment_id+'"]').show();
+
+                        $('#output-blog-report-comment-errors').empty();
+                    }, 3000);
+                } else if (data.status == 400) {
+                    var errros = data.errors.join("<br>");
+                    $('#output-blog-report-comment-errors').html(errros);
+                }
+            }
+        };
+
+        $('#blog-comment-report-form').ajaxForm(options);
+    });
+</script>		<div class="modal fade" id="track_unreported" tabindex="-1" role="dialog" aria-labelledby="track_unreported" aria-hidden="true" data-id="0">
+    <div class="modal-dialog mat_box" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+				<div class="no-track-found" style="padding: 30px 10px;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M10,17L5,12L6.41,10.58L10,14.17L17.59,6.58L19,8M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"></path></svg> The track report was successfully deleted.</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="report_track" tabindex="-1" role="dialog" aria-labelledby="report_track" aria-hidden="true">
+    <div class="modal-dialog mat_box create_playlist" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Report track.</h5>
+            </div>
+            <form method="post" action="http://localhost/mrunal/" id="track-report-form">
+                <div class="alert alert-danger alert-empty" id="output-report-track-errors"></div>
+                <div class="create_playlist_innr">
+                    <div class="play_info">
+                        <div class="form-group mat_input" style="text-align: initial;">
+                            <textarea name="track_description" id="track_description" rows="5" style="width: 100%;"></textarea>
+                            <small>Please describe whey you want to report this track.</small>
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" id="report_track_id" name="id">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary btn-mat" id="btn-report-track-submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        var options = {
+            url: "http://localhost/mrunal//endpoints/report-track?hash_id=" + getHashID(),
+            beforeSubmit:  function () {
+                $('#output-report-track-errors').removeClass('alert-success').addClass('alert-danger');
+                $('#output-report-track-errors').empty();
+                $("#btn-report-track-submit").text("Please wait..");
+            },
+            success: function (data) {
+                $("#btn-report-track-submit").text("Submit");
+                if (data.status == 200) {
+                    $('#output-report-track-errors').addClass('alert-success').removeClass('alert-danger');
+                    $('#output-report-track-errors').text("Thanks for your submission, we will review your request shortly.");
+                    setTimeout(function () {
+                        $('#track-report-form')[0].reset();
+                        $('#report_track').modal('hide');
+                        closeModal();
+                        var track_id = $('#report_track_id').val();
+                        $('.track_report[data-track-id="'+track_id+'"]').hide();
+                        $('.track_unreport[data-track-id="'+track_id+'"]').css({'visibility':'inherit'});
+                        $('.track_unreport[data-track-id="'+track_id+'"]').show();
+
+                        $('#output-report-track-errors').empty();
+                    }, 3000);
+                } else if (data.status == 400) {
+                    var errros = data.errors.join("<br>");
+                    $('#output-report-track-errors').html(errros);
+                }
+            }
+        };
+
+        $('#track-report-form').ajaxForm(options);
+    });
+</script>		<div class="modal fade" id="track_unreported" tabindex="-1" role="dialog" aria-labelledby="track_unreported" aria-hidden="true" data-id="0">
+    <div class="modal-dialog mat_box" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+				<div class="no-track-found" style="padding: 30px 10px;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M10,17L5,12L6.41,10.58L10,14.17L17.59,6.58L19,8M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"></path></svg> The track report was successfully deleted.</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="review_track" tabindex="-1" role="dialog" aria-labelledby="report_track" aria-hidden="true">
+    <div class="modal-dialog mat_box create_playlist" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Review track.</h5>
+            </div>
+            <form method="post" action="http://localhost/mrunal/" id="track-review-form">
+                <div class="alert alert-danger alert-empty" id="output-review-track-errors"></div>
+                <div class="create_playlist_innr">
+                    <div class="play_info">
+                        <div class="form-group mat_input">
+							<section class="rating-widget">
+                                <div class="rating-stars text-center">
+                                    <ul id="stars">
+                                        <li class="star" title="Poor" data-value="1"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"></path></svg></li>
+                                        <li class="star" title="Fair" data-value="2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"></path></svg></li>
+                                        <li class="star" title="Good" data-value="3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"></path></svg></li>
+                                        <li class="star" title="Excellent" data-value="4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"></path></svg></li>
+                                        <li class="star" title="WOW!!!" data-value="5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"></path></svg></li>
+                                    </ul>
+                                </div>
+                            </section>
+                            <textarea name="track_review_description" id="track_review_description" class="form-control" rows="5" placeholder="Please enter your review."></textarea>
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" id="review_track_id" name="id">
+                <input type="hidden" id="review_track_oid">
+                <input type="hidden" id="track_stars" name="track_stars" value="0">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary btn-mat" disabled="disabled" id="btn-review-track-submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function(){
+        /* 1. Visualizing things on Hover - See next part for action on click */
+        $('#stars li').on('mouseover', function(){
+            var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
+
+            // Now highlight all the stars that's not after the current hovered star
+            $(this).parent().children('li.star').each(function(e){
+                if (e < onStar) {
+                    $(this).addClass('hover');
+                }
+                else {
+                    $(this).removeClass('hover');
+                }
+            });
+
+        }).on('mouseout', function(){
+            $(this).parent().children('li.star').each(function(e){
+                $(this).removeClass('hover');
+            });
+        });
+
+        $('#track_review_description').bind('input propertychange', function() {
+            if(this.value.length){
+                var ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
+                if (ratingValue > 1) {
+                    $('#btn-review-track-submit').removeAttr('disabled');
+                }
+            }
+        });
+
+        /* 2. Action to perform on click */
+        $('#stars li').on('click', function(){
+            var onStar = parseInt($(this).data('value'), 10); // The star currently selected
+            var stars = $(this).parent().children('li.star');
+            for (i = 0; i < stars.length; i++) {
+                $(stars[i]).removeClass('selected');
+            }
+            for (i = 0; i < onStar; i++) {
+                $(stars[i]).addClass('selected');
+            }
+            // JUST RESPONSE (Not needed)
+            var ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
+            var msg = "";
+            if (ratingValue > 1) {
+                $('#track_stars').val(ratingValue);
+                if( $('#track_review_description').val() !== '' ) {
+                    $('#btn-review-track-submit').removeAttr('disabled');
+                }
+                msg = "Thanks! You rated this " + ratingValue + " stars.";
+            }
+            else {
+                msg = "We will improve ourselves. You rated this " + ratingValue + " stars.";
+            }
+        });
+    });
+
+    $(document).ready(function() {
+        var options = {
+            url: "http://localhost/mrunal//endpoints/review-track?hash_id=" + getHashID(),
+            beforeSubmit:  function () {
+                $('#output-review-track-errors').removeClass('alert-success').addClass('alert-danger');
+                $('#output-review-track-errors').empty();
+                $("#btn-review-track-submit").text("Please wait..");
+            },
+            success: function (data) {
+                $("#btn-review-track-submit").text("Submit");
+                if (data.status == 200) {
+                    $('#output-review-track-errors').addClass('alert-success').removeClass('alert-danger');
+                    $('#output-review-track-errors').text("Thanks for your submission.");
+                    setTimeout(function () {
+                        $('#track-review-form')[0].reset();
+                        $('#review_track').modal('hide');
+                        closeModal();
+                        goToAjaxLink('track/'+$('#review_track_oid').val());
+                        $('#output-review-track-errors').empty();
+                    }, 3000);
+                } else if (data.status == 400) {
+                    var errros = data.errors.join("<br>");
+                    $('#output-review-track-errors').html(errros);
+                }
+            }
+        };
+
+        $('#track-review-form').ajaxForm(options);
+    });
+</script>		<div class="modal fade" id="payment_modal" tabindex="-1" role="dialog" aria-labelledby="track_unreported" aria-hidden="true" data-id="0">
+    <div class="modal-dialog mat_box" role="document">
+        <div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Choose a payment method</h5>
+			</div>
+            <div class="modal-body">
+				<div class="pay_method">
+					
+													<button class="btn" onclick="purchaseTrackPaypal($(this))" id="btn-paypal-payment" data-id="" data-title="" data-price="">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#283593" d="M8.32,21.97C8.21,21.92 8.08,21.76 8.06,21.65C8.03,21.5 8,21.76 8.66,17.56C9.26,13.76 9.25,13.82 9.33,13.71C9.46,13.54 9.44,13.54 10.94,13.53C12.26,13.5 12.54,13.5 13.13,13.41C16.38,12.96 18.39,11.05 19.09,7.75C19.13,7.53 19.17,7.34 19.18,7.34C19.18,7.33 19.25,7.38 19.33,7.44C20.36,8.22 20.71,9.66 20.32,11.58C19.86,13.87 18.64,15.39 16.74,16.04C15.93,16.32 15.25,16.43 14.05,16.46C13.25,16.5 13.23,16.5 13,16.65C12.83,16.82 12.84,16.79 12.45,19.2C12.18,20.9 12.08,21.45 12.04,21.55C11.97,21.71 11.83,21.85 11.67,21.93L11.56,22H10C8.71,22 8.38,22 8.32,21.97V21.97M3.82,19.74C3.63,19.64 3.5,19.47 3.5,19.27C3.5,19 6.11,2.68 6.18,2.5C6.27,2.32 6.5,2.13 6.68,2.06L6.83,2H10.36C14.27,2 14.12,2 15,2.2C17.62,2.75 18.82,4.5 18.37,7.13C17.87,10.06 16.39,11.8 13.87,12.43C13,12.64 12.39,12.7 10.73,12.7C9.42,12.7 9.32,12.71 9.06,12.85C8.8,13 8.59,13.27 8.5,13.6C8.46,13.67 8.23,15.07 7.97,16.7C7.71,18.33 7.5,19.69 7.5,19.72L7.47,19.78H5.69C4.11,19.78 3.89,19.78 3.82,19.74V19.74Z"></path></svg>PayPal
+							</button>
+																			<button class="btn" onclick="purchaseTrackStripe($(this))" id="btn-stripe-payment" data-id="" data-title="" data-price="">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#6BBEA1" d="M20,8H4V6H20M20,18H4V12H20M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"></path></svg>Credit Card
+							</button>
+												
+									</div>
+            </div>
+        </div>
+    </div>
+</div>		<div class="modal fade" id="paymentpro_modal" tabindex="-1" role="dialog" aria-labelledby="track_unreported" aria-hidden="true" data-id="0">
+    <div class="modal-dialog mat_box" role="document">
+        <div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Choose a payment method</h5>
+			</div>
+            <div class="modal-body">
+				<div class="pay_method">
+											<button class="btn" onclick="purchaseProPaypal($(this))" id="btn-pro-paypal-payment" data-id="" data-title="" data-price="">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#283593" d="M8.32,21.97C8.21,21.92 8.08,21.76 8.06,21.65C8.03,21.5 8,21.76 8.66,17.56C9.26,13.76 9.25,13.82 9.33,13.71C9.46,13.54 9.44,13.54 10.94,13.53C12.26,13.5 12.54,13.5 13.13,13.41C16.38,12.96 18.39,11.05 19.09,7.75C19.13,7.53 19.17,7.34 19.18,7.34C19.18,7.33 19.25,7.38 19.33,7.44C20.36,8.22 20.71,9.66 20.32,11.58C19.86,13.87 18.64,15.39 16.74,16.04C15.93,16.32 15.25,16.43 14.05,16.46C13.25,16.5 13.23,16.5 13,16.65C12.83,16.82 12.84,16.79 12.45,19.2C12.18,20.9 12.08,21.45 12.04,21.55C11.97,21.71 11.83,21.85 11.67,21.93L11.56,22H10C8.71,22 8.38,22 8.32,21.97V21.97M3.82,19.74C3.63,19.64 3.5,19.47 3.5,19.27C3.5,19 6.11,2.68 6.18,2.5C6.27,2.32 6.5,2.13 6.68,2.06L6.83,2H10.36C14.27,2 14.12,2 15,2.2C17.62,2.75 18.82,4.5 18.37,7.13C17.87,10.06 16.39,11.8 13.87,12.43C13,12.64 12.39,12.7 10.73,12.7C9.42,12.7 9.32,12.71 9.06,12.85C8.8,13 8.59,13.27 8.5,13.6C8.46,13.67 8.23,15.07 7.97,16.7C7.71,18.33 7.5,19.69 7.5,19.72L7.47,19.78H5.69C4.11,19.78 3.89,19.78 3.82,19.74V19.74Z"></path></svg>PayPal
+						</button>
+																<button class="btn" onclick="purchaseProStripe($(this))" id="btn-pro-stripe-payment" data-id="" data-title="" data-price="">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#6BBEA1" d="M20,8H4V6H20M20,18H4V12H20M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"></path></svg>Credit Card
+						</button>
+					                    				</div>
+            </div>
+        </div>
+    </div>
+</div>		<div class="modal fade" id="bank_transfer_modal_response" tabindex="-1" role="dialog" aria-labelledby="bank_transfer_modal_response" aria-hidden="true" data-id="0">
+    <div class="modal-dialog mat_box" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="no-track-found" style="padding: 30px 10px;">
+                    <span id="bank_transfer_modal_response_txt"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bank_transfer_modal modal fade modal-fixed-footer" tabindex="-1" role="dialog" aria-hidden="true" data-id="0">
+    <div class="modal-dialog mat_box" role="document">
+        <div class="modal-content dt_bank_trans_modal">
+            <div class="modal-header">
+                <h5 class="modal-title">Bank Transfer</h5>
+            </div>
+            <div class="modal-body">
+                                <div class="bank_info"><div class="dt_settings_header bg_gradient">
+    <div class="bank_info_innr">
+        <h4 class="bank_name">Garanti Bank</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="bank_account">
+                    <p>4796824372433055</p>
+                    <span class="help-block">Account number / IBAN</span>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="bank_account_holder">
+                    <p>Antoian Kordiyal</p>
+                    <span class="help-block">Account name</span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="bank_account_code">
+                    <p>TGBATRISXXX</p>
+                    <span class="help-block">Routing code</span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="bank_account_country">
+                    <p>United States</p>
+                    <span class="help-block">Country</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div></div>
+                                                <div class="dt_user_profile hide_alert_info_bank_trans">
+                <span class="valign-wrapper">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M13,13H11V7H13M13,17H11V15H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"></path></svg> Note:
+                </span>
+                    <ul class="browser-default dt_prof_vrfy">
+                        <li id="bank_note">In order to confirm the bank transfer, you will need to upload a receipt or take a screenshot of your transfer within 1 day from your payment date. If a bank transfer is made but no receipt is uploaded within this period, your order will be cancelled. We will verify and confirm your receipt within 3 working days from the date you upload it.</li>
+                    </ul>
+                </div>
+                                <p class="dt_bank_trans_upl_rec">
+                    <a href="javascript:void(0);" onclick="$(&#39;.bank_transfer_modal&#39;).addClass(&#39;up_rec_active&#39;); return false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M13.5,16V19H10.5V16H8L12,12L16,16H13.5M13,9V3.5L18.5,9H13Z"></path>
+                        </svg> Upload Receipt
+                    </a>
+                </p>
+                <div class="upload_bank_receipts">
+                    <div onclick="document.getElementById(&#39;receipt_img&#39;).click(); return false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M13.5,16V19H10.5V16H8L12,12L16,16H13.5M13,9V3.5L18.5,9H13Z"></path></svg>
+                        <p>Upload Receipt</p>
+                        <img id="receipt_img_preview" src="http://localhost/mrunal/">
+                    </div>
+                </div>
+                <input type="file" id="receipt_img" class="hide" accept="image/x-png, image/gif, image/jpeg" name="receipt_img">
+            </div>
+            <!--<span style="display: block;text-align: center;" id="receipt_img_path"></span>-->
+            <div class="modal-footer">
+                <div class="bank_transfr_progress hide" id="img_upload_progress">
+                    <div class="progress">
+                        <div id="img_upload_progress_bar" class="determinate progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+                    </div>
+                </div>
+                <button class="btn btn-default" data-dismiss="modal">Close</button>
+                <button class="btn btn-primary btn-mat" disabled="" id="btn-upload-receipt" data-selected="" data-mode="" data-id="" data-title="" data-price="">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    document.getElementById('receipt_img').removeEventListener("change", handleReceiptImgChange, true);
+    document.getElementById('receipt_img').addEventListener('change', handleReceiptImgChange, { passive: false });
+    function handleReceiptImgChange(){
+        let imgPath = $(this)[0].files[0].name;
+        if (typeof(FileReader) != "undefined") {
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                $('#receipt_img_preview').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(this.files[0]);
+        }
+        $('#receipt_img_path').html(imgPath);
+        $('.bank_transfer_modal').addClass('up_rec_img_ready');
+        $('#btn-upload-receipt').removeAttr('disabled');
+        $('#btn-upload-receipt').removeClass('btn-flat').addClass('btn-success');
+    }
+    document.getElementById('btn-upload-receipt').addEventListener('click', function(e) {
+        e.preventDefault();
+        let bar = $('#img_upload_progress');
+        let percent = $('#img_upload_progress_bar');
+
+        let id = $(this).attr("data-id");
+        if (!id) {
+            return false;
+        }
+        let title = $(this).attr("data-title");
+        let price = $(this).attr("data-price");
+        let mode = $(this).attr("data-mode");
+
+        let formData = new FormData();
+        formData.append("hash_id",'4adb1d90b00769ea7351a096acad511d4baf680d');
+        formData.append("description",title);
+        formData.append("price", price);
+        formData.append("mode", mode);
+        formData.append("track_id", id);
+        formData.append("receipt_img", $("#receipt_img")[0].files[0], $("#receipt_img")[0].files[0].value);
+        bar.removeClass('hide');
+        $.ajax({
+            xhr: function() {
+                let xhr = new window.XMLHttpRequest();
+                xhr.upload.addEventListener("progress", function(evt){
+                    if (evt.lengthComputable) {
+                        let percentComplete = evt.loaded / evt.total;
+                        percentComplete = parseInt(percentComplete * 100);
+                        //status.html( percentComplete + "%");
+                        percent.width(percentComplete + '%');
+                        percent.html(percentComplete + '%');
+                        if (percentComplete === 100) {
+                            bar.addClass('hide');
+                            percent.width('0%');
+                            percent.html('0%');
+                        }
+                    }
+                }, false);
+                return xhr;
+            },
+            url: ajaxUrl() + '/upload-receipt',
+            type: "POST",
+            async: true,
+            enctype: 'multipart/form-data',
+            processData: false,
+            contentType: false,
+            cache: false,
+            timeout: 60000,
+            dataType: false,
+            data: formData,
+            success: function(result) {
+                if( result.status == 200 ){
+                    $('#payment_modal').modal('hide');
+                    $('#paymentpro_modal').modal('hide');
+                    $('.bank_transfer_modal').modal('hide');
+
+                    $('#bank_transfer_modal_response_txt').html('Your receipt  has been uploaded successfully.');
+                    $('#bank_transfer_modal_response').modal('show');
+
+                    setTimeout(function () {
+                        $('#bank_transfer_modal_response').modal('hide');
+                    },2000);
+                    return false;
+                }
+            }
+        });
+    });
+</script>		<div class="modal fade mat_box" id="logged-out-modal" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><i class="fa fa-exclamation-circle"></i> Session Expired</h4>
+            </div>
+            <div class="modal-body">
+                <p>Your Session has been expired, please login again.</p>
+            </div>
+            <div class="modal-footer">
+                <a href="http://localhost/mrunal//discover" class="btn btn-default">Login</a>
+            </div>
+        </div>
+    </div>
+</div>		<div class="modal fade mat_box" id="verify_code" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="two_factor_title">
+                    A confirmation email has been sent.                </h5>
+            </div>
+            <form id="confirmation_code_form" class="confirmation_code_form" method="POST">
+                <div class="modal-body">
+                    <div id="confirmation_code_form_alert"></div>
+                    <span class="verfy_sett_email_phone_ico"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M21,13.34C20.37,13.12 19.7,13 19,13A6,6 0 0,0 13,19C13,19.34 13.03,19.67 13.08,20H3A2,2 0 0,1 1,18V6C1,4.89 1.89,4 3,4H19A2,2 0 0,1 21,6V13.34M23.5,17L18.5,22L15,18.5L16.5,17L18.5,19L22,15.5L23.5,17M3,6V8L11,13L19,8V6L11,11L3,6Z"></path></svg></span>
+                    <p id="two_factor_desc">
+                        We have sent an email that contains the confirmation code to enable Two-factor authentication.                    </p>
+                    <div class="form-group verfy_sett_email_phone">
+                        <input type="text" class="form-control" name="code" placeholder="Confirmation code">
+                    </div>
+                </div>
+                <div class="modal-footer">
+					<button data-dismiss="modal" class="btn btn-default">Cancel</button>
+                    <button id="confirmation_code_form_btn" type="submit" class="btn btn-primary">Save</button>
+                </div>
+                <input type="hidden" id="confirmation_code_form_user_id" name="user_id" value="">
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade mat_box" id="verify_email_phone" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="verify_email_phone_title">
+                                    </h5>
+            </div>
+            <form id="verify_email_phone_form" class="verify_email_phone_form" method="POST">
+                <div class="modal-body">
+                    <div id="verify_email_phone_form_alert"></div>
+                    <span class="verfy_sett_email_phone_ico"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M17,19V5H7V19H17M17,1A2,2 0 0,1 19,3V21A2,2 0 0,1 17,23H7C5.89,23 5,22.1 5,21V3C5,1.89 5.89,1 7,1H17M9,7H15V9H9V7M9,11H13V13H9V11Z"></path></svg></span>
+                    <p id="verify_email_phone_desc">
+                                            </p>
+                    <div class="form-group verfy_sett_email_phone">
+                        <input type="text" class="form-control" name="code" placeholder="Confirmation code">
+                    </div>
+                </div>
+                <div class="modal-footer">
+					<button data-dismiss="modal" class="btn btn-default">Cancel</button>
+                    <button id="verify_email_phone_form_btn" type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>		
+<div class="modal fade" id="buy_album_modal" tabindex="-1" role="dialog" aria-labelledby="track_unreported" aria-hidden="true" data-id="0">
+    <div class="modal-dialog mat_box" role="document">
+        <div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Choose a payment method</h5>
+			</div>
+
+            <div class="modal-body">
+				<div class="pay_method">
+					                        <button class="btn" onclick="purchaseAlbumPaypal($(this))" id="btn-pro-paypal-payment" data-id="" data-title="" data-price="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#283593" d="M8.32,21.97C8.21,21.92 8.08,21.76 8.06,21.65C8.03,21.5 8,21.76 8.66,17.56C9.26,13.76 9.25,13.82 9.33,13.71C9.46,13.54 9.44,13.54 10.94,13.53C12.26,13.5 12.54,13.5 13.13,13.41C16.38,12.96 18.39,11.05 19.09,7.75C19.13,7.53 19.17,7.34 19.18,7.34C19.18,7.33 19.25,7.38 19.33,7.44C20.36,8.22 20.71,9.66 20.32,11.58C19.86,13.87 18.64,15.39 16.74,16.04C15.93,16.32 15.25,16.43 14.05,16.46C13.25,16.5 13.23,16.5 13,16.65C12.83,16.82 12.84,16.79 12.45,19.2C12.18,20.9 12.08,21.45 12.04,21.55C11.97,21.71 11.83,21.85 11.67,21.93L11.56,22H10C8.71,22 8.38,22 8.32,21.97V21.97M3.82,19.74C3.63,19.64 3.5,19.47 3.5,19.27C3.5,19 6.11,2.68 6.18,2.5C6.27,2.32 6.5,2.13 6.68,2.06L6.83,2H10.36C14.27,2 14.12,2 15,2.2C17.62,2.75 18.82,4.5 18.37,7.13C17.87,10.06 16.39,11.8 13.87,12.43C13,12.64 12.39,12.7 10.73,12.7C9.42,12.7 9.32,12.71 9.06,12.85C8.8,13 8.59,13.27 8.5,13.6C8.46,13.67 8.23,15.07 7.97,16.7C7.71,18.33 7.5,19.69 7.5,19.72L7.47,19.78H5.69C4.11,19.78 3.89,19.78 3.82,19.74V19.74Z"></path></svg>PayPal
+                        </button>
+                                                                <button class="btn" onclick="purchaseAlbumStripe($(this))" id="btn-pro-stripe-payment" data-id="" data-title="" data-price="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#6BBEA1" d="M20,8H4V6H20M20,18H4V12H20M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"></path></svg>Credit Card
+                        </button>
+                    
+                    				</div>
+            </div>
+        </div>
+    </div>
+</div>
+		<div class="modal fade" id="albums_success" role="dialog" aria-labelledby="albums" aria-hidden="true" data-id="{{t_id}}">
+			<div class="modal-dialog mat_box" role="document">
+				<div class="modal-content add_to_plist">
+					<div class="modal-body" style="background: #1b711e;">
+						<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+						<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve" width="50" height="50">
+<g>
+	<g>
+		<path fill="currentColor" d="M449.716,239.842c-0.543-7.535-7.082-13.191-14.628-12.661c-7.536,0.543-13.204,7.092-12.662,14.628
+			c0.337,4.655,0.506,9.431,0.506,14.191c0,109.061-88.726,197.787-197.786,197.787C116.086,453.787,27.36,365.06,27.36,256
+			S116.086,58.214,225.147,58.214c43.191,0,84.21,13.668,118.62,39.525c6.041,4.538,14.615,3.321,19.154-2.718
+			c4.54-6.04,3.323-14.616-2.717-19.154c-39.189-29.447-85.891-45.012-135.058-45.012C101.001,30.854,0,131.855,0,256
+			s101.001,225.145,225.147,225.145S450.292,380.146,450.292,256C450.292,250.586,450.097,245.15,449.716,239.842z"></path>
+	</g>
+</g>
+<g>
+	<g>
+		<path fill="currentColor" d="M496.395,61.77c-20.808-20.807-54.666-20.807-75.474,0l-197.11,197.108l-69.874-69.875
+			c-20.808-20.807-54.666-20.807-75.474,0c-20.808,20.808-20.808,54.666,0,75.474l120.341,120.341
+			c6.895,6.895,15.951,10.342,25.007,10.342c9.057,0,18.113-3.447,25.008-10.342l247.576-247.576
+			C517.201,116.435,517.201,82.579,496.395,61.77z M477.049,117.897L229.472,365.475c-3.12,3.12-8.2,3.12-11.32,0L97.811,245.133
+			c-10.141-10.141-10.141-26.64,0-36.781c5.07-5.072,11.729-7.606,18.39-7.606s13.321,2.535,18.39,7.606l71.882,71.882
+			c4.632,4.631,10.791,7.181,17.339,7.181c6.551,0,12.71-2.551,17.341-7.182L440.268,81.116c10.138-10.141,26.64-10.141,36.781,0
+			C487.189,91.257,487.189,107.756,477.049,117.897z"></path>
+	</g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+						<br><br>
+						<b>The track has been moved to following album.</b>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="queue_overlay" onclick="javascript:$(&#39;body&#39;).removeClass(&#39;data-queue-open&#39;);"></div>
+		<div class="sidenav_overlay" onclick="javascript:$(&#39;body&#39;).removeClass(&#39;side_open&#39;);"></div>
+		
+
+		<script>
+$(document).on('click', '#follow-user', function(event) {
+	$(this).toggleClass('btn-primary btn-success');
+	$(this).text("Following");
+	$(this).attr("id", "unfollow-user");
+	$.post('http://localhost/mrunal//endpoints/follow-user/add', {id: $(this).attr('data-user-id')});
+});
+
+
+$(document).on('click', '.comment_input', function(event){
+    $('#login_box').modal('show');
+});
+
+// unfollow user
+$(document).on('click', '#unfollow-user', function(event) {
+	$(this).toggleClass('btn-success btn-primary');
+	$(this).text("Follow");
+	$(this).attr("id", "follow-user");
+	$.post('http://localhost/mrunal//endpoints/follow-user/remove', {id: $(this).attr('data-user-id')});
+});
+
+function likeSong(id, type, element) {
+	if (!id || !type) {
+		return false;
+	}
+	if (type == 'track-page') {
+		if (element.attr('liked')) {
+			element.removeClass('track-liked').removeAttr('liked', 'true');
+			element.find('svg path').attr('fill', '#333');
+			element.find('span').html("Like");
+
+            $('#track_likes_count').attr('data-count',parseInt($('#track_likes_count').attr('data-count')) - 1);
+            $('#track_likes_count').html(parseInt($('#track_likes_count').attr('data-count')));
+
+            if( $('#dislike-track').hasClass('track-disliked') ){
+                $('#dislike-track-text').html("Disliked");
+                $('#dislike-track').addClass('track-disliked');
+            }
+            // $('#like-track').removeAttr('liked');
+            // $('#dislike-track').attr('disliked', 'true');
+
+		} else {
+			element.addClass('track-liked').attr('liked', 'true');
+            $('#dislike-track').removeAttr('disliked');
+			element.find('svg path').attr('fill', '#fff');
+			element.find('span').html("Liked");
+
+            $('#track_likes_count').attr('data-count',parseInt($('#track_likes_count').attr('data-count')) + 1);
+            $('#track_likes_count').html(parseInt($('#track_likes_count').attr('data-count')));
+
+            if( $('#dislike-track').hasClass('track-disliked') ){
+                $('#dislike-track').removeClass('track-disliked');
+                $('#dislike-track-text').html("Dislike");
+
+                $('#track_dislikes_count').attr('data-count',parseInt($('#track_dislikes_count').attr('data-count')) - 1);
+                $('#track_dislikes_count').html(parseInt($('#track_dislikes_count').attr('data-count')));
+            }
+
+		}
+	}
+	$.get('http://localhost/mrunal//endpoints/like-track', {id: id, type: type});
+}
+
+function dislikeSong(id, type, element) {
+    if (!id || !type) {
+        return false;
+    }
+    if (type == 'track-page') {
+        if (element.attr('disliked')) {
+            element.removeClass('track-disliked').removeAttr('disliked', 'true');
+            element.find('span').html("Dislike");
+
+            $('#track_dislikes_count').attr('data-count',parseInt($('#track_dislikes_count').attr('data-count')) - 1);
+            $('#track_dislikes_count').html(parseInt($('#track_dislikes_count').attr('data-count')));
+
+            if( $('#like-track').hasClass('track-liked') ){
+                $('#like-track-text').html("Liked");
+                $('#like-track').addClass('track-liked');
+            }
+            // $('#like-track').attr('liked', 'true');
+            // $('#dislike-track').removeAttr('disliked');
+
+        } else {
+            element.addClass('track-disliked').attr('disliked', 'true');
+            $('#like-track').removeAttr('liked');
+
+            element.find('span').html("Disliked");
+
+            $('#track_dislikes_count').attr('data-count',parseInt($('#track_dislikes_count').attr('data-count')) + 1);
+            $('#track_dislikes_count').html(parseInt($('#track_dislikes_count').attr('data-count')));
+
+            if( $('#like-track').hasClass('track-liked') ){
+                $('#like-track').removeClass('track-liked');
+                $('#like-track-text').html("Like");
+                $('#like-track svg path').attr('fill','currentColor');
+
+                $('#track_likes_count').attr('data-count',parseInt($('#track_likes_count').attr('data-count')) - 1);
+                $('#track_likes_count').html(parseInt($('#track_likes_count').attr('data-count')));
+            }
+
+        }
+    }
+    $.get('http://localhost/mrunal//endpoints/dislike-track', {id: id, type: type});
+}
+
+function loadMore(type, get_data) {
+	element = $("#load-more-button");
+	$default_text = element.html();
+	$track_id = 0;
+	views = 0;
+	let v_ids = [];
+	if (type == 'songs') {
+		$last_id = $('.feed_post:last-child').attr('data-id');
+		$append_div = '#user-feed-data';
+	} else if (type == 'recently_played') {
+		$last_id = $('.track_list:last').attr('data-time');
+		$append_div = '#recently_played';
+	} else if (type == 'comments') {
+		$last_id = $('.comment_item:last').attr('comment-id');
+		$append_div = '.comment_list';
+		$track_id = $('.comment_item:last').attr('comment-song-id')
+	} else if (type == 'blog_comments') {
+		$last_id = $('.comment_item:last').attr('comment-id');
+		$append_div = '.comment_list';
+		$track_id = $('.comment_item:last').attr('comment-song-id')
+	} else if (type == 'latest_music' || type == 'top_music') {
+		$last_id = $('#new-music .track_list:last').attr('data-id');
+		$append_div = '#new-music';
+	} else if (type == 'categories') {
+		$last_id = $('.list-recommended:last').attr('data-id');
+		$append_div = 'ul.s_list_songs';
+	} else if (type == 'followers') {
+        $last_id = $('.follower_list:last-child').attr('data-id');
+        $append_div = '#followers';
+    } else if (type == 'followings') {
+        $last_id = $('.following_list:last-child').attr('data-id');
+        $append_div = '#followings';
+    } else if (type == 'songs_search') {
+        $last_id = $('.song_search_list:last-child').attr('data-id');
+        $append_div = '#songs_search_result';
+    } else if (type == 'artists_search') {
+        $last_id = $('.artist_list:last-child').attr('data-id');
+        $append_div = '#artists_search_result';
+    } else if (type == 'albums_search') {
+        $last_id = $('.track_list:last-child').attr('data-id');
+        $append_div = '#albums_search_result';
+    } else if (type == 'playlists_search') {
+        $last_id = $('.playlist-p-list:last-child').attr('data-id');
+        $append_div = '#playlists_search_result';
+    } else if (type == 'store_albums') {
+        $last_id = $('.track_list:last-child').attr('data-id');
+        $append_div = '.store_albums';
+    } else if (type == 'store_songs') {
+        $last_id = $('.song_list:last-child').attr('data-id');
+        $append_div = '.store_songs';
+    } else if (type == 'blogs') {
+        $last_id = $('.blog_list').last().attr('data-id');
+        $append_div = '.blog_articles';
+    } else if (type == 'stations') {
+        $last_id = $('#new-music .track_list:last').attr('data-id');
+        $append_div = '#new-music';
+    }
+    else if(type == 'fame_page'){
+    	$last_id = $('#fame_page_result .artist_lists:last').attr('data-id');
+    	views   = $('#fame_page_result .artist_lists:last').attr('data_views');
+        $append_div = '#fame_page_result';
+        $('.artist_lists').each(function(i, obj) {
+            v_ids.push($(obj).attr('data_v_id'));
+        });
+    }
+
+
+	if (get_data == 'all' || get_data == 'liked' || get_data == 'spotlight') {
+		$last_id = $('.feed_post:last-child').attr('data-a-id');
+		type = 'activities';
+	}
+	if (get_data == 'playlists') {
+		$last_id = $('.playlist-p-list:last-child').attr('data-id');
+		type = 'playlists';
+	}
+	if (get_data == 'albums') {
+		$last_id = $('.album-p-list:last-child').attr('data-id');
+		type = 'albums';
+	}
+    if (get_data == 'stations') {
+        $last_id = $('.track_list:last-child').attr('data-id');
+        type = 'stations';
+    }
+	element.text("Please wait..");
+
+    let geners = [];
+    let price = [];
+    let filter_type = null;
+    let current_tag = null;
+    if($('#current_tag').length > 0){
+        current_tag = $('#current_tag').val();
+    }
+    if($('#filter_type').length > 0){
+        filter_type = $('#filter_type').val();
+    }
+    if($('.song_category').length > 0){
+        $('.song_category').each(function(i, obj) {
+            if(this.checked){
+                geners.push($(obj).attr('data-category'));
+            }
+        });
+    }
+    if($( "#slider-range" ).length > 0){
+        price = $("#slider-range").slider("option").values;
+    }
+    let params = {'geners': geners, 'filter_type': filter_type,'current_tag': current_tag, 'price': price };
+
+	$.get(ajaxUrl() + '/load-more/' + type, {id: $last_id, userID: $('#user-id').val(), track_id: $track_id, get_data: get_data,params: params,views:views,v_ids:v_ids}, function(data) {
+		if (data.status == 200 && data.html.length > 0) {
+			$($append_div).append(data.html);
+		} else {
+			$default_text = "No more tracks found";
+			if (type == 'comments' || type == 'blog_comments') {
+				$default_text = "No more comments found";
+			} 
+			if (type == 'all') {
+				$default_text = "No more activities found";
+			} 
+			if (type == 'playlists' || type == 'playlists_search') {
+				$default_text = "No more playlists found";
+			}
+            if (type == 'followers') {
+                $default_text = "No more followers found";
+            }
+            if (type == 'followings') {
+                $default_text = "No more following found";
+            }
+            if (type == 'artists_search' || type == 'fame_page') {
+                $default_text = "No more artists found";
+            }
+            if (type == 'albums_search' || type == 'store_albums') {
+                $default_text = "No more albums found";
+            }
+            if (type == 'blogs_search' || type == 'blogs') {
+                $default_text = "No more articles found";
+            }
+            if (type == 'stations' ) {
+                $default_text = "No more stations found";
+            }
+        }
+		element.html($default_text);
+	});
+}
+
+$(document).on('click', '.amplitude-next', function(event) {
+	console.log($('#current-track').val());
+	
+});
+var is_sent = 0;
+$(function () {
+	var songsObject = [{
+        "name": "",
+        "artist": "",
+        "album": "",
+        "url": "",
+        "cover_art_url": ""
+	}];
+		var songsObject = [{"name":"Army(PaglaSongs).mp3","artist":"Karan Nandanwar","album":"Album","url":"http:\/\/localhost\/mrunal\/\/get-track.php?id=jOuQnhIT3UvCFiW&hash=c0e728d6f99440748227cb220e8b0077","cover_art_url":"http:\/\/localhost\/mrunal\/\/upload\/photos\/2024\/02\/GRGuEz7nnYda3KS7dpY3_05_3457a094cd6d81d10e015f4e46cd4e82_image.jpg","id":"jOuQnhIT3UvCFiW","u_id":"28","data_load":"track\/jOuQnhIT3UvCFiW","href":"http:\/\/localhost\/mrunal\/\/track\/jOuQnhIT3UvCFiW","duration":"3:32","purchase":"false","price":"0","is_favoriated":"false","showDemo":"false","qID":"1"}] ;
+		Amplitude.init({
+	"songs": songsObject,
+    "callbacks": {
+		 'after_play': function(){
+		 	setTimeout(function () {
+		 		var song_seconds = Amplitude.getSongDuration();
+		 		if (song_seconds) {
+		 			$('body').attr('song-duration', song_seconds);
+		 		}
+			 	$('body').addClass('audio_playing');
+			 	$('body').addClass('player_running');
+			 	$('#play-pause').addClass('amplitude-playing');
+		 	}, 100);
+		 },
+		 'after_pause': function(){
+		 	$('body').removeClass('audio_playing');
+		 	$('#play-pause').removeClass('amplitude-playing');
+		 	$('body').removeClass('player_running');
+		 },
+		 'after_stop': function(){
+		 	if (parseInt($('.ss_track_play_pause').attr('data_is_ad')) > 0 && is_sent == 0) {
+		 		is_sent = 1;
+		 		song_id = $('#current-track').attr('value');
+		 		onTimesUp(song_id);
+		 		return false;
+		 	}
+		 	$('body').removeClass('audio_playing');
+		 	$('#play-pause').removeClass('amplitude-playing');
+		 	$('body').removeClass('player_running');
+		 	$('#light-wave').width('0px');
+		 	// console.log("Stopped..");
+		 	// $('.song_details').hide();
+		 }
+	 }
+});
+
+});
+
+const FULL_DASH_ARRAY = 283;
+const WARNING_THRESHOLD = 10;
+const ALERT_THRESHOLD = 5;
+
+const TIME_LIMIT = 10;
+let timePassed = 0;
+let timeLeft = TIME_LIMIT;
+let timerInterval = null;
+
+function onTimesUp(song_id) {
+	if (typeof wavesurfer != "undefined") {
+		wavesurfer.pause();
+	}
+	if (typeof Amplitude != "undefined") {
+		Amplitude.pause();
+		Amplitude.removeSong(0);
+	}
+	$('#queue-' + song_id).remove();
+	$(".song_controls").css("pointer-events","auto");
+    $(".song_progress").css("pointer-events","auto");
+    $(".song_progress_right").css("pointer-events","auto");
+    $(".ma_player_playlist").css("pointer-events","auto");
+    $("#waveform").css("pointer-events","auto");
+	playSong(song_id,0,'yes');
+	$('body').removeClass('player_running');
+    clearInterval(timerInterval);
+    goToAjaxLink('track/' + song_id);
+}
+
+function startTimer(song_id) {
+  $(".song_controls").css("pointer-events","none");
+  $(".song_progress").css("pointer-events","none");
+  $(".song_progress_right").css("pointer-events","none");
+  $(".ma_player_playlist").css("pointer-events","none");
+  $("#waveform").css("pointer-events","none");
+  timerInterval = setInterval(() => {
+    timePassed = timePassed += 1;
+    timeLeft = TIME_LIMIT - timePassed;
+    if (timeLeft >= 0) {
+    	document.getElementById("base-timer-label").innerHTML = formatTime(
+	      timeLeft
+	    );
+	    setCircleDasharray();
+    }
+    
+    if (timeLeft === 0) {
+    	song_id = "'"+song_id+"'";
+    	$(".pause_btn").replaceWith('<div class="pause_btn" onclick="onTimesUp('+song_id+')"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#f98f1d" d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M8,8L13,12L8,16M14,8H16V16H14"/></svg></div>');
+    }
+  }, 1000);
+}
+
+function formatTime(time) {
+  const minutes = Math.floor(time / 60);
+  let seconds = time % 60;
+
+  if (seconds < 10) {
+    seconds = `0${seconds}`;
+  }
+
+  return `${minutes}:${seconds}`;
+}
+
+function calculateTimeFraction() {
+  const rawTimeFraction = timeLeft / TIME_LIMIT;
+  return rawTimeFraction - (1 / TIME_LIMIT) * (1 - rawTimeFraction);
+}
+
+function setCircleDasharray() {
+  const circleDasharray = `${(
+    calculateTimeFraction() * FULL_DASH_ARRAY
+  ).toFixed(0)} 283`;
+  document
+    .getElementById("base-timer-path-remaining")
+    .setAttribute("stroke-dasharray", circleDasharray);
+}
+
+var songIndex = [];
+function playSong(id,audio_ad_id = 0,skip = '') {
+	if (typeof setPlayerInterval != 'undefined') {
+		clearInterval(setPlayerInterval);
+	}
+	if (!$('body').attr('first-play')) {
+		//Amplitude.removeSong(0);
+		$('body').attr('first-play', "true");
+				
+	}
+
+
+	if (Amplitude.getActiveSongMetadata().id) {
+		if (Amplitude.getActiveSongMetadata().id == id) {
+			Amplitude.play();
+			if ($('#page').attr('data-page') != 'track') {
+				goToAjaxLink('track/' + Amplitude.getActiveSongMetadata().id);
+			}
+			// $('#container_content').append('<a href="#" id="redirect-user" data-load="track/' + Amplitude.getActiveSongMetadata().id + '"></a>');
+			// $('#redirect-user').trigger('click');
+			if ($('body').attr('first-play')) {
+				if (skip != 'yes') {
+					return false;
+				}
+			}
+			
+		}
+	}
+
+	$('#bar_loading').show().animate({width:20 + 80 * Math.random() + "%"}, 200);
+	$.get('http://localhost/mrunal//endpoints/get-song-info', {id: id,audio_ad_id: audio_ad_id}, function(data) {
+		if (data.age == true) {
+			$('#age-restricted').modal('show');
+			$('#bar_loading').animate({width:"100%"}, 200).fadeOut(300, function() {
+	           $(this).width("0");
+	        });
+			return false;
+		}
+		$("#light-wave").stop(true);
+		$('.waveform-small').html("");
+		$('.ssong_comments.small-waves').addClass('hidden');
+		$('.post-actions').addClass('hidden');
+		if (data.status == 200) {
+			$('body').attr('song-duration', data.duration);
+			if ($('.feed_post[data-id="' + data.songID + '"]:first').length > 0) {
+				if (data.songWaves.length > 0) {
+					$('.feed_post[data-id="' + data.songID + '"]:first').find('.waveform-small').html(data.songWaves);
+					$('#light-wave img').width($('#dark-wave').width() + 'px');
+				}
+				$('.feed_post[data-id="' + data.songID + '"]:first').find('.art-info').removeClass('hidden');
+				$('.feed_post[data-id="' + data.songID + '"]:first').find('.post-actions').removeClass('hidden');
+				$('.feed_post[data-id="' + data.songID + '"]:first').find('.ssong_comments').removeClass('hidden');
+			    $('.feed_post[data-id="' + data.songID + '"]:first').find('.comment_list').html(data.comments);
+			    $('.feed_post[data-id="' + data.songID + '"]:first').find('.comment-waves').html(data.waves);
+				$('html,body').animate({
+			        scrollTop: $('.feed_post[data-id="' + data.songID + '"]:first').offset().top
+			    }, 'slow');
+			}
+			
+			$('body').addClass('player_running');
+		    if ($('#queue-' + id).length == 0) {
+				var songObject = {
+			        "name": data.songTitle,
+			        "artist": data.artistName,
+			        "album": data.albumName,
+			        "url": data.songURL,
+			        "cover_art_url": data.coverURL,
+			        "id": id,
+			        "u_id": data.songID,
+			        "data_load": 'track/' + id,
+			        "href": data.songPageURL,
+			        "duration": data.songDuration,
+			        "purchase": data.purchase,
+			        'price': data.price,
+			        "is_favoriated": data.is_favoriated,
+			        "showDemo": data.showDemo
+				};
+		    	var songIndex = Amplitude.addSong(songObject);
+				data.qID = songIndex;
+				songObject.qID = songIndex;
+				
+				Amplitude.playSongAtIndex(songIndex);
+				if (data.is_ad != 'yes') {
+					addToQueue(data, songObject, false);
+					addView(data.songID);
+
+				}
+				
+				$('.amplitude-song-container').removeClass('amplitude-playing');
+				//$('.amplitude-song-container[amplitude-song-index="' + songIndex + '"]').addClass('amplitude-playing');
+				$('#queue-list').find('.amplitude-song-container').last().addClass('amplitude-playing');
+		    } else { 
+		    	songIndex = $('#queue-' + id).attr('amplitude-song-index');
+		    	Amplitude.playSongAtIndex(songIndex);
+		    }
+		    $('.player-song-url').attr('href', data.songPageURL);
+
+		    if (data.data_load != '') {
+		    	Amplitude.getActiveSongMetadata().data_load = '';
+		    	$('.player-song-url').attr('data-load', '');
+		    }
+		    else{
+		    	$('.player-song-url').attr('data-load', 'track/' + id);
+		    }
+			
+			$('#song-fav-button').html(data.favorite_button);
+			$('.ma_player').removeClass('closed');
+			if (data.is_ad == 'yes') {
+				document.querySelector(".pause_btn").innerHTML = `
+				<div class="base-timer">
+				  <svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><g class="base-timer__circle"><circle class="base-timer__path-elapsed" cx="50" cy="50" r="45"></circle><path id="base-timer-path-remaining" stroke-dasharray="283" class="base-timer__path-remaining" d="M 50, 50 m -45, 0 a 45,45 0 1,0 90,0 a 45,45 0 1,0 -90,0"></path></g></svg>
+				  <span id="base-timer-label" class="base-timer__label">${formatTime(
+				    timeLeft
+				  )}</span><p>to Skip Ad</p>
+				</div>
+				`;
+				startTimer(id);
+				$('.ss_track_play_pause').attr('data_is_ad', 1);
+			}
+		} else {
+			alert("Can't load the song, please try again later.")
+		}
+		$('#bar_loading').animate({width:"100%"}, 200).fadeOut(300, function() {
+           $(this).width("0");
+        });
+	});
+}
+
+function addToQueue(data, object, fetch) {
+    if (fetch == false) {
+        html = '<div class="song amplitude-song-container amplitude-play-pause" id="queue-' + object.id + '" onclick="playSong(\'' + object.id + '\')" amplitude-song-index="' + object.qID + '"><div class="song_icon_container"><img class="now-playing" src="'+ object.cover_art_url+'"/></div><span class="song_duration">' + object.duration + '</span><div class="song_meta_data"><span class="song_title">' + object.name + '</span><span class="song_artist">' + object.artist + '</span></div></div>';
+        $('#queue-list').append(html);
+    }
+    setTimeout(function () {
+        $.post('http://localhost/mrunal//endpoints/add-queue', {qdata: object});
+    }, 2000);
+}
+
+function registerBlogComment(value, id, event, element) {
+	if (!value || !id) {
+		return false;
+	}
+	if(event.which == 13) {
+		element.attr('disabled', "true");
+        $.post('http://localhost/mrunal//endpoints/register-blog-comment', {id: id, value: value}, function(data) {
+        	if (data.status == 300) {
+                $('#login_box').modal('show');
+            }
+        	if (data.status == 200) {
+        		$('.no-comments-found').remove();
+        		$('.no-track-found').remove();
+        		element.val("");
+        		$('.comment-list-' + id).prepend(data.html);
+        	}
+        	element.removeAttr('disabled');
+        });
+    }
+	
+}
+
+function registerCommentreplay(value, id, commentid, event, element) {
+    if (!value || !id || !commentid) {
+        return false;
+    }
+    //fix
+    if(event.which == 13) {
+        element.attr('disabled', "true");
+        $.post('http://localhost/mrunal//endpoints/register-comment-replay', {id: id, value: value, cid:commentid}, function(data) {
+            if (data.status == 300) {
+                $('#login_box').modal('show');
+            }
+            if (data.status == 200) {
+                $('.no-comments-found').remove();
+                $('.no-track-found').remove();
+                element.val("");
+                $('.comment-replay-list-' + commentid).append(data.html);
+                //window.init_emojioneArea();
+            }
+            element.removeAttr('disabled');
+        });
+    }
+
+}
+
+function registerComment(value, id, event, element) {
+	if (!value || !id) {
+		return false;
+	}
+	if(event.which == 13) {
+		element.attr('disabled', "true");
+		time = "";
+		timeSeconds = "";
+		if (Amplitude.getActiveSongMetadata().id == id) {
+			time = Amplitude.audio().currentTime;
+		    timeSeconds = $('.amplitude-song-played-progress').val();
+		}
+		wave = 0;
+		if ($('#light-wave').val()) {
+			wave = $('#light-wave').val();
+		}
+        $.post('http://localhost/mrunal//endpoints/register-comment', {id: id, value: value, timePercentage: timeSeconds, time: time, wave: wave}, function(data) {
+        	if (data.status == 300) {
+                $('#login_box').modal('show');
+            }
+        	if (data.status == 200) {
+        		$('.no-comments-found').remove();
+        		$('.no-track-found').remove();
+        		element.val("");
+        		$('.comment-waves').append(data.comment_wave);
+        		$('.comment-list-' + id).prepend(data.html);
+                //window.init_emojioneArea();
+        	}
+        	element.removeAttr('disabled');
+        });
+    }
+	
+} 
+
+$(document).on('mouseover', '.comment-on-wave', function(event) {
+	$(this).find('.comment-on-wave-data').css({
+		display: 'block',
+	});
+});
+$(document).on('mouseleave', '.comment-on-wave', function(event) {
+	$(this).find('.comment-on-wave-data').css({
+		display: 'none',
+	});
+});
+
+$('.comment-on-wave-data').on('hover', function(event) {
+	
+});
+
+function goToWave(secnods) {
+	setTimeout(function () {
+		Amplitude.skipTo(secnods, Amplitude.getActiveSongMetadata().qID);
+	}, 200);
+}
+
+function goTo(element) {
+	mainElement = element.parents('li');
+
+	if (Amplitude.getActiveSongMetadata().id != mainElement.attr('comment-song-id')) {
+		playSong(mainElement.attr('song-id'));
+	} 
+
+	setTimeout(function () {
+		Amplitude.skipTo(mainElement.attr('comment-seconds'), Amplitude.getActiveSongMetadata().qID);
+	}, 200);
+}
+
+function deleteComment(element) {
+	mainElement = $('#delete-comment');
+	comment_id = mainElement.attr('data-id');
+    mode = mainElement.attr('data-mode');
+	if (!comment_id) {
+		return false;
+	}
+	$('#delete-comment').modal('hide');
+	$('.comment-' + comment_id).slideUp('200', function () {
+		$(this).remove();
+	});
+    if(mode == 'blog'){
+        $.get('http://localhost/mrunal//endpoints/delete-blog-comment', {id: comment_id});
+    }else{
+        $.get('http://localhost/mrunal//endpoints/delete-comment', {id: comment_id});
+    }
+}
+
+function deleteCommentReplay(element) {
+    mainElement = $('#delete-comment-replay');
+    comment_id = mainElement.attr('data-id');
+    mode = mainElement.attr('data-mode');
+    if (!comment_id) {
+        return false;
+    }
+    $('#delete-comment-replay').modal('hide');
+    $('.comment-replay-' + comment_id).slideUp('200', function () {
+        $(this).remove();
+    });
+    $.get('http://localhost/mrunal//endpoints/delete-comment-replay', {id: comment_id});
+}
+
+function likeComment(comment_id) {
+    if (!comment_id) {
+        return false;
+    }
+    var clickval = $('.comment_like[data-comment-id="'+comment_id+'"]').attr("onclick");
+    $('.comment_like[data-comment-id="'+comment_id+'"]').attr('onclick',clickval.replace('likeComment', 'UnlikeComment') );
+    $('.comment_like[data-comment-id="'+comment_id+'"] path').attr('fill','#e62117');
+    $.get('http://localhost/mrunal//endpoints/like-comment', {id: comment_id});
+    let c = parseInt($('#comment_like_'+comment_id).html());
+    $('#comment_like_'+comment_id).html( c + 1);
+}
+
+function UnlikeComment(comment_id) {
+    if (!comment_id) {
+        return false;
+    }
+    var clickval = $('.comment_like[data-comment-id="'+comment_id+'"]').attr("onclick");
+    $('.comment_like[data-comment-id="'+comment_id+'"]').attr('onclick',clickval.replace('UnlikeComment', 'likeComment') );
+    $('.comment_like[data-comment-id="'+comment_id+'"] path').attr('fill','currentColor');
+    $.get('http://localhost/mrunal//endpoints/unlike-comment', {id: comment_id});
+
+    let c = parseInt($('#comment_like_'+comment_id).html());
+    $('#comment_like_'+comment_id).html( c - 1);
+
+}
+
+function BloglikeComment(comment_id) {
+    if (!comment_id) {
+        return false;
+    }
+    var clickval = $('.comment_like[data-comment-id="'+comment_id+'"]').attr("onclick");
+    $('.comment_like[data-comment-id="'+comment_id+'"]').attr('onclick',clickval.replace('likeComment', 'UnlikeComment') );
+    $('.comment_like[data-comment-id="'+comment_id+'"] path').attr('fill','#e62117');
+    $.get('http://localhost/mrunal//endpoints/like-blog-comment', {id: comment_id});
+    let c = parseInt($('#comment_like_'+comment_id).html());
+    $('#comment_like_'+comment_id).html( c + 1);
+}
+
+function BlogUnlikeComment(comment_id) {
+    if (!comment_id) {
+        return false;
+    }
+    var clickval = $('.comment_like[data-comment-id="'+comment_id+'"]').attr("onclick");
+    $('.comment_like[data-comment-id="'+comment_id+'"]').attr('onclick',clickval.replace('UnlikeComment', 'likeComment') );
+    $('.comment_like[data-comment-id="'+comment_id+'"] path').attr('fill','currentColor');
+    $.get('http://localhost/mrunal//endpoints/unlike-blog-comment', {id: comment_id});
+
+    let c = parseInt($('#comment_like_'+comment_id).html());
+    $('#comment_like_'+comment_id).html( c - 1);
+
+}
+function BlogUnReportComment(comment_id,user_id) {
+    if (!comment_id) {
+        return false;
+    }
+    $('.blog_comment_report[data-comment-id="'+comment_id+'"]').show();
+    $('.blog_comment_report[data-comment-id="'+comment_id+'"]').css({'visibility':'inherit'});
+    $('.blog_comment_unreport[data-comment-id="'+comment_id+'"]').hide();
+
+    $.get(ajaxUrl() + '/blog-unreport-comment', {id: comment_id,uid: user_id}, function (data) {
+        if (data.status == 200) {
+            $('#blog_comment_unreported').modal('show');
+            setTimeout(function () {
+                $('#blog_comment_unreported').modal('hide');
+            }, 3000);
+        }
+    });
+
+}
+function UnReportComment(comment_id,user_id) {
+    if (!comment_id) {
+        return false;
+    }
+    $('.comment_report[data-comment-id="'+comment_id+'"]').show();
+    $('.comment_report[data-comment-id="'+comment_id+'"]').css({'visibility':'inherit'});
+    $('.comment_unreport[data-comment-id="'+comment_id+'"]').hide();
+
+    $.get(ajaxUrl() + '/unreport-comment', {id: comment_id,uid: user_id}, function (data) {
+        if (data.status == 200) {
+            $('#comment_unreported').modal('show');
+            setTimeout(function () {
+                $('#comment_unreported').modal('hide');
+            }, 3000);
+        }
+    });
+
+}
+
+function UnReportTrack(track_id,user_id) {
+    if (!track_id) {
+        return false;
+    }
+    $('.track_report[data-track-id="'+track_id+'"]').show();
+    $('.track_report[data-track-id="'+track_id+'"]').css({'visibility':'inherit'});
+    $('.track_unreport[data-track-id="'+track_id+'"]').hide();
+
+    $.get(ajaxUrl() + '/unreport-track', {'id': track_id,'uid': user_id}, function (data) {
+        if (data.status == 200) {
+            $('#track_unreported').modal('show');
+            setTimeout(function () {
+                $('#track_unreported').modal('hide');
+            }, 3000);
+        }
+    });
+
+}
+
+function purchaseTrack(id, element) {
+	if (!id) {
+		return false;
+	}
+    var title = element.attr("data-title");
+    var price = element.attr("data-price");
+
+    $('#btn-paypal-payment').attr('data-id',id);
+    $('#btn-stripe-payment').attr('data-id',id);
+    $('#btn-bank-payment').attr('data-id',id);
+
+    $('#btn-paypal-payment').attr('data-title',title);
+    $('#btn-stripe-payment').attr('data-title',title);
+    $('#btn-bank-payment').attr('data-title',title);
+
+    $('#btn-paypal-payment').attr('data-price',price);
+    $('#btn-stripe-payment').attr('data-price',price);
+    $('#btn-bank-payment').attr('data-price',price);
+
+    getText = element.text();
+    element.attr('disabled', 'true');
+    element.text("Please wait..");
+    $.get('http://localhost/mrunal//endpoints/get-payment-model', {id: id}, function (data) {
+        if (data.status == 200) {
+            $('#login_box').modal('hide');
+            $('#payment_modal').modal('show');
+            element.text(getText);
+            element.removeAttr('disabled');
+        } else if (data.status == 300) {
+            $('#login_box').modal('show');
+            element.text(getText);
+            element.removeAttr('disabled');
+            $('#purchase-song').modal('hide');
+        } else {
+            element.text(getText);
+            element.removeAttr('disabled');
+            alert('Error found while creating the payment, please try again later.');
+        }
+    });
+}
+
+function purchaseTrackPaypal(element) {
+    var id = element.attr("data-id");
+    if (!id) {
+        return false;
+    }
+    getText = element.text();
+    element.attr('disabled', 'true');
+    element.text("Please wait..");
+    $.get('http://localhost/mrunal//endpoints/purchase', {id: id}, function (data) {
+    	if (data.status == 200) {
+    		location.href = data.url;
+    	} else if (data.status == 300) {
+    		$('#login_box').modal('show');
+    		element.text(getText);
+    		element.removeAttr('disabled');
+    		$('#purchase-song').modal('hide');
+    	} else {
+    		element.text(getText);
+    		element.removeAttr('disabled');
+    		alert('Error found while creating the payment, please try again later.');
+    	}
+    });
+}
+
+function TrackReadMore() {
+    var dots = document.getElementById("dots");
+    var moreText = document.getElementById("more");
+    var btnText = document.getElementById("btn-track-load-more");
+
+    if (dots.style.display === "none") {
+        dots.style.display = "inline";
+        btnText.innerHTML = "Read more";
+        moreText.style.display = "none";
+    } else {
+        dots.style.display = "none";
+        btnText.innerHTML = "Read less";
+        moreText.style.display = "inline";
+    }
+}
+
+function purchaseTrackStripe(element) {
+    var id = element.attr("data-id");
+    if (!id) {
+        return false;
+    }
+
+    var stripe = Stripe('');
+    var title = element.attr("data-title");
+    var price = element.attr("data-price");
+
+    getText = element.text();
+    element.attr('disabled', 'true');
+    element.text("Please wait..");
+
+    var fd = new FormData();
+        fd.append('description', title);
+        fd.append('price', price);
+        fd.append('payType', 'track_purchase');
+        fd.append('trackID', id);
+        fd.append('hash_id', $('.main_session').val() );
+
+    fetch('http://localhost/mrunal//endpoints/new-stripe', {
+        method: 'POST',
+        body : fd
+    }).then(function(response) {
+        return response.json();
+    }).then(function(session) {
+        return stripe.redirectToCheckout({ sessionId: session.id });
+    }).then(function(result) {
+        // If redirectToCheckout fails due to a browser or network
+        // error, you should display the localized error message to your
+        // customer using error.message.
+        if (result.error) {
+            alert(result.error.message);
+        }
+    })
+    .catch(function(error) {
+        console.error('Error:', error);
+    });
+
+}
+
+function _purchaseTrackStripe(element) {
+    var id = element.attr("data-id");
+    if (!id) {
+        return false;
+    }
+    var title = element.attr("data-title");
+    var price = element.attr("data-price");
+
+    getText = element.text();
+    element.attr('disabled', 'true');
+    element.text("Please wait..");
+
+    let script = document.createElement('script');
+    script.src = 'https://checkout.stripe.com/checkout.js';
+    script.type = 'text/javascript';
+    script.onload = script.onreadystatechange = function() {
+        if ( !this.readyState || this.readyState === "loaded" || this.readyState === "complete" ) {
+            if (typeof StripeCheckout !== 'undefined'){
+                let handler = StripeCheckout.configure({
+                    key: '',
+                    image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+                    locale: 'english',
+                    token: function (token) {
+                        $.post('http://localhost/mrunal//endpoints/stripe', {
+                            stripeToken: token.id,
+                            description: title,
+                            price: price,
+                            payType: 'track_purchase',
+                            trackID: id
+                        }, function (data) {
+                            if (data.status == 200) {
+                                window.location = data.url;
+                            }else{
+                                alert(data.message);
+                            }
+                        });
+                    }
+                });
+                handler.open({
+                    name: 'Music',
+                    description: title,
+                    currency: 'USD',
+                    amount: price * 100,
+                    opened: function () {
+
+                    },
+                    closed: function () {
+                        element.text("Credit Card");
+                        element.attr('disabled', 'false');
+                    }
+                });
+            }
+        }
+    };
+    let head  = document.getElementsByTagName('head')[0];
+    head.appendChild(script);
+
+    $(window).on('popstate', function() {
+        handler.close();
+
+    });
+}
+
+function purchaseTrackBank(element) {
+    var id = element.attr("data-id");
+    if (!id) {
+        return false;
+    }
+    var title = element.attr("data-title");
+    var price = element.attr("data-price");
+
+
+    $('#btn-upload-receipt').attr('data-id', id);
+    $('#btn-upload-receipt').attr('data-mode', 'track');
+    $('#btn-upload-receipt').attr('data-title', title);
+    $('#btn-upload-receipt').attr('data-price', price);
+
+   // $('#bank_transfer_price').text('$' + getPrice());
+    //$('#bank_transfer_description').text(getDescription());
+    $('#receipt_img_path').html('');
+    $('#receipt_img_preview').attr('src', '');
+    $('.bank_transfer_modal').removeClass('up_rec_img_ready, up_rec_active');
+    $('.bank_transfer_modal').modal('show');
+}
+
+
+function purchaseAlbum(id, element) {
+    if (!id) {
+        return false;
+    }
+    getText = element.text();
+    element.attr('disabled', 'true');
+    element.text("Please wait..");
+    $('#buy_album_modal').attr('data-id', id);
+    $('#buy_album_modal').attr('data_price', element.attr('data_price'));
+    $('#buy_album_modal').modal('show');
+    element.text(getText);
+    element.removeAttr('disabled');
+}
+
+function purchaseAlbumPaypal(element) {
+    getText = element.text();
+    element.text("Please wait..");
+    element.attr('disabled', 'true');
+    id = $('#buy_album_modal').attr('data-id');
+    $.get('http://localhost/mrunal//endpoints/purchase-album', {id: id,type:'paypal'}, function (data) {
+        if (data.status == 200) {
+            location.href = data.url;
+        } else if (data.status == 300) {
+            $('#login_box').modal('show');
+            element.text(getText);
+            element.removeAttr('disabled');
+            $('#purchase-song').modal('hide');
+        } else {
+            element.text(getText);
+            element.removeAttr('disabled');
+            alert('Error found while creating the payment, please try again later.');
+        }
+    });
+}
+
+function purchaseAlbumBank(element) {
+
+    var title = "Buy Album";
+    var price = $('#buy_album_modal').attr('data_price');
+    id = $('#buy_album_modal').attr('data-id');
+
+
+    $('#btn-upload-receipt').attr('data-id', id);
+    $('#btn-upload-receipt').attr('data-mode', 'album');
+    $('#btn-upload-receipt').attr('data-title', title);
+    $('#btn-upload-receipt').attr('data-price', price);
+
+    // $('#bank_transfer_price').text('$' + getPrice());
+    //$('#bank_transfer_description').text(getDescription());
+    $('#receipt_img_path').html('');
+    $('#receipt_img_preview').attr('src', '');
+    $('.bank_transfer_modal').removeClass('up_rec_img_ready, up_rec_active');
+    $('#buy_album_modal').modal('hide');
+    $('.bank_transfer_modal').modal('show');
+}
+
+function purchaseAlbumStripe(element) {
+    var title = "Buy Album";
+    var price = $('#buy_album_modal').attr('data_price');
+    id = $('#buy_album_modal').attr('data-id');
+
+    getText = element.text();
+    element.attr('disabled', 'true');
+    element.text("Please wait..");
+
+    let script = document.createElement('script');
+    script.src = 'https://checkout.stripe.com/checkout.js';
+    script.type = 'text/javascript';
+    script.onload = script.onreadystatechange = function() {
+        if ( !this.readyState || this.readyState === "loaded" || this.readyState === "complete" ) {
+            if (typeof StripeCheckout !== 'undefined'){
+                let handler = StripeCheckout.configure({
+                    key: '',
+                    image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+                    locale: 'english',
+                    token: function (token) {
+                        $.post('http://localhost/mrunal//endpoints/purchase-album?type=stripe&id='+id, {
+                            stripeToken: token.id,
+                            description: title,
+                            price: price,
+                            payType: 'album',
+                            trackID: ''
+                        }, function (data) {
+                            if (data.status == 200) {
+                                window.location = data.url;
+                            }else{
+                                alert(data.message);
+                            }
+                        });
+                    }
+                });
+                handler.open({
+                    name: 'Music',
+                    description: title,
+                    currency: 'USD',
+                    amount: price * 100,
+                    opened: function () {
+
+                    },
+                    closed: function () {
+                        element.text("Credit Card");
+                        element.attr('disabled', 'false');
+                    }
+                });
+            }
+        }
+    };
+    let head  = document.getElementsByTagName('head')[0];
+    head.appendChild(script);
+
+    $(window).on('popstate', function() {
+        handler.close();
+
+    });
+}
+
+function getUrl() {
+	var url = window.location.href;
+	return url.replace("http://localhost/mrunal/", "");
+}
+
+function ajaxRedirect(url) {
+	if (!url) {
+		url = getUrl();
+	}
+	goToAjaxLink(url);
+}
+
+function favorite(id, element) {
+	if (element.hasClass('is_favoriated')) {
+		element.html('<path fill="#fff" d="M12,15.39L8.24,17.66L9.23,13.38L5.91,10.5L10.29,10.13L12,6.09L13.71,10.13L18.09,10.5L14.77,13.38L15.76,17.66M22,9.24L14.81,8.63L12,2L9.19,8.63L2,9.24L7.45,13.97L5.82,21L12,17.27L18.18,21L16.54,13.97L22,9.24Z" />');
+		element.removeClass("is_favoriated");
+		if (Amplitude.getActiveSongMetadata()) {
+			Amplitude.getActiveSongMetadata().is_favoriated = false;
+		}
+	} else {
+		element.addClass("is_favoriated");
+		element.html('<path fill="#ff9900" d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" />');
+		if (Amplitude.getActiveSongMetadata()) {
+			Amplitude.getActiveSongMetadata().is_favoriated = true;
+		}
+	}
+
+	$.get('http://localhost/mrunal//endpoints/favorite-track', {id: id});
+}
+
+function addToLists(id) {
+	getID = $('#playlists').attr('data-id');
+	if (!getID) {
+		return false;
+	}
+	var playlists = "";
+	$(".select-playlist-list").each(function (index, item) {
+		if ($(this).hasClass('active')) {
+			 playlists += $(this).attr('data-id') + ",";
+		}
+	});
+	if (playlists) {
+		$('#playlists').find('.btn-mat').text("Please wait..");
+		$.get(ajaxUrl() + "/playlist/add-to-playlist", {playlists: playlists, id: getID}, function (data) {
+			if (data.status == 200) {
+				$('#playlists').modal('hide');
+				setTimeout(function () {
+					$('#playlists').remove();
+				}, 200);
+			} else if (data.status == 300) {
+				alert("Please select which playlist you want to add this song to.")
+			} else {
+				$('#playlists').modal('hide');
+				setTimeout(function () {
+					$('#playlists').remove();
+				}, 200);
+			}
+		});
+	}
+}
+
+function addToAlbum(id) {
+    getID = $('#albums').attr('data-id');
+    if (!getID) {
+        return false;
+    }
+    var playlists = "";
+    $(".select-albums-list").each(function (index, item) {
+        if ($(this).hasClass('active')) {
+            var albums = $(this).attr('data-id');
+
+            $('#playlists').find('.btn-mat').text("Please wait..");
+            $.get(ajaxUrl() + "/album/add-to-album", {album: albums, id: getID}, function (data) {
+                if (data.status == 200) {
+                    $('#albums_success').modal('show');
+                    $('#albums').modal('hide');
+                    setTimeout(function () {
+                        $('#albums').remove();
+                    }, 200);
+                    setTimeout(function () {
+                        $('#albums_success').modal('hide');
+                    }, 3000);
+                } else if (data.status == 300) {
+                    alert("Please select which album you want to add this song to.")
+                } else {
+                    $('#albums').modal('hide');
+                    setTimeout(function () {
+                        $('#albums').remove();
+                    }, 200);
+                }
+            });
+
+        }
+    });
+
+}
+
+function blockUser(id, username, type) {
+	if (!id || !username) {
+		return false;
+	}
+	if (!confirm("Are you sure you want to block this user")) {
+		return false;
+	}
+	$.get('http://localhost/mrunal//endpoints/block-user/' + type, {id: id}, function (data) {
+		goToAjaxLink('user/' + username);
+	});
+}
+
+$(document).on('click', '#night_mode_toggle', function(event) {
+    mode = $(this).attr('data-mode');
+    $.post('http://localhost/mrunal//endpoints/?mode=' + mode, {}, function(data, textStatus, xhr) { /* pass */ });
+    if (mode !== 'night') {
+        //$("head link[rel='stylesheet']").last().after("<link rel='stylesheet' href='http://deepsound.test/themes/default/css/day.style.css' id='night-mode-css' type='text/css' media='screen'>");
+
+        $('body').append('<link rel="stylesheet" href="http://localhost/mrunal//themes/default/css/day.style.css" id="night-mode-css">');
+        $('#night_mode_toggle').attr('data-mode', 'night');
+        $('.switch .txt').text('Night mode');
+        $('.logo_container img').attr('src', 'http://localhost/mrunal//themes/default/img/logo-white.png');
+                    if($('#dark-wave').length > 0){
+            $('#dark-wave').css({'opacity':'0.5'});
+                }
+                if($('#light-wave').length > 0){
+        $('#light-wave').css({'border-right':'1px solid rgb(191, 191, 191)'});
+            }
+    } else {
+        $('#night-mode-css').remove();
+        $('#night_mode_toggle').attr('data-mode', 'day');
+        $('.switch .txt').text('Day mode');
+        $('.logo_container img').attr('src', 'http://localhost/mrunal//themes/default/img/logo.png');
+                    if($('#dark-wave').length > 0){
+            $('#dark-wave').css({'opacity':'inherit'});
+                }
+                if($('#light-wave').length > 0){
+        $('#light-wave').css({'border-right':'1px solid rgb(71, 71, 71)'});
+            }
+    }
+
+
+});
+
+$(document).ready(function() {
+    FastClick.attach(document.body);
+});
+
+function hide_announcement(id){
+    if (!id) { return false; }
+    $("#announcement-"+id).slideUp('fast',function(){
+        $(this).remove();
+        $.post('http://localhost/mrunal//endpoints/user/hide-announcement', {id: id}, function(data, textStatus, xhr) { /* pass */ });
+    })
+}
+</script>		<script src="./register pageOMSP_files/fingerprint2.min.js.download"></script>
+		<script src="./register pageOMSP_files/jquery.form.min.js.download"></script>
+		<script src="./register pageOMSP_files/popper.min.js.download"></script>
+		<script src="./register pageOMSP_files/bootstrap.min.js.download"></script>
+		<script src="./register pageOMSP_files/owl.carousel.min.js.download"></script>
+		<script src="./register pageOMSP_files/simplebar.min.js.download"></script>
+		<script src="./register pageOMSP_files/amplitude.min.js.download"></script>
+		<script src="./register pageOMSP_files/script.js.download"></script>
+		<script src="./register pageOMSP_files/Chart.min.js.download"></script>
+		<script src="./register pageOMSP_files/highcharts.js.download"></script>
+		<script src="./register pageOMSP_files/footer.js.download"></script>
+		<script src="./register pageOMSP_files/bootstrap-select.min.js.download"></script>
+		<script type="text/javascript" language="javascript" src="./register pageOMSP_files/jquery.dataTables.min.js.download"></script>
+		<script type="text/javascript" language="javascript" src="./register pageOMSP_files/dataTables.bootstrap4.min.js.download"></script>
+		<script src="./register pageOMSP_files/sweetalert2.js.download"></script>
+		<script src="./register pageOMSP_files/bootstrap-toggle.min.js.download"></script>
+		<input type="hidden" class="main_session" value="4adb1d90b00769ea7351a096acad511d4baf680d">
+        <script type="text/javascript">
+    (function (factory) {
+        if (typeof define === 'function' && define.amd) {
+            // AMD. Register as an anonymous module.
+            define(['jquery'], factory);
+        } else {
+            // Browser globals
+            factory(jQuery);
+        }
+    }(function ($) {
+        $.timeago = function(timestamp) {
+            if (timestamp instanceof Date) {
+                return inWords(timestamp);
+            } else if (typeof timestamp === "string") {
+                return inWords($.timeago.parse(timestamp));
+            } else if (typeof timestamp === "number") {
+                return inWords(new Date(timestamp));
+            } else {
+                return inWords($.timeago.datetime(timestamp));
+            }
+        };
+        var $t = $.timeago;
+
+        $.extend($.timeago, {
+            settings: {
+                refreshMillis: 60000,
+                allowPast: true,
+                allowFuture: false,
+                localeTitle: false,
+                cutoff: 0,
+                strings: {
+                    prefixAgo: null,
+                    prefixFromNow: null,
+                    suffixAgo: "ago",
+                    suffixFromNow: "from now",
+                    inPast: "any moment now",
+                    seconds: "Just now",
+                    minute: "about a minute ago",
+                    minutes: "%d minutes ago",
+                    hour: "about an hour ago",
+                    hours: "%d hours ago",
+                    day: "a day ago",
+                    days: "%d days ago",
+                    month: "about a month ago",
+                    months: "%d months ago",
+                    year: "about a year ago",
+                    years: "%d years ago",
+                    wordSeparator: " ",
+                    numbers: []
+                }
+            },
+
+            inWords: function(distanceMillis) {
+                if(!this.settings.allowPast && ! this.settings.allowFuture) {
+                    throw 'timeago allowPast and allowFuture settings can not both be set to false.';
+                }
+
+                var $l = this.settings.strings;
+                var prefix = $l.prefixAgo;
+                var suffix = $l.suffixAgo;
+                if (this.settings.allowFuture) {
+                    if (distanceMillis < 0) {
+                        prefix = $l.prefixFromNow;
+                        suffix = $l.suffixFromNow;
+                    }
+                }
+
+                if(!this.settings.allowPast && distanceMillis >= 0) {
+                    return this.settings.strings.inPast;
+                }
+
+                var seconds = Math.abs(distanceMillis) / 1000;
+                var minutes = seconds / 60;
+                var hours = minutes / 60;
+                var days = hours / 24;
+                var years = days / 365;
+
+                function substitute(stringOrFunction, number) {
+                    var string = $.isFunction(stringOrFunction) ? stringOrFunction(number, distanceMillis) : stringOrFunction;
+                    var value = ($l.numbers && $l.numbers[number]) || number;
+                    return string.replace(/%d/i, value);
+                }
+
+                var words = seconds < 45 && substitute($l.seconds, Math.round(seconds)) ||
+                    seconds < 90 && substitute($l.minute, 1) ||
+                    minutes < 45 && substitute($l.minutes, Math.round(minutes)) ||
+                    minutes < 90 && substitute($l.hour, 1) ||
+                    hours < 24 && substitute($l.hours, Math.round(hours)) ||
+                    hours < 42 && substitute($l.day, 1) ||
+                    days < 30 && substitute($l.days, Math.round(days)) ||
+                    days < 45 && substitute($l.month, 1) ||
+                    days < 365 && substitute($l.months, Math.round(days / 30)) ||
+                    years < 1.5 && substitute($l.year, 1) ||
+                    substitute($l.years, Math.round(years));
+
+                var separator = $l.wordSeparator || "";
+                if ($l.wordSeparator === undefined) { separator = " "; }
+
+                    return $.trim([prefix, words].join(separator));
+
+
+            },
+
+            parse: function(iso8601) {
+                var s = $.trim(iso8601);
+                s = s.replace(/\.\d+/,""); // remove milliseconds
+                s = s.replace(/-/,"/").replace(/-/,"/");
+                s = s.replace(/T/," ").replace(/Z/," UTC");
+                s = s.replace(/([\+\-]\d\d)\:?(\d\d)/," $1$2"); // -04:00 -> -0400
+                s = s.replace(/([\+\-]\d\d)$/," $100"); // +09 -> +0900
+                return new Date(s);
+            },
+            datetime: function(elem) {
+                var iso8601 = $t.isTime(elem) ? $(elem).attr("datetime") : $(elem).attr("title");
+                return $t.parse(iso8601);
+            },
+            isTime: function(elem) {
+                // jQuery's `is()` doesn't play well with HTML5 in IE
+                return $(elem).get(0).tagName.toLowerCase() === "time"; // $(elem).is("time");
+            }
+        });
+
+        // functions that can be called via $(el).timeago('action')
+        // init is default when no action is given
+        // functions are called with context of a single element
+        var functions = {
+            init: function(){
+                var refresh_el = $.proxy(refresh, this);
+                refresh_el();
+                var $s = $t.settings;
+                if ($s.refreshMillis > 0) {
+                    this._timeagoInterval = setInterval(refresh_el, $s.refreshMillis);
+                }
+            },
+            update: function(time){
+                var parsedTime = $t.parse(time);
+                $(this).data('timeago', { datetime: parsedTime });
+                if($t.settings.localeTitle) $(this).attr("title", parsedTime.toLocaleString());
+                refresh.apply(this);
+            },
+            updateFromDOM: function(){
+                $(this).data('timeago', { datetime: $t.parse( $t.isTime(this) ? $(this).attr("datetime") : $(this).attr("title") ) });
+                refresh.apply(this);
+            },
+            dispose: function () {
+                if (this._timeagoInterval) {
+                    window.clearInterval(this._timeagoInterval);
+                    this._timeagoInterval = null;
+                }
+            }
+        };
+
+        $.fn.timeago = function(action, options) {
+            var fn = action ? functions[action] : functions.init;
+            if(!fn){
+                throw new Error("Unknown function name '"+ action +"' for timeago");
+            }
+            // each over objects here and call the requested function
+            this.each(function(){
+                fn.call(this, options);
+            });
+            return this;
+        };
+
+        function refresh() {
+            var data = prepareData(this);
+            var $s = $t.settings;
+
+            if (!isNaN(data.datetime)) {
+                if ( $s.cutoff == 0 || Math.abs(distance(data.datetime)) < $s.cutoff) {
+                    $(this).text(inWords(data.datetime));
+                }
+            }
+            return this;
+        }
+
+        function prepareData(element) {
+            element = $(element);
+            if (!element.data("timeago")) {
+                element.data("timeago", { datetime: $t.datetime(element) });
+                var text = $.trim(element.text());
+                if ($t.settings.localeTitle) {
+                    element.attr("title", element.data('timeago').datetime.toLocaleString());
+                } else if (text.length > 0 && !($t.isTime(element) && element.attr("title"))) {
+                    element.attr("title", text);
+                }
+            }
+            return element.data("timeago");
+        }
+
+        function inWords(date) {
+            return $t.inWords(distance(date));
+        }
+
+        function distance(date) {
+            return (new Date().getTime() - date.getTime());
+        }
+
+        // fix for IE6 suckage
+        document.createElement("abbr");
+        document.createElement("time");
+    }));
+
+
+    $(function () {
+        setInterval(function () {
+
+                if ( $('.ajax-time').length > 0) {
+                    $('.ajax-time').timeago()
+                        .removeClass('.ajax-time');
+                }
+            },
+            500);
+    });
+</script>		<script>
+            
+            $('#rmjs-1').readmore({
+                speed: 75,
+                collapsedHeight: 190,
+                moreLink: '<a href="#" class="hash"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg> Read more</a>',
+				lessLink: '<a href="#" class="hash"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z" /></svg> Read less</a>',
+                afterToggle: function(trigger, element, expanded) {
+                    //if(! expanded) {
+                        // The "Close" link was clicked
+                        $('html, body').animate({scrollTop: element.offset().top}, {duration: 100});
+                    //}
+                }
+            });
+            var running = false;
+            $( document ).on( 'change', '#chat_message_upload_media_file', function(e){
+                if( running === true ){
+                    running = false;
+                    return false;
+                }
+                running = true;
+                var countFiles = $(this)[0].files.length;
+                var imgPath = $(this)[0].value;
+                var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
+
+                if(countFiles > 1) {
+                    M.toast({html: 'Please select Four Images only.'});
+                } else if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg") {
+
+                    let from = $( '#user-id' ).val();
+                    let formData = new FormData();
+                    formData.append( "media", $(this)[0].files[0],$(this)[0].files[0].value );
+                    formData.append( 'to' , $('#user-id').val() );
+                    formData.append( 'message_id' , window.message_id );
+
+                    var img = $('<img style="width: 300px;border-radius: 20px;">');
+                    //if (typeof(FileReader) != "undefined") {
+                    let reader = new FileReader();
+                    reader.onload = function(e) {
+                        img.attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL($(this)[0].files[0]);
+                    //}
+
+                    $('.lds-facebook').removeClass('hide');
+                    $('#btn_chat_f_send').addClass('hide');
+
+                    $( '.chat_message_upload_media_imgprogress' ).removeClass( 'hide' );
+                    $( '.chat_message_upload_media_imgstatus' ).removeClass( 'hide' );
+                    $.ajax({
+                        xhr: function() {
+                            let xhr = new window.XMLHttpRequest();
+                            xhr.upload.addEventListener("progress", function(evt){
+                                if (evt.lengthComputable) {
+                                    let percentComplete = evt.loaded / evt.total;
+                                    percentComplete = parseInt(percentComplete * 100);
+                                    //console.log( 'prog: ' + percentComplete + '%');
+                                    $( '#chat_message_upload_media_imgstatus' ).html( percentComplete + '%');
+                                    $( '.chat_message_upload_media_imgdeterminate' ).css({'width': percentComplete + '%'});
+                                    if (percentComplete === 100) {
+                                        $( '.chat_message_upload_media_imgprogress' ).addClass( 'hide' );
+                                        $( '.chat_message_upload_media_imgstatus' ).addClass( 'hide' );
+                                        $( '#chat_message_upload_media_imgstatus' ).html( '' );
+                                    }
+                                }
+                            }, false);
+                            return xhr;
+                        },
+                        beforeSend: function() {
+                            $('.messages').append('<div class="data_message" data-id="' + window.message_id + '"><div class="message to-user pull-right" data-id=""><div class="user-message"></div><div class="clear"></div></div><div class="clear"></div></div>');
+                            img.appendTo($('.data_message[data-id="' + window.message_id + '"]').find('.user-message'));
+                            $('.user-messages').scrollTop($('.user-messages')[0].scrollHeight);
+                            window.message_id = makeid();
+                        },
+                        url: 'http://localhost/mrunal//endpoints/messages/upload_media?hash_id=' + $('.main_session').val(),
+                        type: "POST",
+                        async: true,
+                        data: formData,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        timeout: 60000,
+                        dataType: false,
+                        success: function(data) {
+                            $('.data_message[data-id="' + data.message_id + '"]').replaceWith(data.message);
+                            running = false;
+                        }
+                    });
+
+                }else{
+                    M.toast({html: 'Please select only Images.'});
+                }
+            });
+
+            // update user last seen
+            function getRandomBetween(min, max) {
+                return min + Math.random() * (max - min);
+            }
+            function UpdateLastSeen() {
+                $.get('http://localhost/mrunal//endpoints/user/update_lastseen', { }, function () {
+                    setTimeout(UpdateLastSeen, getRandomBetween(60000, 120000));
+                });
+            }
+            setTimeout(UpdateLastSeen, getRandomBetween(60000, 120000));
+
+            function GetArtist(key,form = '') {
+            	$.post('http://localhost/mrunal//endpoints/tag_artist/tag', {key: key}, function(data, textStatus, xhr) {
+            		if (data.html) {
+            			if (form != '') {
+            				$('#group_chat_mbr_list_'+form).html(data.html);
+            			}
+            			else{
+            				$('.group_chat_mbr_list').html(data.html);
+            			}
+            		}
+            	});
+            }
+            function ApproveRequest(id) {
+            	$.post('http://localhost/mrunal//endpoints/tag_artist/approve', {id: id}, function(data, textStatus, xhr) {});
+            }
+            function DeclineRequest(id) {
+            	$.post('http://localhost/mrunal//endpoints/tag_artist/decline', {id: id}, function(data, textStatus, xhr) {});
+            }
+            function count_char(self,id) {
+			    $(self).limit("640", id);
+			}
+
+		</script>
+		<script src="./register pageOMSP_files/footer(1).js.download"></script>
+	
+</ink></ink><iframe name="__privateStripeMetricsController6320" frameborder="0" allowtransparency="true" scrolling="no" role="presentation" allow="payment *" src="./register pageOMSP_files/m-outer-3437aaddcdf6922d623e172c2d6f9278.html" aria-hidden="true" tabindex="-1" style="border: none !important; margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; visibility: hidden !important; position: fixed !important; height: 1px !important; pointer-events: none !important; user-select: none !important;"></iframe><div class="modal-backdrop fade show"></div></body></html>
