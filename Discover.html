@@ -1,0 +1,3649 @@
+<!DOCTYPE html>
+<!-- saved from url=(0029)http://localhost/msp/discover -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<!-- Title -->
+		<title>Discover</title>
+
+		<!-- Required Meta Tags Always Come First -->
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!-- Favicon -->
+		<link rel="shortcut icon" href="http://localhost/msp/themes/volcano/img/icon.png">
+		
+		<meta name="title" content="Discover">
+		<meta name="description" content="DeepSound is a PHP Audio Sharing Script, DeepSound is the best way to start your own audiosharing script!">
+		<meta name="keywords" content="deepsound,video sharing">
+
+
+		</head><body class="modal-open" data-lang="ltr" style="padding-right: 15px;"><ink rel="canonical" href="http://localhost/msp"><ink rel="home" href="http://localhost/msp"><meta property="og:title" content="Pranjali"><meta property="og:image" content="http://localhost/msp/themes/volcano/img/logo.png"><meta property="og:image:width" content="500"><meta property="og:image:height" content="500"><meta property="og:description" content="DeepSound is a PHP Audio Sharing Script, DeepSound is the best way to start your own audiosharing script!"><meta property="og:url" content="http://localhost/msp">
+
+		<!-- Google Fonts -->
+		<link href="./Discover_files/css" rel="stylesheet">
+		<link href="./Discover_files/css(1)" rel="stylesheet">
+		
+		<script src="./Discover_files/jquery.min.js.download"></script>
+		<link rel="stylesheet" href="./Discover_files/jquery-ui.css">
+		<script src="./Discover_files/jquery-ui.min.js.download"></script>
+		<!-- CSS -->
+		<link rel="stylesheet" href="./Discover_files/bootstrap.min.css">
+		<link rel="stylesheet" href="./Discover_files/owl.carousel.min.css">
+		<link rel="stylesheet" href="./Discover_files/style.css">
+		<script src="./Discover_files/wavesurfer.min.js.download"></script>
+
+		<script type="text/javascript" src="./Discover_files/tag-it.min.js.download"></script>
+		<link rel="stylesheet" href="./Discover_files/jquery.tagit.css">
+		<link rel="stylesheet" href="./Discover_files/bootstrap-colorpicker.min.css">
+		<script src="./Discover_files/bootstrap-colorpicker.min.js.download"></script>
+
+		<script type="text/javascript" src="./Discover_files/fastclick.js.download"></script>
+		<!--  Scripts-->
+		<script>
+			function ajaxUrl() {
+				return 'http://localhost/msp/endpoints';
+			}
+			function siteUrl() {
+				return 'http://localhost/msp/';
+			}
+		</script>
+		<!-- <script src="https://unpkg.com/wavesurfer.js"></script> -->
+				<script src="./Discover_files/emojionearea.min.js.download"></script>
+		<link rel="stylesheet" href="./Discover_files/emojionearea.min.css">
+		 		<script>
+            window.run_station = null;
+            $(document).ready(function() {
+                // $(".emoji_comment_btn").emojioneArea({
+                //     standalone: true,
+                //     autocomplete: false,
+                //     pickerPosition: "bottom",
+                //     emojiPlaceholder: "",
+                //     inline: true,
+                //     dir            : "ltr",
+                //     placement : 'absright'
+                // 	// container: "#container",
+                // 	// hideSource: false,
+                // 	// useSprite: false
+                // });
+                window.init_emojioneArea = function() {
+                    $(".comment_input").emojioneArea({
+                        useInternalCDN: true,
+                        events: {
+                            keyup: function (editor, event) {
+                                let emojioneArea = this; //this is instance of EmojioneArea
+                                                                id = $( $(this)[0].source[0]).attr('data-audio-id');
+                                $($(".comment_input")).limit("640", '#charsLeft_'+id);
+                                c_id = $( $(this)[0].source[0]).attr('data-comment-id');
+                                if ($('#write_comment_'+c_id).length) {
+                                	$($('#write_comment_'+c_id)).limit("640", '#charsLeft_r_'+c_id);
+                                }
+                                                                if (event.which === 13 && !event.shiftKey) {
+                                    // $scope.onPressKeyTextarea(event);
+									var audioid = $( $(this)[0].source[0]).attr('data-audio-id');
+									var commentid = $( $(this)[0].source[0]).attr('data-comment-id');
+									if(typeof commentid !== 'undefined'){
+										registerCommentreplay(emojioneArea.getText(), audioid, commentid, event, $(this));
+									}else{
+										registerComment(emojioneArea.getText(), audioid, event, $(this));
+									}
+                                    emojioneArea.setText('');
+                                    emojioneArea.hidePicker();
+                                    emojioneArea.editor.focus();
+                                    event.preventDefault();
+                                }
+                            }
+                        },
+                        search: false,
+                        recentEmojis: false,
+                        filtersPosition: "bottom",
+                        tones: false,
+                        autocomplete: true,
+                        filters: {animals_nature: false, food_drink: false, activity: false, travel_places: false, objects: false, symbols: false, flags: false}
+                    });
+                }
+				window.init_emojioneArea();
+
+				window.init_emojioneArea_replay = function(id) {
+					$('#write_comment_'+id).emojioneArea({
+						useInternalCDN: true,
+						events: {
+							keyup: function (editor, event) {
+								let _emojioneArea = this; //this is instance of EmojioneArea
+								if (event.which === 13 && !event.shiftKey) {
+									var _audioid = $( $(this)[0].source[0]).attr('data-audio-id');
+									var _commentid = $( $(this)[0].source[0]).attr('data-comment-id');
+									registerCommentreplay(_emojioneArea.getText(), _audioid, _commentid, event, $(this));
+									_emojioneArea.setText('');
+									_emojioneArea.hidePicker();
+									_emojioneArea.editor.focus();
+									event.preventDefault();
+								}
+							}
+						},
+						search: false,
+						recentEmojis: false,
+						filtersPosition: "bottom",
+						tones: false,
+						autocomplete: false,
+						filters: {animals_nature: false, food_drink: false, activity: false, travel_places: false, objects: false, symbols: false, flags: false}
+					});
+				}
+
+				window.init_blogemojioneArea = function() {
+                    $(".blog_comment_input").emojioneArea({
+                        useInternalCDN: true,
+                        events: {
+                            keyup: function (editor, event) {
+                                let emojioneArea = this; //this is instance of EmojioneArea
+                                if (event.which === 13 && !event.shiftKey) {
+                                    // $scope.onPressKeyTextarea(event);
+									var audioid = $( $(this)[0].source[0]).attr('data-article-id');
+                                    registerBlogComment(emojioneArea.getText(), audioid, event, $(this));
+                                    emojioneArea.setText('');
+                                    emojioneArea.hidePicker();
+                                    emojioneArea.editor.focus();
+                                    event.preventDefault();
+                                }
+                            }
+                        },
+                        search: false,
+                        recentEmojis: false,
+                        filtersPosition: "bottom",
+                        tones: false,
+                        autocomplete: true,
+                        filters: {animals_nature: false, food_drink: false, activity: false, travel_places: false, objects: false, symbols: false, flags: false}
+                    });
+                }
+                window.init_blogemojioneArea();
+            });
+		</script>
+
+		<script>
+		$(document).ready(function() {
+		  $.ajaxSetup({ 
+		    data: {
+		        hash_id: getHashID()
+		    },
+		    cache: false 
+		  });
+		});
+		$(window).on("popstate", function () {
+			if (history.state.ajax_url) {
+				goToAjaxLink(history.state.ajax_url);
+			}
+		});
+        window.search_url = 'http://localhost/msp/search/songs/';
+        window.chatfetch = false;
+			$(document).on('click', '[data-load]', function(event) {
+				if ($(this).attr('data-load') == '') {window.open($(this).attr('href'), '_blank'); 
+					if (parseInt($('.ss_track_play_pause').attr('data_is_ad')) > 0) {
+				 		is_sent = 1;
+				 		song_id = $('#current-track').attr('value');
+				 		onTimesUp(song_id);
+				 		return false;
+				 	}
+					return false;
+				}
+				  //$('.sections li').removeClass('active');
+			      $('#bar_loading').show().animate({width:20 + 80 * Math.random() + "%"}, 200);
+			      event.preventDefault();
+			      var url = $(this).attr('data-load');
+			      $.ajax({
+			        url: siteUrl() + '/ajax-load.php?path=' + url,
+			        type: 'GET',
+			        dataType: 'html'
+			      })
+			      .done(function(data_html, textStatus, request) {
+			      	if (request.status == 201) {
+			      		$('#login_box').modal('show');
+			      	} else {
+                        if(window.run_station !== null){
+                            window.run_station.pause();
+                        }
+
+			      		data = JSON.parse($(data_html).filter('#json-data').val());
+				        window.history.pushState({state:'new', ajax_url: url},'', data.url);
+
+                        if(data.page_name == 'messages'){
+                            window.chatfetch = true;
+						}else{
+                            window.chatfetch = false;
+						}
+
+				        if(data.page_name !== 'search'){
+				            $('#search_keyword').val('');
+						}
+
+				        $('#container_content').html(data_html);
+				        $('meta[name=title]').attr('content', data.site_title);
+				        $('#page').attr('data-page', data.page_name);
+				        $('meta[name=description]').attr('content', data.description);
+				        $('meta[name=keywords]').attr('content', data.keyword);
+				        $('title').html(data.site_title);
+				        if (data.page_name) {
+				        	setTimeout(function () {
+				        		updateWaves = false;
+				        		if ($('#current-track').val()) {
+				        			if (Amplitude.getActiveSongMetadata().id == $('#current-track').val()) {
+					        			updateWaves = true;
+					        		} else {
+					        			$('body').removeClass('player_running');
+					        		}
+				        		} else {
+				        			updateWaves = true;
+				        		}
+				        		if (updateWaves == true) {
+				        			var getCurrentPlaying = Number($('.amplitude-song-played-progress').attr('value')) * 100;
+					        		$('#light-wave, #light-waves').width(getCurrentPlaying + '%');
+					        		updateWaveForm();
+				        		}
+				        	}, 100);
+                            if( data.page_name == 'blogs' ){
+                                window.search_url = 'http://localhost/msp/blogs/tag/';
+                            }
+				        }
+				        if (Amplitude.getActiveSongMetadata().id && $('#page').attr('data-page') == 'track') {
+				        	if (Amplitude.getActiveSongMetadata().id == $('#current-track').val()) {
+				        		$('body').addClass('player_running');
+				        	}
+				        }
+				        if (Amplitude.getActiveSongMetadata().u_id && $('#page').attr('data-page') != 'track') {
+				        	$('.playlist-list-song[data-id=' + Amplitude.getActiveSongMetadata().u_id + ']').addClass('playing');
+				        	$('.list-recommended[data-id=' + Amplitude.getActiveSongMetadata().u_id + ']').addClass('playlist-list-song playing');
+				        	if ($('.feed_post[data-id="' + Amplitude.getActiveSongMetadata().u_id + '"]').length > 0) {
+				        		$.get('http://localhost/msp/endpoints/get-song-info', {id: Amplitude.getActiveSongMetadata().id}, function(data) {
+				        			if (data.status == 200) {
+				        				$('body').attr('song-duration', data.duration);
+				        				if (data.songWaves.length > 0) {
+											$('.feed_post[data-id="' + data.songID + '"]:first').find('.waveform-small').html(data.songWaves);
+											$('#light-wave img').width($('#dark-wave').width() + 'px');
+											$('#light-waves img').width($('#dark-wavez').width() + 'px');
+											$('.feed_post[data-id="' + data.songID + '"]:first').find('.post-actions').removeClass('hidden');
+											$('.feed_post[data-id="' + data.songID + '"]:first').find('.ssong_comments').removeClass('hidden');
+											$('.feed_post[data-id="' + data.songID + '"]:first').find('.mus_feeds_bodycoms').removeClass('hidden');
+											$('.feed_post[data-id="' + data.songID + '"]:first').find('.art-info').removeClass('hidden');
+				    						$('.feed_post[data-id="' + data.songID + '"]:first').find('.comment_list').html(data.comments);
+				    						$('.feed_post[data-id="' + data.songID + '"]:first').find('.comment-waves').html(data.waves);
+				    						var getCurrentPlaying = Number($('.amplitude-song-played-progress').attr('value')) * 100;
+					        		        $('#light-wave, #light-waves').width(getCurrentPlaying + '%');
+				    						updateWaveForm();
+										}
+				        			}
+				        		});
+				        	}
+				        }
+                        $('#music-user-ads-table').find('[type="checkbox"]').each(function(index, el) {
+                            $(el).bootstrapToggle();
+                        });
+                        if( data.page_name === 'station'){
+                            setTimeout(function () {
+                                $('body').addClass('player_running');
+                            }, 100);
+                        }
+			      	}
+			        
+			      })
+			      .fail(function() {
+			         window.location.href = siteUrl()+'/404';
+			      })
+			      .always(function() {
+			      	if (typeof data !== 'undefined') {
+			      		if (data.page_name == 'user' && data.scroll == true) {
+				        	$('html,body').animate({
+						        scrollTop: $('#myTab').offset().top - 350
+						    });
+				        } else {
+				        	$('html,body').animate({
+						        scrollTop: $('body').offset().top
+						    });
+				        }
+                        window.init_emojioneArea();
+			      	}
+			        $('#bar_loading').animate({width:"100%"}, 200).fadeOut(300, function() {
+			           $(this).width("0");
+			        });
+			      });
+			  });
+			window.artist_sell = 'on';
+		</script>
+
+		<script src="./Discover_files/header.js.download"></script>
+
+		
+		<link rel="stylesheet" href="./Discover_files/custom.style.css" id="custom.style.css">
+		
+		<link href="./Discover_files/bootstrap-toggle.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="./Discover_files/sweetalert2.min.css">
+		<link rel="stylesheet" type="text/css" href="./Discover_files/dataTables.bootstrap4.min.css">
+		<link rel="stylesheet" href="./Discover_files/bootstrap-select.min.css">
+
+				<script src="./Discover_files/saved_resource"></script>
+			
+	
+		
+		
+		<div class="music_app">
+			<div class="ma_container" id="page" data-page="discover">
+				<!-- Start Sidebar  -->	
+				<div class="ma_sidebar">
+	<div class="sidebar">
+		<div class="side_upld_btn">
+					</div>
+
+		<div class="sidebar_innr" data-simplebar="init"><div class="simplebar-track vertical" style="visibility: visible;"><div class="simplebar-scrollbar" style="height: 626px; transform: translate3d(0px, 0px, 0px);"></div></div><div class="simplebar-track horizontal" style="visibility: hidden;"><div class="simplebar-scrollbar"></div></div><div class="simplebar-scroll-content" style="padding-right: 15px; margin-bottom: -30px;"><div class="simplebar-content" style="padding-bottom: 15px; margin-right: -15px;">
+			<ul class="sections">
+				<li class="active">
+					<a href="http://localhost/msp/discover" data-load="discover">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M12,23 C5.92486775,23 1,18.0751322 1,12 C1,5.92486775 5.92486775,1 12,1 C18.0751322,1 23,5.92486775 23,12 C23,18.0751322 18.0751322,23 12,23 Z M12,21 C16.9705627,21 21,16.9705627 21,12 C21,7.02943725 16.9705627,3 12,3 C7.02943725,3 3,7.02943725 3,12 C3,16.9705627 7.02943725,21 12,21 Z M17.5811388,6.41886117 L14.7905694,14.7905694 L6.41886117,17.5811388 L9.20943058,9.20943058 L17.5811388,6.41886117 Z M9.58113883,14.4188612 L13.2094306,13.2094306 L14.4188612,9.58113883 L10.7905694,10.7905694 L9.58113883,14.4188612 Z"></path></svg> Discover
+					</a>
+				</li>
+				<li class="">
+					<a href="http://localhost/msp/new_music" data-load="new_music">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M20,10.1804604 L10,11.8471271 L10,18.5 C10,20.477434 8.17292083,22 6,22 C3.82707917,22 2,20.477434 2,18.5 C2,16.522566 3.82707917,15 6,15 C6.72317475,15 7.40804269,15.1686455 8.00000003,15.4665774 L8.00000003,4.15287291 L22,1.81953958 L22,17.5 C22,19.477434 20.1729208,21 18,21 C15.8270792,21 14,19.477434 14,17.5 C14,15.522566 15.8270792,14 18,14 C18.7231748,14 19.4080427,14.1686455 20,14.4665774 L20,10.1804604 Z M6,20 C7.14078767,20 8,19.2839897 8,18.5 C8,17.7160103 7.14078767,17 6,17 C4.85921233,17 4,17.7160103 4,18.5 C4,19.2839897 4.85921233,20 6,20 Z M18,19 C19.1407877,19 20,18.2839897 20,17.5 C20,16.7160103 19.1407877,16 18,16 C16.8592123,16 16,16.7160103 16,17.5 C16,18.2839897 16.8592123,19 18,19 Z M10,5.84712709 L10,9.81953958 L20,8.15287291 L20,4.18046042 L10,5.84712709 Z"></path></svg> New Music
+					</a>
+				</li>
+				<li class="">
+					<a href="http://localhost/msp/top_music" data-load="top_music">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M11 14H18V16H11zM11 10H20V12H11zM11 18H16V20H11z"></path><path fill="currentColor" d="M7 20L9 20 9 8 12 8 8 4 4 8 7 8z"></path></svg> Top Music
+					</a>
+				</li>
+				<li class="">
+					<a href="http://localhost/msp/albums" data-load="albums">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M20,2H8A2,2 0 0,0 6,4V16A2,2 0 0,0 8,18H20A2,2 0 0,0 22,16V4A2,2 0 0,0 20,2M20,16H8V4H20M12.5,15A2.5,2.5 0 0,0 15,12.5V7H18V5H14V10.5C13.58,10.19 13.07,10 12.5,10A2.5,2.5 0 0,0 10,12.5A2.5,2.5 0 0,0 12.5,15M4,6H2V20A2,2 0 0,0 4,22H18V20H4"></path></svg> Albums
+					</a>
+				</li>
+				<li class="">
+					<a href="http://localhost/msp/spotlight" data-load="spotlight">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M1,13 C0.44771525,13 0,12.5522847 0,12 C0,11.4477153 0.44771525,11 1,11 L1.41604369,11 C2.18760031,9.23409522 3.94968096,8 6,8 C7.82440303,8 9.42058775,8.97711876 10.2937745,10.4365766 C10.7845275,10.1580384 11.3764731,10 12,10 C12.6235269,10 13.2154725,10.1580384 13.7062255,10.4365766 C14.5794122,8.97711876 16.175597,8 18,8 C20.050319,8 21.8123997,9.23409522 22.5839563,11 L23,11 C23.5522847,11 24,11.4477153 24,12 C24,12.5522847 23.5522847,13 23,13 C23,15.7614237 20.7614237,18 18,18 C15.2385763,18 13,15.7614237 13,13 C13,12.8312503 13.0083597,12.6644531 13.0246876,12.5 L13,12.5 C13,12.2965729 12.6045695,12 12,12 C11.3954305,12 11,12.2965729 11,12.5 L10.9753124,12.5 C10.9916403,12.6644531 11,12.8312503 11,13 C11,15.7614237 8.76142375,18 6,18 C3.23857625,18 1,15.7614237 1,13 Z M6,16 C7.65685425,16 9,14.6568542 9,13 C9,11.3431458 7.65685425,10 6,10 C4.34314575,10 3,11.3431458 3,13 C3,14.6568542 4.34314575,16 6,16 Z M18,16 C19.6568542,16 21,14.6568542 21,13 C21,11.3431458 19.6568542,10 18,10 C16.3431458,10 15,11.3431458 15,13 C15,14.6568542 16.3431458,16 18,16 Z"></path></svg> Spotlight
+					</a>
+				</li>
+				<li class="">
+					<a href="http://localhost/msp/genres" data-load="genres">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M19.8521478,10 L21.2077346,10.7531038 C22.2640885,11.339967 22.2640885,12.660033 21.2077346,13.2468962 L19.8521478,14 L21.2077346,14.7531038 C22.2640885,15.339967 22.2640885,16.660033 21.2077346,17.2468962 L13.1565731,21.7197637 C12.484006,22.0934121 11.515994,22.0934121 10.8434269,21.7197637 L2.79226543,17.2468962 C1.73591152,16.660033 1.73591152,15.339967 2.79226543,14.7531038 L4.1478522,14 L2.79226543,13.2468962 C1.73591152,12.660033 1.73591152,11.339967 2.79226543,10.7531038 L4.1478522,10 L2.79226543,9.24689624 C1.73591152,8.66003296 1.73591152,7.33996704 2.79226543,6.75310376 L10.8434269,2.28023626 C11.515994,1.90658791 12.484006,1.90658791 13.1565731,2.28023626 L21.2077346,6.75310376 C22.2640885,7.33996704 22.2640885,8.66003296 21.2077346,9.24689624 L19.8521478,10 Z M17.7930218,11.1439589 L13.1565731,13.7197637 C12.484006,14.0934121 11.515994,14.0934121 10.8434269,13.7197637 L6.20697823,11.1439589 L4.66610426,12 L11.8147128,15.9714492 C11.8832347,16.0095169 12.1167653,16.0095169 12.1852872,15.9714492 L19.3338957,12 L17.7930218,11.1439589 Z M17.7930218,15.1439589 L13.1565731,17.7197637 C12.484006,18.0934121 11.515994,18.0934121 10.8434269,17.7197637 L6.20697823,15.1439589 L4.66610426,16 L11.8147128,19.9714492 C11.8832347,20.0095169 12.1167653,20.0095169 12.1852872,19.9714492 L19.3338957,16 L17.7930218,15.1439589 Z M12.1852872,4.02855081 C12.1167653,3.99048306 11.8832347,3.99048306 11.8147128,4.02855081 L4.66610426,8 L11.8147128,11.9714492 C11.8832347,12.0095169 12.1167653,12.0095169 12.1852872,11.9714492 L19.3338957,8 L12.1852872,4.02855081 Z"></path></svg> Genres
+					</a>
+				</li>
+				<li class="">
+					<a href="http://localhost/msp/playlists" data-load="playlists">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M23,19 C23,20.1045695 22.1045695,21 21,21 L9,21 C7.8954305,21 7,20.1045695 7,19 L7,5 C7,3.8954305 7.8954305,3 9,3 L21,3 C22.1045695,3 23,3.8954305 23,5 L23,19 Z M6,20 C4.8954305,20 4,19.1045695 4,18 L4,6 C4,4.8954305 4.8954305,4 6,4 L6,20 Z M3,19 C1.8954305,19 1,18.1045695 1,17 L1,7 C1,5.8954305 1.8954305,5 3,5 L3,19 Z M21,19 L21,5 L9,5 L9,19 L21,19 Z M13,9 L17,12 L13,15 L13,9 Z"></path></svg> Playlists
+					</a>
+				</li>
+									<li class="">
+						<a href="http://localhost/msp/fame" data-load="fame">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart"><line x1="12" y1="20" x2="12" y2="10"></line><line x1="18" y1="20" x2="18" y2="4"></line><line x1="6" y1="20" x2="6" y2="16"></line></svg>
+							Hall of fame
+						</a>
+					</li>
+											</ul>
+						<ul class="sections">
+				<h3>Store</h3>
+				<li class="">
+					<a href="http://localhost/msp/store/songs" data-load="store/songs">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M19.148,2.971C18.789,2.372,18.132,2,17.434,2H6.566C5.868,2,5.211,2.372,4.852,2.971L2.143,7.485 C2.049,7.641,2,7.818,2,8c0,1.006,0.386,1.914,1,2.618V19c0,1.103,0.897,2,2,2h4h6h4c1.103,0,2-0.897,2-2v-8.382 C21.614,9.914,22,9.006,22,8c0-0.182-0.049-0.359-0.143-0.515L19.148,2.971z M19.984,8.251C19.86,9.235,19.018,10,18,10 c-1.103,0-2-0.897-2-2c0-0.068-0.025-0.128-0.039-0.192l0.02-0.004L15.22,4h2.214L19.984,8.251z M10.819,4h2.361l0.813,4.065 C13.958,9.137,13.08,10,12,10s-1.958-0.863-1.993-1.935L10.819,4z M6.566,4H8.78L8.02,7.804l0.02,0.004C8.025,7.872,8,7.932,8,8 c0,1.103-0.897,2-2,2c-1.018,0-1.86-0.765-1.984-1.749L6.566,4z M10,19v-3h4v3H10z M16,19v-3c0-1.103-0.897-2-2-2h-4 c-1.103,0-2,0.897-2,2v3H5v-7.142C5.321,11.941,5.652,12,6,12c1.193,0,2.267-0.525,3-1.357C9.733,11.475,10.807,12,12,12 s2.267-0.525,3-1.357C15.733,11.475,16.807,12,18,12c0.348,0,0.679-0.059,1-0.142V19H16z"></path></svg> Browse
+					</a>
+				</li>
+				<li class="">
+					<a href="http://localhost/msp/purchased" data-load="purchased">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M20.9459865,2 L21.9398231,19.88906 C22.0010936,20.9919288 21.1567113,21.9356502 20.0538425,21.9969207 C19.9984009,21.9994866 19.9984009,21.9994866 19.9429024,22 L4.05709758,22 C2.95252808,22 2.05709758,21.1045695 2.05709758,20 C2.05761099,19.9445015 2.05761099,19.9445015 2.06017687,19.88906 L3.05401353,2 L20.9459865,2 Z M4.94598647,4 L4.05709758,20 L19.9429024,20 L19.0540135,4 L4.94598647,4 Z M7,6 L9,6 L9,8.5 C9,9.74837297 10.3851384,11 12,11 C13.6148616,11 15,9.74837297 15,8.5 L15,6 L17,6 L17,8.5 C17,10.9006956 14.6767623,13 12,13 C9.32323775,13 7,10.9006956 7,8.5 L7,6 Z"></path></svg> Purchased
+					</a>
+				</li>
+			</ul>
+						<ul class="sections">
+				<h3>Your Music</h3>
+				<li class="">
+					<a href="http://localhost/msp/recently_played" data-load="recently_played">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M5.11409306,6 L8,6 L8,8 L2,8 L2,1.99121094 L4,1.99121094 L4,4.25644966 C6.23707736,1.91055844 8.78662625,1 12,1 C18.0751322,1 23,5.92486775 23,12 C23,18.0751322 18.0751322,23 12,23 C5.92486775,23 1,18.0751322 1,12 L3,12 C3,16.9705627 7.02943725,21 12,21 C16.9705627,21 21,16.9705627 21,12 C21,7.02943725 16.9705627,3 12,3 C9.1592152,3 7.04465569,3.7913744 5.11409306,6 Z M13,11 L17,11 L17,13 L11,13 L11,6 L13,6 L13,11 Z"></path></svg> Recently Played
+					</a>
+				</li>
+				<li class="">
+					<a href="http://localhost/msp/my_playlists" data-load="my_playlists">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M18,14.1404647 L18,9.13148291 L22.5547002,12.1679497 L21.4452998,13.8320503 L20,12.8685171 L20,16.5 C20,17.9534271 18.6045695,19 17,19 C15.3954305,19 14,17.9534271 14,16.5 C14,15.0465729 15.3954305,14 17,14 C17.3471248,14 17.6844618,14.0489806 18,14.1404647 Z M4,19 L4,17 L12,17 L12,19 L4,19 Z M4,15 L4,13 L12,13 L12,15 L4,15 Z M4,11 L4,9 L16,9 L16,11 L4,11 Z M4,7 L4,5 L19,5 L19,7 L4,7 Z M17,17 C17.6045695,17 18,16.7034271 18,16.5 C18,16.2965729 17.6045695,16 17,16 C16.3954305,16 16,16.2965729 16,16.5 C16,16.7034271 16.3954305,17 17,17 Z"></path></svg> My Playlists
+					</a>
+				</li>
+				<li class="">
+					<a href="http://localhost/msp/favourites" data-load="favourites">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M17,18L12,15.82L7,18V5H17M17,3H7A2,2 0 0,0 5,5V21L12,18L19,21V5C19,3.89 18.1,3 17,3Z"></path></svg> Favourites
+					</a>
+				</li>
+			</ul>
+		</div></div></div>
+	</div>
+</div>
+<script>
+$(document).on('click', '.sidebar .sidebar_innr a', function() {
+	$('body').removeClass('side_open');
+});
+</script>
+				<!-- End Sidebar  -->	
+
+				<!-- Header  -->
+				<div id="main-header">
+					<header class="vlc_no_usr_hdr">
+	<div class="head_menu" id="open_slide">
+		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z"></path></svg>
+	</div>
+	<div class="head_search">
+		<form onsubmit="event.preventDefault();window.location = window.search_url + $(&#39;#search_keyword&#39;).val();"><!--action="http://localhost/msp/search/songs" method="POST" >-->
+	<div class="head_search_cont">
+		<input name="search_keyword" id="search_keyword" value="" type="text" class="form-control" placeholder="Search for songs, artists, playlists and more.." onfocus="Ma_OpenTrending();" autocomplete="off">
+		<div class="head_search_mobi_close" id="close_search">
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"></path></svg>
+		</div>
+		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"></path></svg>
+		<div class="search_dropdown hidden">
+			<div data-simplebar="init"><div class="simplebar-track vertical" style="visibility: hidden;"><div class="simplebar-scrollbar"></div></div><div class="simplebar-track horizontal" style="visibility: hidden;"><div class="simplebar-scrollbar"></div></div><div class="simplebar-scroll-content" style="padding-right: 15px; margin-bottom: -30px;"><div class="simplebar-content" style="padding-bottom: 15px; margin-right: -15px;">
+				<div class="trend_head"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#2196f3" d="M16,6L18.29,8.29L13.41,13.17L9.41,9.17L2,16.59L3.41,18L9.41,12L13.41,16L19.71,9.71L22,12V6H16Z"></path></svg> Trending Now</div>
+									<div class="serach_trend"><a href="http://localhost/msp/search/songs/tere" data-load="search/songs/tere">tere</a></div>
+									<div class="serach_trend"><a href="http://localhost/msp/search/songs/shubham" data-load="search/songs/shubham">shubham</a></div>
+								<div class="text-center see_all">
+					<a href="http://localhost/msp/search/songs" data-load="search/songs"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"></path></svg> Advanced Search</a>
+				</div>
+			</div></div></div>
+		</div>
+	</div>
+</form>
+	</div>
+	<div class="mu_left_hdr_part">
+		<div class="left_hdr_btns" id="open_search">
+			<a href="javascript:void(0);" class="btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M16.3198574,14.9056439 L21.7071068,20.2928932 L20.2928932,21.7071068 L14.9056439,16.3198574 C13.5509601,17.3729184 11.8487115,18 10,18 C5.581722,18 2,14.418278 2,10 C2,5.581722 5.581722,2 10,2 C14.418278,2 18,5.581722 18,10 C18,11.8487115 17.3729184,13.5509601 16.3198574,14.9056439 Z M10,16 C13.3137085,16 16,13.3137085 16,10 C16,6.6862915 13.3137085,4 10,4 C6.6862915,4 4,6.6862915 4,10 C4,13.3137085 6.6862915,16 10,16 Z"></path></svg> search</a>
+		</div>
+	</div>
+	<div class="head_logo">
+		<a href="http://localhost/msp/">
+						<img src="./Discover_files/logo.png" alt="">
+					</a>
+	</div>
+	<div class="mu_right_hdr_part head_user not_loggd_hdrr">
+		<!--<a href="#" data-toggle="modal" data-target="#login_box" class="btn login hide_hd_btn">Login</a>
+				<a href="#" data-toggle="modal" data-target="#signup_box" class="btn btn-primary btn-mat hide_hd_btn">Register</a>
+		-->
+		<span class="opts_head_acc dropdown">
+			<svg data-display="static" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12,19.2C9.5,19.2 7.29,17.92 6,16C6.03,14 10,12.9 12,12.9C14,12.9 17.97,14 18,16C16.71,17.92 14.5,19.2 12,19.2M12,5A3,3 0 0,1 15,8A3,3 0 0,1 12,11A3,3 0 0,1 9,8A3,3 0 0,1 12,5M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12C22,6.47 17.5,2 12,2Z"></path></svg>
+			<div class="dropdown-menu dropdown-menu-right mat-dropdown">
+				<ul class="list-unstyled mb-0">
+					<li><a href="http://localhost/msp/discover#" data-toggle="modal" data-target="#login_box">Login</a></li>
+										<li><a href="http://localhost/msp/discover#" data-toggle="modal" data-target="#signup_box">Register</a></li>
+										<li class="divider"></li>
+					<li class="toggle-mode top-header">
+						<label class="switch">
+							<span class="txt">Day mode</span>
+							<input type="checkbox" id="night_mode_toggle" data-mode="day">
+							<span class="slider round"></span>
+						</label>
+					</li>
+				</ul>
+			</div>
+		</span>
+	</div>
+</header>
+				</div>
+				<div id="bar_loading"></div>
+				<!-- End Header  -->
+
+				<!-- Content  -->
+				<div id="container_content">
+					
+<div class="ma_page_content">
+	<div class="ma_pc_inner">
+		<center></center>
+		<div class="page_padding ma_discover_page">
+			<div class="row">
+				<div class="col-md-7">
+					<!-- Top Slider -->
+					<div class="owl-carousel home_top_slider owl-theme owl-loaded owl-drag">
+						
+					<div class="owl-stage-outer"><div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 1270px;"><div class="owl-item active" style="width: 635px;"><div class="item">
+	<a href="http://localhost/msp/track/sFMc1ic1hGUwXhR" class="card embed-responsive embed-responsive-16by9" data-load="track/sFMc1ic1hGUwXhR">
+		<img class="embed-responsive-item" src="./Discover_files/1m3FGLxox4AY6pfXyWyt_19_e6bf6581b49e51ff00b8d4ca65ba6876_image.jpg" alt="">
+		<div class="play_btn">
+			<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"><path fill="currentColor" d="M8,5.14V19.14L19,12.14L8,5.14Z"></path></svg>
+		</div>
+		<div class="bg_text">
+			<h2>Tere-Hawale-Kar-Diya(PagalWorld).mp3</h2>
+		</div>
+	</a>
+</div></div><div class="owl-item" style="width: 635px;"><div class="item">
+	<a href="http://localhost/msp/track/E8goGGjWNeEEIzS" class="card embed-responsive embed-responsive-16by9" data-load="track/E8goGGjWNeEEIzS">
+		<img class="embed-responsive-item" src="./Discover_files/RHusoNeSLrOLtFtBObXS_31_316a2a5c0107fe326456b5a2dbf5b690_image.jpg" alt="">
+		<div class="play_btn">
+			<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"><path fill="currentColor" d="M8,5.14V19.14L19,12.14L8,5.14Z"></path></svg>
+		</div>
+		<div class="bg_text">
+			<h2>Meri Ho Ja - Sachet Tandon 128 Kbps.mp3</h2>
+		</div>
+	</a>
+</div></div></div></div><div class="owl-nav disabled"><button type="button" role="presentation" class="owl-prev"><span aria-label="Previous">‹</span></button><button type="button" role="presentation" class="owl-next"><span aria-label="Next">›</span></button></div><div class="owl-dots"><button role="button" class="owl-dot active"><span></span></button><button role="button" class="owl-dot"><span></span></button></div></div>
+					<!-- End Top Slider -->
+					<div class="row">
+						<div class="col-sm-4">
+							<div class="mus_disc_mini_blks">
+								<a href="http://localhost/msp/top_music" data-load="top_music">
+									<img src="./Discover_files/top-music.jpg" alt="Top Music">
+									<p>Top Music</p>
+								</a>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="mus_disc_mini_blks">
+								<a href="http://localhost/msp/new_music" data-load="new_music">
+									<img src="./Discover_files/new-music.jpg" alt="New Music">
+									<p>New Music</p>
+								</a>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="mus_disc_mini_blks">
+								<a href="http://localhost/msp/genres" data-load="genres">
+									<img src="./Discover_files/genres.jpg" alt="Genres">
+									<p>Genres</p>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="short_list_cont top_dic_son_listz col-md-5">
+					<div class="short_list_card">
+						<h2 class="home_big_title">Most Popular This Week</h2>
+						<ul class="s_list_songs home_tp_songs_list">
+							<li class="list-recommended" data-id="1">
+	<ul class="s_lsongs_child">
+		<li class="first">
+			<span class="numbers">1</span>
+			<span class="fav_song"></span>
+		</li>
+		<li class="second">
+			<a href="http://localhost/msp/track/sFMc1ic1hGUwXhR" data-load="track/sFMc1ic1hGUwXhR">
+				<div class="art_song"><img src="./Discover_files/1m3FGLxox4AY6pfXyWyt_19_e6bf6581b49e51ff00b8d4ca65ba6876_image.jpg"></div>
+				<div class="art_details">
+					<h4>Tere-Hawale-Kar-Diya(PagalWorld).mp3</h4>
+					<p>pranjali ganvir</p>
+				</div>
+			</a>
+		</li>
+		<li class="third">
+			<span class="duration">5:50</span>
+			<span class="opts_song dropdown">
+				<svg data-display="static" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z"></path></svg>
+				<div class="dropdown-menu dropdown-menu-right mat-dropdown">
+					<ul class="list-unstyled mb-0">
+						<li><a href="javascript:void(0)" onclick="getPlayLists(1)">Add to Playlist</a></li>
+						<li><a onclick="getShareModal(&#39;1&#39;, $(this));">Share</a></li>
+					</ul>
+				</div>
+			</span>
+		</li>
+	</ul>
+</li><li class="list-recommended" data-id="2">
+	<ul class="s_lsongs_child">
+		<li class="first">
+			<span class="numbers">2</span>
+			<span class="fav_song"></span>
+		</li>
+		<li class="second">
+			<a href="http://localhost/msp/track/E8goGGjWNeEEIzS" data-load="track/E8goGGjWNeEEIzS">
+				<div class="art_song"><img src="./Discover_files/RHusoNeSLrOLtFtBObXS_31_316a2a5c0107fe326456b5a2dbf5b690_image.jpg"></div>
+				<div class="art_details">
+					<h4>Meri Ho Ja - Sachet Tandon 128 Kbps.mp3</h4>
+					<p>pranjali ganvir</p>
+				</div>
+			</a>
+		</li>
+		<li class="third">
+			<span class="duration">2:59</span>
+			<span class="opts_song dropdown">
+				<svg data-display="static" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z"></path></svg>
+				<div class="dropdown-menu dropdown-menu-right mat-dropdown">
+					<ul class="list-unstyled mb-0">
+						<li><a href="javascript:void(0)" onclick="getPlayLists(2)">Add to Playlist</a></li>
+						<li><a onclick="getShareModal(&#39;2&#39;, $(this));">Share</a></li>
+					</ul>
+				</div>
+			</span>
+		</li>
+	</ul>
+</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<!-- Recently Played (Only Visible if User Plays any Music) -->
+				<div class="sq_music_tracks mb-60">
+					<h2 class="home_widget_title home_big_title">
+						Recently Played
+						<div class="slide_btns">
+														<div class="recent_music_btn disabled"><button type="button" role="presentation" class="owl-prev disabled"><span aria-label="Previous">‹</span></button><button type="button" role="presentation" class="owl-next disabled"><span aria-label="Next">›</span></button></div>
+						</div>
+					</h2>
+					<div class="owl-carousel sq_track_slider owl-theme rp_slider owl-loaded owl-drag"><div class="owl-stage-outer"><div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 323px;"><div class="owl-item active" style="width: 141.429px; margin-right: 20px;"><div class="track_list" data-id="2">
+	<div class="track">
+		<div class="cover_art">
+			<a href="http://localhost/msp/track/E8goGGjWNeEEIzS" data-load="track/E8goGGjWNeEEIzS">
+				<img src="./Discover_files/RHusoNeSLrOLtFtBObXS_31_316a2a5c0107fe326456b5a2dbf5b690_image.jpg">
+				<div class="play_btn">
+					<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"><path fill="currentColor" d="M10,16.5V7.5L16,12M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"></path></svg>
+				</div>
+			</a>
+		</div>
+		<div class="track_info">
+			<a href="http://localhost/msp/track/E8goGGjWNeEEIzS" data-load="track/E8goGGjWNeEEIzS"><span class="title">Meri Ho Ja - Sachet Tandon 128 Kbps.mp3</span></a>
+			<a href="http://localhost/msp/Pranju" data-load="Pranju"><span class="artist">pranjali ganvir</span></a>
+		</div>
+	</div>
+</div></div><div class="owl-item active" style="width: 141.429px; margin-right: 20px;"><div class="track_list" data-id="1">
+	<div class="track">
+		<div class="cover_art">
+			<a href="http://localhost/msp/track/sFMc1ic1hGUwXhR" data-load="track/sFMc1ic1hGUwXhR">
+				<img src="./Discover_files/1m3FGLxox4AY6pfXyWyt_19_e6bf6581b49e51ff00b8d4ca65ba6876_image.jpg">
+				<div class="play_btn">
+					<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"><path fill="currentColor" d="M10,16.5V7.5L16,12M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"></path></svg>
+				</div>
+			</a>
+		</div>
+		<div class="track_info">
+			<a href="http://localhost/msp/track/sFMc1ic1hGUwXhR" data-load="track/sFMc1ic1hGUwXhR"><span class="title">Tere-Hawale-Kar-Diya(PagalWorld).mp3</span></a>
+			<a href="http://localhost/msp/Pranju" data-load="Pranju"><span class="artist">pranjali ganvir</span></a>
+		</div>
+	</div>
+</div></div></div></div><div class="owl-dots disabled"></div></div>
+				</div>
+			<!-- End Recently Played -->
+
+			<div class="row">
+				<div class="col-md-6">
+					<!-- New Releases -->
+					<div class="sq_music_tracks mb-60">
+						<h2 class="home_big_title">New Releases</h2>
+						<div class="mus_disc_new_trk">
+							<div class="track_list" data-id="2">
+	<div class="track">
+		<div class="cover_art">
+			<a href="http://localhost/msp/track/E8goGGjWNeEEIzS" data-load="track/E8goGGjWNeEEIzS">
+				<img src="./Discover_files/RHusoNeSLrOLtFtBObXS_31_316a2a5c0107fe326456b5a2dbf5b690_image.jpg">
+				<div class="play_btn">
+					<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"><path fill="currentColor" d="M10,16.5V7.5L16,12M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"></path></svg>
+				</div>
+			</a>
+		</div>
+		<div class="track_info">
+			<a href="http://localhost/msp/track/E8goGGjWNeEEIzS" data-load="track/E8goGGjWNeEEIzS"><span class="title">Meri Ho Ja - Sachet Tandon 128 Kbps.mp3</span></a>
+			<a href="http://localhost/msp/Pranju" data-load="Pranju"><span class="artist">pranjali ganvir</span></a>
+		</div>
+	</div>
+</div><div class="track_list" data-id="1">
+	<div class="track">
+		<div class="cover_art">
+			<a href="http://localhost/msp/track/sFMc1ic1hGUwXhR" data-load="track/sFMc1ic1hGUwXhR">
+				<img src="./Discover_files/1m3FGLxox4AY6pfXyWyt_19_e6bf6581b49e51ff00b8d4ca65ba6876_image.jpg">
+				<div class="play_btn">
+					<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"><path fill="currentColor" d="M10,16.5V7.5L16,12M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"></path></svg>
+				</div>
+			</a>
+		</div>
+		<div class="track_info">
+			<a href="http://localhost/msp/track/sFMc1ic1hGUwXhR" data-load="track/sFMc1ic1hGUwXhR"><span class="title">Tere-Hawale-Kar-Diya(PagalWorld).mp3</span></a>
+			<a href="http://localhost/msp/Pranju" data-load="Pranju"><span class="artist">pranjali ganvir</span></a>
+		</div>
+	</div>
+</div>
+						</div>
+					</div>
+					<!-- End New Releases -->
+				</div>
+				
+				<div class="col-md-6">
+					<div class="short_list_cont short_list_cont_bigp top_dic_son_listz">
+						<!-- Recommended  -->
+						<div class="short_list_card">
+							<h2 class="home_big_title">Recommended</h2>
+							<ul class="s_list_songs">
+								<li class="list-recommended" data-id="2">
+	<ul class="s_lsongs_child">
+		<li class="first">
+			<span class="numbers">1</span>
+			<span class="fav_song"></span>
+		</li>
+		<li class="second">
+			<a href="http://localhost/msp/track/E8goGGjWNeEEIzS" data-load="track/E8goGGjWNeEEIzS">
+				<div class="art_song"><img src="./Discover_files/RHusoNeSLrOLtFtBObXS_31_316a2a5c0107fe326456b5a2dbf5b690_image.jpg"></div>
+				<div class="art_details">
+					<h4>Meri Ho Ja - Sachet Tandon 128 Kbps.mp3</h4>
+					<p>pranjali ganvir</p>
+				</div>
+			</a>
+		</li>
+		<li class="third">
+			<span class="duration">2:59</span>
+			<span class="opts_song dropdown">
+				<svg data-display="static" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z"></path></svg>
+				<div class="dropdown-menu dropdown-menu-right mat-dropdown">
+					<ul class="list-unstyled mb-0">
+						<li><a href="javascript:void(0)" onclick="getPlayLists(2)">Add to Playlist</a></li>
+						<li><a onclick="getShareModal(&#39;2&#39;, $(this));">Share</a></li>
+					</ul>
+				</div>
+			</span>
+		</li>
+	</ul>
+</li><li class="list-recommended" data-id="1">
+	<ul class="s_lsongs_child">
+		<li class="first">
+			<span class="numbers">2</span>
+			<span class="fav_song"></span>
+		</li>
+		<li class="second">
+			<a href="http://localhost/msp/track/sFMc1ic1hGUwXhR" data-load="track/sFMc1ic1hGUwXhR">
+				<div class="art_song"><img src="./Discover_files/1m3FGLxox4AY6pfXyWyt_19_e6bf6581b49e51ff00b8d4ca65ba6876_image.jpg"></div>
+				<div class="art_details">
+					<h4>Tere-Hawale-Kar-Diya(PagalWorld).mp3</h4>
+					<p>pranjali ganvir</p>
+				</div>
+			</a>
+		</li>
+		<li class="third">
+			<span class="duration">5:50</span>
+			<span class="opts_song dropdown">
+				<svg data-display="static" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z"></path></svg>
+				<div class="dropdown-menu dropdown-menu-right mat-dropdown">
+					<ul class="list-unstyled mb-0">
+						<li><a href="javascript:void(0)" onclick="getPlayLists(1)">Add to Playlist</a></li>
+						<li><a onclick="getShareModal(&#39;1&#39;, $(this));">Share</a></li>
+					</ul>
+				</div>
+			</span>
+		</li>
+	</ul>
+</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+$(function () {
+	$(".home_top_slider").owlCarousel({
+		items:1
+	});
+	$(".rp_slider").owlCarousel({
+		margin:20,
+		nav: true,
+		dots: false,
+		navContainer: '.recent_music_btn',
+		slideBy: 2,
+		items:7,
+		responsive:{
+			0:{
+				items:1
+			},
+			260:{
+				items:2
+			},
+			380:{
+				items:3
+			},
+			768:{
+				items:5
+			},
+			992:{
+				items:6
+			},
+			1300:{
+				items:7
+			}
+		}
+	});
+})
+</script>
+				</div>
+				<!-- End Content  -->
+				
+				<!-- Footer -->
+				<div class="ma_footer">
+						
+					<div class="ma_footer_cright">
+						© 2023 Pranjali						<div class="ma_footer_links">
+							<a href="http://localhost/msp/blogs" data-load="blogs">Blogs</a> •
+														<a href="http://localhost/msp/point-system" data-load="point-system">Points system</a> •
+														<a href="http://localhost/msp/terms/dmca" data-load="terms/dmca">DMCA</a> • <a href="http://localhost/msp/terms/about" data-load="terms/about">About Us</a> • <a href="http://localhost/msp/terms/terms" data-load="terms/terms">Terms</a> • <a href="http://localhost/msp/contact" data-load="contact">Contact</a> • <a href="http://localhost/msp/terms/privacy" data-load="terms/privacy">Privacy Policy</a>
+
+														 • <div class="lang_select dropup">
+								<button type="button" class="btn dropdown-toggle" data-display="static" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">English</button>
+								<div class="dropdown-menu dropdown-menu-right mat-dropdown">
+									<ul class="list-unstyled mb-0">
+																					<li><a href="http://localhost/msp/discover?lang=english">English</a></li>
+																					<li><a href="http://localhost/msp/discover?lang=arabic">Arabic</a></li>
+																					<li><a href="http://localhost/msp/discover?lang=dutch">Dutch</a></li>
+																					<li><a href="http://localhost/msp/discover?lang=french">French</a></li>
+																					<li><a href="http://localhost/msp/discover?lang=german">German</a></li>
+																					<li><a href="http://localhost/msp/discover?lang=russian">Russian</a></li>
+																					<li><a href="http://localhost/msp/discover?lang=spanish">Spanish</a></li>
+																					<li><a href="http://localhost/msp/discover?lang=turkish">Turkish</a></li>
+																			</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- End Footer -->
+			</div>
+			<!-- Player  -->
+			<div class="ma_player closed">
+	<div class="player">
+		<div class="song_details">
+			<div class="song_details_inner player-song-url" data-load="">
+				<div class="song_art">
+					<a href="http://localhost/msp/discover#" class="player-song-url" data-load=""><img amplitude-song-info="cover_art_url" amplitude-main-song-info="true" src="http://localhost/msp/discover"></a>
+				</div>
+				<div class="song_title">
+					<a href="http://localhost/msp/discover#" class="player-song-url" data-load="">
+						<h3 amplitude-song-info="name" amplitude-main-song-info="true" class="song_name"></h3>
+					</a>
+					<div class="song_fav" title="Favorite" id="song-fav-button"></div>
+					<div class="song_time_sec">
+						<span class="current_time">
+						<span class="amplitude-current-minutes" amplitude-main-current-minutes="true">00</span>:<span class="amplitude-current-seconds" amplitude-main-current-seconds="true">00</span>
+						</span>
+						<span class="duration_seperate">/</span>
+						<span class="duration_time">
+						<span class="amplitude-duration-minutes" amplitude-main-duration-minutes="true">00</span>:<span class="amplitude-duration-seconds" amplitude-main-duration-seconds="true">00</span>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="song_progress">
+			<div class="song_controls">
+				<div class="amplitude-shuffle amplitude-shuffle-off" id="shuffle" title="Shuffle">
+					<svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24"><path fill="currentColor" d="M14.83,13.41L13.42,14.82L16.55,17.95L14.5,20H20V14.5L17.96,16.54L14.83,13.41M14.5,4L16.54,6.04L4,18.59L5.41,20L17.96,7.46L20,9.5V4M10.59,9.17L5.41,4L4,5.41L9.17,10.58L10.59,9.17Z"></path></svg>
+				</div>
+				<div class="amplitude-prev" id="previous">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M6,18V6H8V18H6M9.5,12L18,6V18L9.5,12Z"></path></svg>
+				</div>
+				<div class="amplitude-play-pause amplitude-paused" amplitude-main-play-pause="true" id="play-pause"></div>
+				<div class="amplitude-next" id="next">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M16,18H18V6H16M6,18L14.5,12L6,6V18Z"></path></svg>
+				</div>
+				<div class="amplitude-stop" id="stop">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M18,18H6V6H18V18Z"></path></svg>
+				</div>
+			</div>
+			<div class="song_time">
+				<span class="current_time">
+				<span class="amplitude-current-minutes" amplitude-main-current-minutes="true">00</span>:<span class="amplitude-current-seconds" amplitude-main-current-seconds="true">00</span>
+				</span>
+				<div class="song_prog_mobi">
+					<div class="progress_container">
+						<input type="range" class="amplitude-song-slider" amplitude-main-song-slider="true">
+						<progress id="song-played-progress" class="amplitude-song-played-progress" amplitude-main-song-played-progress="true" value="0"></progress>
+						<progress id="song-buffered-progress" class="amplitude-buffered-progress" value="0"></progress>
+					</div>
+				</div>
+				<span class="duration_seperate">/</span>
+				<span class="duration_time">
+				<span class="amplitude-duration-minutes" amplitude-main-duration-minutes="true">00</span>:<span class="amplitude-duration-seconds" amplitude-main-duration-seconds="true">00</span>
+				</span>
+			</div>
+		</div>
+		<div class="song_progress_right">
+			<div class="song_volume">
+				<div class="volume_controls">
+					<div class="amplitude-mute amplitude-not-muted"></div>
+					<div class="plyr_vol_mobi">
+						<input type="range" class="amplitude-volume-slider">
+						<div class="ms-range-fix"></div>
+					</div>
+				</div>
+			</div>
+			<div class="song_rs_controls">
+				<div class="repeat_container">
+					<div class="amplitude-repeat amplitude-repeat-off" id="repeat" title="Repeat">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M17,17H7V14L3,18L7,22V19H19V13H17M7,7H17V10L21,6L17,2V5H5V11H7V7Z"></path></svg>
+					</div>
+					<div class="amplitude-playback-speed amplitude-playback-speed-10"></div>
+				</div>
+			</div>
+			<div class="song_queue" onclick="Ma_ShowQueue();">
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M18 5v8.333c-.455-.216-.957-.346-1.493-.346-1.934 0-3.507 1.573-3.507 3.507S14.573 20 16.507 20s3.507-1.573 3.507-3.507c0-.177-.027-.347-.053-.517H20V6h2V4h-3C18.447 4 18 4.448 18 5zM2 5H16V7H2z"></path><path fill="currentColor" d="M2 9H16V11H2zM2 13H11V15H2zM2 17H11V19H2z"></path></svg>
+			</div>
+		</div>
+		<div class="ma_player_playlist" data-simplebar="init"><div class="simplebar-track vertical" style="visibility: visible;"><div class="simplebar-scrollbar" style="height: 647px; transform: translate3d(0px, 0px, 0px);"></div></div><div class="simplebar-track horizontal" style="visibility: hidden;"><div class="simplebar-scrollbar"></div></div><div class="simplebar-scroll-content" style="padding-right: 15px; margin-bottom: -30px;"><div class="simplebar-content" style="padding-bottom: 15px; margin-right: -15px;">
+			<div class="queue_head">
+				<h4>Queue</h4>
+				<span onclick="clearQueues();" title="Clear"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"></path></svg></span>
+			</div>
+			<div id="queue-list">
+							</div>
+		</div></div></div>
+	</div>
+</div>
+			<!-- End Player  -->
+		</div>
+		
+		<!-- Login Modal  -->
+		<!-- Modal -->
+<div class="modal fade auth_box_prnt" id="login_box" tabindex="-1" role="dialog" aria-labelledby="login_box" aria-hidden="true">
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"></path></svg></button>
+	<div class="modal-dialog auth_box" role="document">
+		<div class="modal-content">
+			<div class="left_combo" style="background-image: url(http://localhost/msp/themes/volcano/img/music.svg);">
+				<h2>Login</h2>
+				<p>Get access to your music, playlists and account</p>
+			</div>
+			<div class="right_combo">
+				<div class="alert alert-danger alert-empty" id="output-errors"></div>
+				<form method="post" action="http://localhost/msp/discover" id="login-form">
+					<div class="form-group mat_input">
+						<input type="text" class="form-control" placeholder="Username" autofocus="" name="username">
+					</div>
+					<div class="form-group mat_input">
+						<input type="password" class="form-control" placeholder="Password" name="password">
+					</div>
+					<div class="forgot_password">
+						<a href="http://localhost/msp/forgot-password">Forgot your password?</a>
+					</div>
+					<button type="submit" class="btn btn-primary btn-mat" id="btn-submit">Login</button>
+				</form>
+								<div class="signup_">
+					<span>Don't have an account?</span>
+					<a href="http://localhost/msp/discover#" data-dismiss="modal" data-toggle="modal" data-target="#signup_box">Sign Up</a>
+				</div>
+												<div class="text-center">
+					<span class="u_divider">OR</span>
+				</div>
+								<div class="ma_social_login">
+										<a href="http://localhost/msp/social-login.php?provider=Facebook" class="btn_social btn_fb bold"><span class="btn_fb"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M13.397,20.997v-8.196h2.765l0.411-3.209h-3.176V7.548c0-0.926,0.258-1.56,1.587-1.56h1.684V3.127	C15.849,3.039,15.025,2.997,14.201,3c-2.444,0-4.122,1.492-4.122,4.231v2.355H7.332v3.209h2.753v8.202H13.397z"></path></svg></span> Login with Facebook</a>
+															<a href="http://localhost/msp/social-login.php?provider=Twitter" class="btn_social btn_tw bold"><span class="btn_tw"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M19.633,7.997c0.013,0.175,0.013,0.349,0.013,0.523c0,5.325-4.053,11.461-11.46,11.461c-2.282,0-4.402-0.661-6.186-1.809	c0.324,0.037,0.636,0.05,0.973,0.05c1.883,0,3.616-0.636,5.001-1.721c-1.771-0.037-3.255-1.197-3.767-2.793	c0.249,0.037,0.499,0.062,0.761,0.062c0.361,0,0.724-0.05,1.061-0.137c-1.847-0.374-3.23-1.995-3.23-3.953v-0.05	c0.537,0.299,1.16,0.486,1.82,0.511C3.534,9.419,2.823,8.184,2.823,6.787c0-0.748,0.199-1.434,0.548-2.032	c1.983,2.443,4.964,4.04,8.306,4.215c-0.062-0.3-0.1-0.611-0.1-0.923c0-2.22,1.796-4.028,4.028-4.028	c1.16,0,2.207,0.486,2.943,1.272c0.91-0.175,1.782-0.512,2.556-0.973c-0.299,0.935-0.936,1.721-1.771,2.22	c0.811-0.088,1.597-0.312,2.319-0.624C21.104,6.712,20.419,7.423,19.633,7.997z"></path></svg></span> Login with Twitter</a>
+															<a href="http://localhost/msp/social-login.php?provider=Google" class="btn_social btn_gp bold"><span class="btn_gp"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M20.283,10.356h-8.327v3.451h4.792c-0.446,2.193-2.313,3.453-4.792,3.453c-2.923,0-5.279-2.356-5.279-5.28	c0-2.923,2.356-5.279,5.279-5.279c1.259,0,2.397,0.447,3.29,1.178l2.6-2.599c-1.584-1.381-3.615-2.233-5.89-2.233	c-4.954,0-8.934,3.979-8.934,8.934c0,4.955,3.979,8.934,8.934,8.934c4.467,0,8.529-3.249,8.529-8.934	C20.485,11.453,20.404,10.884,20.283,10.356z"></path></svg></span> Login with Google</a>
+																				<script src="./Discover_files/sdk-3.3.2.js.download"></script>
+					<script>
+                        SC.initialize({
+                            client_id: '',
+                            redirect_uri: 'http://localhost/msp/deepsound-login.php'
+                        });
+                        function soundcloudlogin(){
+                            SC.connect(function () {
+                                console.log("User has logged in");
+                            });
+                        }
+					</script>
+					<a href="javascript:void(0);" onclick="soundcloudlogin();" class="btn_social btn_gp bold" style="background-color: #693100;color: #fff;"><span class="btn_wo">
+							<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 291.319 291.319" style="enable-background:new 0 0 291.319 291.319;">
+								<path style="fill:#FF7700;" d="M72.83,218.485h18.207V103.832c-6.828,1.93-12.982,5.435-18.207,10.041
+									C72.83,113.874,72.83,218.485,72.83,218.485z M36.415,140.921v77.436l1.174,0.127h17.033v-77.682H37.589
+									C37.589,140.803,36.415,140.921,36.415,140.921z M0,179.63c0,14.102,7.338,26.328,18.207,33.147V146.52
+									C7.338,153.329,0,165.556,0,179.63z M109.245,218.485h18.207v-109.6c-5.444-3.396-11.607-5.635-18.207-6.5V218.485z
+									 M253.73,140.803h-10.242c0.519-3.168,0.847-6.382,0.847-9.705c0-32.182-25.245-58.264-56.388-58.264
+									c-16.896,0-31.954,7.775-42.287,19.955v125.695h108.07c20.747,0,37.589-17.388,37.589-38.855
+									C291.319,158.182,274.477,140.803,253.73,140.803z"></path>
+							</svg>
+						</span> Login with SoundCloud</a>
+									</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+$(document).ready(function() { 
+    var options = { 
+    	url: "http://localhost/msp/endpoints/auth/login?hash_id=" + getHashID(),
+        beforeSubmit:  function () {
+        	$('#output-errors').empty();
+        	$("#btn-submit").text("Please wait..");
+        }, 
+        success: function (data) {
+        	$("#btn-submit").text("Login");
+        	if (data.status == 200) {
+        		if ($('#page').attr('data-page') != 'home' && $('#page').attr('data-page') != 'forgot' && $('#page').attr('data-page') != 'reset') {
+        			$('#main-header').html(data.header);
+        			$('#login_box').modal('hide');
+        			if (Amplitude.getActiveSongMetadata().price > 0) {
+        				location.href = window.location.href;
+        			} else {
+        				location.href = window.location.href;
+        			}
+        		} else {
+        			location.href = window.location.href;
+        		}
+        	} else if (data.status == 400) {
+        		var errros = data.errors.join("<br>");
+        		$('#output-errors').html(errros);
+        	} else if (data.status == 600) {
+                location.href = data.location;
+            }
+        }
+    }; 
+
+    $('#login-form').ajaxForm(options); 
+}); 
+
+
+</script>
+		<!-- End Login Modal  -->
+		
+		<!-- Signup Modal  -->
+		<!-- Modal -->
+<div class="modal fade auth_box_prnt show" id="signup_box" tabindex="-1" role="dialog" aria-labelledby="signup_box" style="padding-right: 15px; display: block;">
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"></path></svg></button>
+	<div class="modal-dialog auth_box" role="document">
+		<div class="modal-content">
+			<div class="left_combo" style="background-image: url(http://localhost/msp/themes/volcano/img/music-register.svg);">
+				<h2>Signup</h2>
+				<p>Get access to your music, playlists and account</p>
+			</div>
+			<div class="right_combo">
+				<div class="alert alert-danger alert-empty" id="output-singup-errors"></div>
+				<form method="post" action="http://localhost/msp/POST" id="signup-form">
+					<div class="form-group mat_input">
+						<input type="text" name="name" class="form-control" placeholder="Full Name" autofocus="">
+					</div>
+					<div class="form-group mat_input">
+						<input type="text" name="username" class="form-control" placeholder="Username">
+					</div>
+					<div class="form-group mat_input">
+						<input type="email" name="email" class="form-control" placeholder="Email address">
+					</div>
+					<div class="form-group mat_input">
+						<input type="password" name="password" class="form-control" placeholder="Password">
+					</div>
+					<div class="form-group mat_input">
+						<input type="password" name="c_password" class="form-control" placeholder="Confirm Password">
+					</div>
+										<div class="recaptcha">
+											</div>
+					<button type="submit" class="btn btn-primary btn-mat" id="btn-singup-submit">Signup</button>
+				</form>
+				<div class="signup_">
+					<span>Already have an account?</span>
+					<a href="http://localhost/msp/discover#" data-dismiss="modal" data-toggle="modal" data-target="#login_box">Login</a>
+				</div>
+				<div class="terms_check">
+					<span>By signing up, you agree to our</span>
+					<a href="http://localhost/msp/terms/terms">Terms</a>
+					<span>and</span>
+					<a href="http://localhost/msp/terms/privacy">Privacy Policy</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+</style>
+<script>
+$(document).ready(function() { 
+    var options = { 
+    	url: "http://localhost/msp/endpoints/auth/signup?hash_id=" + getHashID() + '',
+        beforeSubmit:  function () {
+        	$('#output-singup-errors').removeClass("alert-success").addClass('alert-danger');
+        	$('#output-singup-errors').empty();
+        	$("#btn-singup-submit").text("Please wait..");
+        }, 
+        success: function (data) {
+        	$("#btn-singup-submit").text("Signup");
+        	if (data.status == 200) {
+
+        	    if( typeof data.link !== "undefined" ){
+                    location.href = 'http://localhost/msp';
+				}
+
+        		if ($('#page').attr('data-page') != 'home' && $('#page').attr('data-page') != 'forgot' && $('#page').attr('data-page') != 'reset') {
+        			$('#main-header').html(data.header);
+        			$('#signup_box').modal('hide');
+
+        			if (Amplitude.getActiveSongMetadata().price > 0) {
+        				location.href = 'http://localhost/msp/interest';//window.location.href;
+        			} else {
+        				ajaxRedirect('interest');
+        			}
+        		} else {
+        			location.href = 'http://localhost/msp/interest';//window.location.href;
+        		}
+        	} else if (data.status == 400) {
+        		var errros = data.errors.join("<br>");
+        		$('#output-singup-errors').html(errros);
+        	} else if (data.status == 403) {
+        		$('#output-singup-errors').removeClass("alert-danger").addClass('alert-success');
+        		$('#output-singup-errors').html(data.message);
+            }
+        }
+    }; 
+
+    $('#signup-form').ajaxForm(options); 
+}); 
+</script>
+		<!-- End Signup Modal  -->
+
+		<!-- Modals -->
+		<div class="modal fade" id="delete-song" tabindex="-1" role="dialog" aria-labelledby="delete-song" aria-hidden="true" data-id="0">
+	<div class="modal-dialog mat_box" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Delete your track</h5>
+			</div>
+			<div class="modal-body">
+				Are you sure you want to delete this track?
+			</div>	
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-danger btn-mat" onclick="deleteSong();">Delete</button>
+			</div>
+		</div>
+	</div>
+</div>		<div class="modal fade" id="delete-comment" tabindex="-1" role="dialog" aria-labelledby="delete-comment" aria-hidden="true" data-id="0">
+	<div class="modal-dialog mat_box" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Delete comment</h5>
+			</div>
+			<div class="modal-body">
+				Are you sure you want to delete this comment?
+			</div>	
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-danger btn-mat" onclick="deleteComment();">Delete</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="modal fade" id="delete-comment-replay" tabindex="-1" role="dialog" aria-labelledby="delete-comment-replay" aria-hidden="true" data-id="0">
+	<div class="modal-dialog mat_box" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Delete comment</h5>
+			</div>
+			<div class="modal-body">
+				Are you sure you want to delete this comment?
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-danger btn-mat" onclick="deleteCommentReplay(this);">Delete</button>
+			</div>
+		</div>
+	</div>
+</div>		<div class="modal fade" id="delete-post" tabindex="-1" role="dialog" aria-labelledby="delete-post" aria-hidden="true" data-id="0">
+	<div class="modal-dialog mat_box" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Delete your post</h5>
+			</div>
+			<div class="modal-body">
+				Are you sure you want to delete this post?
+			</div>
+
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-danger btn-mat" onclick="deletePost();">Delete</button>
+			</div>
+		</div>
+	</div>
+</div>		<div class="modal fade" id="reposted" tabindex="-1" role="dialog" aria-labelledby="reposted" aria-hidden="true" data-id="0">
+	<div class="modal-dialog mat_box" role="document">
+		<div class="modal-content">
+			<div class="modal-body">
+				<div class="no-track-found" style="padding: 30px 10px;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M10,17L5,12L6.41,10.58L10,14.17L17.59,6.58L19,8M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"></path></svg> The song was successfully shared on your timeline.</div>
+			</div>	
+		</div>
+	</div>
+</div>		<div class="modal fade" id="purchase-song" role="dialog" aria-labelledby="purchase-song" aria-hidden="true" data-id="0">
+	<div class="modal-dialog mat_box" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Purchase Required</h5>
+			</div>
+			<div class="modal-body">
+				To continue listening to this track, you need to purchase the song.
+			</div>	
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-primary btn-mat" onclick="purchaseTrack($(this));">Purchase $<span class="price"></span></button>
+			</div>
+		</div>
+	</div>
+</div>		<div class="modal fade" id="age-restricted" role="dialog" aria-labelledby="age-restricted" aria-hidden="true" data-id="0">
+	<div class="modal-dialog mat_box" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Age restricted track</h5>
+			</div>
+			<div class="modal-body">
+				This track is age restricted for viewers under 18, Create an account or login to confirm your age.			</div>	
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>		<div class="modal fade" id="create_copyright_box" tabindex="-1" role="dialog" aria-labelledby="create_copyright_box" aria-hidden="true">
+	<div class="modal-dialog mat_box create_playlist" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Create DMCA take down notice</h5>
+			</div>
+			<form method="post" action="http://localhost/msp/discover" id="copyright-form">
+				<div class="alert alert-danger alert-empty" id="output-copyright-errors"></div>
+				<div class="create_playlist_innr">
+					<div class="play_info">
+						<div class="form-group mat_input" style="text-align: initial;">
+							<textarea name="description" id="description" rows="6" style="width: 100%;"></textarea><br>
+							<small>Please describe your request carefully and as much as you can, note that false DMCA requests can lead to account termination.</small>
+						</div>
+						<hr>
+						<div class="custom-control custom-radio">
+							<input type="checkbox" id="confirm_1" name="confirm_1" class="custom-control-input">
+							<label class="custom-control-label" for="confirm_1">I have a good faith belief that use of the copyrighted work described above is not authorized by the copyright owner, its agent or the law</label>
+						</div>
+						<div class="custom-control custom-radio">
+							<input type="checkbox" id="confirm_2" name="confirm_2" class="custom-control-input">
+							<label class="custom-control-label" for="confirm_2">I confirm that I am the copyright owner or am authorised to act on behalf of the owner of an exclusive right that is allegedly infringed.</label>
+						</div>
+					</div>
+				</div>
+				<input type="hidden" id="song-copyright-id" name="id">
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					<button type="submit" class="btn btn-primary btn-mat" id="btn-copyright-submit">Submit</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+$(document).ready(function() { 
+    var options = { 
+    	url: "http://localhost/msp/endpoints/copyright-create?hash_id=" + getHashID(),
+        beforeSubmit:  function () {
+        	$('#output-copyright-errors').removeClass('alert-success').addClass('alert-danger');
+        	$('#output-copyright-errors').empty();
+        	$("#btn-copyright-submit").text("Please wait..");
+        }, 
+        success: function (data) {
+        	$("#btn-copyright-submit").text("Submit");
+        	if (data.status == 200) {
+        		$('#output-copyright-errors').addClass('alert-success').removeClass('alert-danger');
+        		$('#output-copyright-errors').text("Thanks for your submission, we will review your request shortly.");
+        		setTimeout(function () {
+        			$('#copyright-form')[0].reset();
+	        		$('#create_copyright_box').modal('hide');
+	        		closeModal();
+	        		$('#output-copyright-errors').empty();
+        		}, 3000);
+        	} else if (data.status == 400) {
+        		var errros = data.errors.join("<br>");
+        		$('#output-copyright-errors').html(errros);
+        	}
+        }
+    }; 
+
+    $('#copyright-form').ajaxForm(options); 
+}); 
+</script>		<div class="modal fade" id="comment_unreported" tabindex="-1" role="dialog" aria-labelledby="comment_unreported" aria-hidden="true" data-id="0">
+    <div class="modal-dialog mat_box" role="document">
+        <div class="modal-content">
+			<div class="modal-body">
+				<div class="no-track-found" style="padding: 30px 10px;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M10,17L5,12L6.41,10.58L10,14.17L17.59,6.58L19,8M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"></path></svg> The comment report was successfully deleted.</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="report_comment" tabindex="-1" role="dialog" aria-labelledby="report_comment" aria-hidden="true">
+    <div class="modal-dialog mat_box create_playlist" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Report comment.</h5>
+            </div>
+            <form method="post" action="http://localhost/msp/discover" id="comment-report-form">
+                <div class="alert alert-danger alert-empty" id="output-report-comment-errors"></div>
+                <div class="create_playlist_innr">
+                    <div class="play_info">
+                        <div class="form-group mat_input" style="text-align: initial;">
+                            <textarea name="comment_description" id="comment_description" rows="5" style="width: 100%;"></textarea><br>
+                            <small>Please describe whey you want to report this comment.</small>
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" id="comment_id" name="id">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary btn-mat" id="btn-report-comment-submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        var options = {
+            url: "http://localhost/msp/endpoints/report-comment?hash_id=" + getHashID(),
+            beforeSubmit:  function () {
+                $('#output-report-comment-errors').removeClass('alert-success').addClass('alert-danger');
+                $('#output-report-comment-errors').empty();
+                $("#btn-report-comment-submit").text("Please wait..");
+            },
+            success: function (data) {
+                $("#bbtn-report-comment-submit").text("Submit");
+                if (data.status == 200) {
+                    $('#output-report-comment-errors').addClass('alert-success').removeClass('alert-danger');
+                    $('#output-report-comment-errors').text("Thanks for your submission, we will review your request shortly.");
+                    setTimeout(function () {
+                        $('#comment-report-form')[0].reset();
+                        $('#report_comment').modal('hide');
+                        closeModal();
+                        var comment_id = $('#comment_id').val();
+                        $('.comment_report[data-comment-id="'+comment_id+'"]').hide();
+                        $('.comment_unreport[data-comment-id="'+comment_id+'"]').css({'visibility':'inherit'});
+                        $('.comment_unreport[data-comment-id="'+comment_id+'"]').show();
+
+                        $('#output-report-comment-errors').empty();
+                    }, 3000);
+                } else if (data.status == 400) {
+                    var errros = data.errors.join("<br>");
+                    $('#output-report-comment-errors').html(errros);
+                }
+            }
+        };
+
+        $('#comment-report-form').ajaxForm(options);
+    });
+</script>		<div class="modal fade" id="blog_comment_unreported" tabindex="-1" role="dialog" aria-labelledby="comment_unreported" aria-hidden="true" data-id="0">
+    <div class="modal-dialog mat_box" role="document">
+        <div class="modal-content">
+			<div class="modal-body">
+				<div class="no-track-found" style="padding: 30px 10px;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M10,17L5,12L6.41,10.58L10,14.17L17.59,6.58L19,8M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"></path></svg> The comment report was successfully deleted.</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="blog_report_comment" tabindex="-1" role="dialog" aria-labelledby="blog_report_comment" aria-hidden="true">
+    <div class="modal-dialog mat_box create_playlist" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Report comment.</h5>
+            </div>
+            <form method="post" action="http://localhost/msp/discover" id="blog-comment-report-form">
+                <div class="alert alert-danger alert-empty" id="output-blog-report-comment-errors"></div>
+                <div class="create_playlist_innr">
+                    <div class="play_info">
+                        <div class="form-group mat_input" style="text-align: initial;">
+                            <textarea name="comment_description" id="blog_comment_description" rows="5" style="width: 100%;"></textarea><br>
+                            <small>Please describe whey you want to report this comment.</small>
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" id="blog_comment_id" name="id">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary btn-mat" id="btn-blog-report-comment-submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        var options = {
+            url: "http://localhost/msp/endpoints/blog-report-comment?hash_id=" + getHashID(),
+            beforeSubmit:  function () {
+                $('#output-blog-report-comment-errors').removeClass('alert-success').addClass('alert-danger');
+                $('#output-blog-report-comment-errors').empty();
+                $("#btn-blog-report-comment-submit").text("Please wait..");
+            },
+            success: function (data) {
+                $("#btn-blog-report-comment-submit").text("Submit");
+                if (data.status == 200) {
+                    $('#output-blog-report-comment-errors').addClass('alert-success').removeClass('alert-danger');
+                    $('#output-blog-report-comment-errors').text("Thanks for your submission, we will review your request shortly.");
+                    setTimeout(function () {
+                        $('#blog-comment-report-form')[0].reset();
+                        $('#blog_report_comment').modal('hide');
+                        closeModal();
+                        var comment_id = $('#blog_comment_id').val();
+                        $('.blog_comment_report[data-comment-id="'+comment_id+'"]').hide();
+                        $('.blog_comment_unreport[data-comment-id="'+comment_id+'"]').css({'visibility':'inherit'});
+                        $('.blog_comment_unreport[data-comment-id="'+comment_id+'"]').show();
+
+                        $('#output-blog-report-comment-errors').empty();
+                    }, 3000);
+                } else if (data.status == 400) {
+                    var errros = data.errors.join("<br>");
+                    $('#output-blog-report-comment-errors').html(errros);
+                }
+            }
+        };
+
+        $('#blog-comment-report-form').ajaxForm(options);
+    });
+</script>		<div class="modal fade" id="track_unreported" tabindex="-1" role="dialog" aria-labelledby="track_unreported" aria-hidden="true" data-id="0">
+    <div class="modal-dialog mat_box" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+				<div class="no-track-found" style="padding: 30px 10px;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M10,17L5,12L6.41,10.58L10,14.17L17.59,6.58L19,8M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"></path></svg> The track report was successfully deleted.</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="report_track" tabindex="-1" role="dialog" aria-labelledby="report_track" aria-hidden="true">
+    <div class="modal-dialog mat_box create_playlist" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Report track.</h5>
+            </div>
+            <form method="post" action="http://localhost/msp/discover" id="track-report-form">
+                <div class="alert alert-danger alert-empty" id="output-report-track-errors"></div>
+                <div class="create_playlist_innr">
+                    <div class="play_info">
+                        <div class="form-group mat_input" style="text-align: initial;">
+                            <textarea name="track_description" id="track_description" rows="5" style="width: 100%;"></textarea>
+                            <small>Please describe whey you want to report this track.</small>
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" id="report_track_id" name="id">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary btn-mat" id="btn-report-track-submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        var options = {
+            url: "http://localhost/msp/endpoints/report-track?hash_id=" + getHashID(),
+            beforeSubmit:  function () {
+                $('#output-report-track-errors').removeClass('alert-success').addClass('alert-danger');
+                $('#output-report-track-errors').empty();
+                $("#btn-report-track-submit").text("Please wait..");
+            },
+            success: function (data) {
+                $("#btn-report-track-submit").text("Submit");
+                if (data.status == 200) {
+                    $('#output-report-track-errors').addClass('alert-success').removeClass('alert-danger');
+                    $('#output-report-track-errors').text("Thanks for your submission, we will review your request shortly.");
+                    setTimeout(function () {
+                        $('#track-report-form')[0].reset();
+                        $('#report_track').modal('hide');
+                        closeModal();
+                        var track_id = $('#report_track_id').val();
+                        $('.track_report[data-track-id="'+track_id+'"]').hide();
+                        $('.track_unreport[data-track-id="'+track_id+'"]').css({'visibility':'inherit'});
+                        $('.track_unreport[data-track-id="'+track_id+'"]').show();
+
+                        $('#output-report-track-errors').empty();
+                    }, 3000);
+                } else if (data.status == 400) {
+                    var errros = data.errors.join("<br>");
+                    $('#output-report-track-errors').html(errros);
+                }
+            }
+        };
+
+        $('#track-report-form').ajaxForm(options);
+    });
+</script>		<link rel="stylesheet" href="./Discover_files/font-awesome.min.css">
+
+<style>
+    .success-box {
+        margin:50px 0;
+        padding:10px 10px;
+        border:1px solid #eee;
+        background:#f9f9f9;
+    }
+    .success-box img {
+        margin-right:10px;
+        display:inline-block;
+        vertical-align:top;
+    }
+    .success-box > div {
+        vertical-align:top;
+        display:inline-block;
+        color:#888;
+    }
+    /* Rating Star Widgets Style */
+    .rating-stars ul {
+        list-style-type:none;
+        padding:0;
+
+        -moz-user-select:none;
+        -webkit-user-select:none;
+    }
+    .rating-stars ul > li.star {
+        display:inline-block;
+
+    }
+    /* Idle State of the stars */
+    .rating-stars ul > li.star > i.fa {
+        font-size:2.5em; /* Change the size of the stars */
+        color:#ccc; /* Color on idle state */
+    }
+    /* Hover state of the stars */
+    .rating-stars ul > li.star.hover > i.fa {
+        color:#FFCC36;
+    }
+    /* Selected state of the stars */
+    .rating-stars ul > li.star.selected > i.fa {
+        color:#FF912C;
+    }
+</style>
+
+<div class="modal fade" id="track_unreported" tabindex="-1" role="dialog" aria-labelledby="track_unreported" aria-hidden="true" data-id="0">
+    <div class="modal-dialog mat_box" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+				<div class="no-track-found" style="padding: 30px 10px;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M10,17L5,12L6.41,10.58L10,14.17L17.59,6.58L19,8M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"></path></svg> The track report was successfully deleted.</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="review_track" tabindex="-1" role="dialog" aria-labelledby="report_track" aria-hidden="true">
+    <div class="modal-dialog mat_box create_playlist" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Review track.</h5>
+            </div>
+            <form method="post" action="http://localhost/msp/discover" id="track-review-form">
+                <div class="alert alert-danger alert-empty" id="output-review-track-errors"></div>
+                <div class="create_playlist_innr">
+                    <div class="play_info">
+                        <div class="form-group mat_input" style="text-align: initial;">
+                            <textarea name="track_review_description" id="track_review_description" rows="5" style="width: 100%;" placeholder="Please enter your review."></textarea>
+                            <br><br>
+
+                            <section class="rating-widget">
+                                <!-- Rating Stars Box -->
+                                <div class="rating-stars text-center">
+                                    <ul id="stars">
+                                        <li class="star" title="Poor" data-value="1">
+                                            <i class="fa fa-star fa-fw"></i>
+                                        </li>
+                                        <li class="star" title="Fair" data-value="2">
+                                            <i class="fa fa-star fa-fw"></i>
+                                        </li>
+                                        <li class="star" title="Good" data-value="3">
+                                            <i class="fa fa-star fa-fw"></i>
+                                        </li>
+                                        <li class="star" title="Excellent" data-value="4">
+                                            <i class="fa fa-star fa-fw"></i>
+                                        </li>
+                                        <li class="star" title="WOW!!!" data-value="5">
+                                            <i class="fa fa-star fa-fw"></i>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </section>
+
+
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" id="review_track_id" name="id">
+                <input type="hidden" id="review_track_oid">
+                <input type="hidden" id="track_stars" name="track_stars" value="0">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary btn-mat" disabled="disabled" id="btn-review-track-submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function(){
+
+        /* 1. Visualizing things on Hover - See next part for action on click */
+        $('#stars li').on('mouseover', function(){
+            var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
+
+            // Now highlight all the stars that's not after the current hovered star
+            $(this).parent().children('li.star').each(function(e){
+                if (e < onStar) {
+                    $(this).addClass('hover');
+                }
+                else {
+                    $(this).removeClass('hover');
+                }
+            });
+
+        }).on('mouseout', function(){
+            $(this).parent().children('li.star').each(function(e){
+                $(this).removeClass('hover');
+            });
+        });
+
+        $('#track_review_description').bind('input propertychange', function() {
+            if(this.value.length){
+                var ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
+                if (ratingValue > 1) {
+                    $('#btn-review-track-submit').removeAttr('disabled');
+                }
+            }
+        });
+
+        /* 2. Action to perform on click */
+        $('#stars li').on('click', function(){
+            var onStar = parseInt($(this).data('value'), 10); // The star currently selected
+            var stars = $(this).parent().children('li.star');
+
+            for (i = 0; i < stars.length; i++) {
+                $(stars[i]).removeClass('selected');
+            }
+
+            for (i = 0; i < onStar; i++) {
+                $(stars[i]).addClass('selected');
+            }
+
+            // JUST RESPONSE (Not needed)
+            var ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
+            var msg = "";
+            if (ratingValue > 1) {
+                $('#track_stars').val(ratingValue);
+                if( $('#track_review_description').val() !== '' ) {
+                    $('#btn-review-track-submit').removeAttr('disabled');
+                }
+                msg = "Thanks! You rated this " + ratingValue + " stars.";
+            }
+            else {
+                msg = "We will improve ourselves. You rated this " + ratingValue + " stars.";
+            }
+
+        });
+
+
+    });
+
+    $(document).ready(function() {
+        var options = {
+            url: "http://localhost/msp/endpoints/review-track?hash_id=" + getHashID(),
+            beforeSubmit:  function () {
+                $('#output-review-track-errors').removeClass('alert-success').addClass('alert-danger');
+                $('#output-review-track-errors').empty();
+                $("#btn-review-track-submit").text("Please wait..");
+            },
+            success: function (data) {
+                $("#btn-review-track-submit").text("Submit");
+                if (data.status == 200) {
+                    $('#output-review-track-errors').addClass('alert-success').removeClass('alert-danger');
+                    $('#output-review-track-errors').text("Thanks for your submission.");
+                    setTimeout(function () {
+                        $('#track-review-form')[0].reset();
+                        $('#review_track').modal('hide');
+                        closeModal();
+
+
+                        goToAjaxLink('track/'+$('#review_track_oid').val());
+
+                        $('#output-review-track-errors').empty();
+                    }, 3000);
+                } else if (data.status == 400) {
+                    var errros = data.errors.join("<br>");
+                    $('#output-review-track-errors').html(errros);
+                }
+            }
+        };
+
+        $('#track-review-form').ajaxForm(options);
+    });
+</script>		<div class="modal fade" id="payment_modal" tabindex="-1" role="dialog" aria-labelledby="track_unreported" aria-hidden="true" data-id="0">
+    <div class="modal-dialog mat_box" role="document">
+        <div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Choose a payment method</h5>
+			</div>
+            <div class="modal-body">
+				<div class="pay_method">
+					
+													<button class="btn" onclick="purchaseTrackPaypal($(this))" id="btn-paypal-payment" data-id="" data-title="" data-price="">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#283593" d="M8.32,21.97C8.21,21.92 8.08,21.76 8.06,21.65C8.03,21.5 8,21.76 8.66,17.56C9.26,13.76 9.25,13.82 9.33,13.71C9.46,13.54 9.44,13.54 10.94,13.53C12.26,13.5 12.54,13.5 13.13,13.41C16.38,12.96 18.39,11.05 19.09,7.75C19.13,7.53 19.17,7.34 19.18,7.34C19.18,7.33 19.25,7.38 19.33,7.44C20.36,8.22 20.71,9.66 20.32,11.58C19.86,13.87 18.64,15.39 16.74,16.04C15.93,16.32 15.25,16.43 14.05,16.46C13.25,16.5 13.23,16.5 13,16.65C12.83,16.82 12.84,16.79 12.45,19.2C12.18,20.9 12.08,21.45 12.04,21.55C11.97,21.71 11.83,21.85 11.67,21.93L11.56,22H10C8.71,22 8.38,22 8.32,21.97V21.97M3.82,19.74C3.63,19.64 3.5,19.47 3.5,19.27C3.5,19 6.11,2.68 6.18,2.5C6.27,2.32 6.5,2.13 6.68,2.06L6.83,2H10.36C14.27,2 14.12,2 15,2.2C17.62,2.75 18.82,4.5 18.37,7.13C17.87,10.06 16.39,11.8 13.87,12.43C13,12.64 12.39,12.7 10.73,12.7C9.42,12.7 9.32,12.71 9.06,12.85C8.8,13 8.59,13.27 8.5,13.6C8.46,13.67 8.23,15.07 7.97,16.7C7.71,18.33 7.5,19.69 7.5,19.72L7.47,19.78H5.69C4.11,19.78 3.89,19.78 3.82,19.74V19.74Z"></path></svg>PayPal
+							</button>
+																			<button class="btn" onclick="purchaseTrackStripe($(this))" id="btn-stripe-payment" data-id="" data-title="" data-price="">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#6BBEA1" d="M20,8H4V6H20M20,18H4V12H20M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"></path></svg>Credit Card
+							</button>
+												
+									</div>
+            </div>
+        </div>
+    </div>
+</div>				
+<div class="modal fade" id="paymentpro_modal" tabindex="-1" role="dialog" aria-labelledby="track_unreported" aria-hidden="true" data-id="0">
+    <div class="modal-dialog mat_box" role="document">
+        <div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Choose a payment method</h5>
+			</div>
+
+            <div class="modal-body">
+				<div class="pay_method">
+					                        <button class="btn" onclick="purchaseProPaypal($(this))" id="btn-pro-paypal-payment" data-id="" data-title="" data-price="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#283593" d="M8.32,21.97C8.21,21.92 8.08,21.76 8.06,21.65C8.03,21.5 8,21.76 8.66,17.56C9.26,13.76 9.25,13.82 9.33,13.71C9.46,13.54 9.44,13.54 10.94,13.53C12.26,13.5 12.54,13.5 13.13,13.41C16.38,12.96 18.39,11.05 19.09,7.75C19.13,7.53 19.17,7.34 19.18,7.34C19.18,7.33 19.25,7.38 19.33,7.44C20.36,8.22 20.71,9.66 20.32,11.58C19.86,13.87 18.64,15.39 16.74,16.04C15.93,16.32 15.25,16.43 14.05,16.46C13.25,16.5 13.23,16.5 13,16.65C12.83,16.82 12.84,16.79 12.45,19.2C12.18,20.9 12.08,21.45 12.04,21.55C11.97,21.71 11.83,21.85 11.67,21.93L11.56,22H10C8.71,22 8.38,22 8.32,21.97V21.97M3.82,19.74C3.63,19.64 3.5,19.47 3.5,19.27C3.5,19 6.11,2.68 6.18,2.5C6.27,2.32 6.5,2.13 6.68,2.06L6.83,2H10.36C14.27,2 14.12,2 15,2.2C17.62,2.75 18.82,4.5 18.37,7.13C17.87,10.06 16.39,11.8 13.87,12.43C13,12.64 12.39,12.7 10.73,12.7C9.42,12.7 9.32,12.71 9.06,12.85C8.8,13 8.59,13.27 8.5,13.6C8.46,13.67 8.23,15.07 7.97,16.7C7.71,18.33 7.5,19.69 7.5,19.72L7.47,19.78H5.69C4.11,19.78 3.89,19.78 3.82,19.74V19.74Z"></path></svg>PayPal
+                        </button>
+                                                                <button class="btn" onclick="purchaseProStripe($(this))" id="btn-pro-stripe-payment" data-id="" data-title="" data-price="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#6BBEA1" d="M20,8H4V6H20M20,18H4V12H20M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"></path></svg>Credit Card
+                        </button>
+                    
+                    				</div>
+            </div>
+        </div>
+    </div>
+</div>        		<div class="modal fade" id="bank_transfer_modal_response" tabindex="-1" role="dialog" aria-labelledby="bank_transfer_modal_response" aria-hidden="true" data-id="0">
+    <div class="modal-dialog mat_box" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="no-track-found" style="padding: 30px 10px;">
+                    <span id="bank_transfer_modal_response_txt"></span>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="bank_transfer_modal modal fade modal-fixed-footer" tabindex="-1" role="dialog" aria-hidden="true" data-id="0">
+    <div class="modal-dialog mat_box" role="document">
+        <div class="modal-content dt_bank_trans_modal">
+            <div class="modal-header">
+                <h5 class="modal-title">Bank Transfer</h5>
+            </div>
+            <div class="modal-body">
+                                <div class="bank_info"><div class="dt_settings_header bg_gradient">
+    <div class="bank_info_innr">
+        <h4 class="bank_name">Garanti Bank</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="bank_account">
+                    <p>4796824372433055</p>
+                    <span class="help-block">Account number / IBAN</span>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="bank_account_holder">
+                    <p>Antoian Kordiyal</p>
+                    <span class="help-block">Account name</span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="bank_account_code">
+                    <p>TGBATRISXXX</p>
+                    <span class="help-block">Routing code</span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="bank_account_country">
+                    <p>United States</p>
+                    <span class="help-block">Country</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div></div>
+                                                <div class="dt_user_profile hide_alert_info_bank_trans">
+                <span class="valign-wrapper">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M13,13H11V7H13M13,17H11V15H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"></path></svg> Note:
+                </span>
+                    <ul class="browser-default dt_prof_vrfy">
+                        <li id="bank_note">In order to confirm the bank transfer, you will need to upload a receipt or take a screenshot of your transfer within 1 day from your payment date. If a bank transfer is made but no receipt is uploaded within this period, your order will be cancelled. We will verify and confirm your receipt within 3 working days from the date you upload it.</li>
+                    </ul>
+                </div>
+                                <p class="dt_bank_trans_upl_rec">
+                    <a href="javascript:void(0);" onclick="$(&#39;.bank_transfer_modal&#39;).addClass(&#39;up_rec_active&#39;); return false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M13.5,16V19H10.5V16H8L12,12L16,16H13.5M13,9V3.5L18.5,9H13Z"></path>
+                        </svg> Upload Receipt
+                    </a>
+                </p>
+                <div class="upload_bank_receipts">
+                    <div onclick="document.getElementById(&#39;receipt_img&#39;).click(); return false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M13.5,16V19H10.5V16H8L12,12L16,16H13.5M13,9V3.5L18.5,9H13Z"></path></svg>
+                        <p>Upload Receipt</p>
+                        <img id="receipt_img_preview" src="http://localhost/msp/discover">
+                    </div>
+                </div>
+                <input type="file" id="receipt_img" class="hide" accept="image/x-png, image/gif, image/jpeg" name="receipt_img">
+            </div>
+            <!--<span style="display: block;text-align: center;" id="receipt_img_path"></span>-->
+            <div class="modal-footer">
+                <div class="bank_transfr_progress hide" id="img_upload_progress">
+                    <div class="progress">
+                        <div id="img_upload_progress_bar" class="determinate progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+                    </div>
+                </div>
+                <button class="btn btn-default" data-dismiss="modal">Close</button>
+                <button class="btn btn-primary btn-mat" disabled="" id="btn-upload-receipt" data-selected="" data-mode="" data-id="" data-title="" data-price="">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('receipt_img').removeEventListener("change", handleReceiptImgChange, true);
+    document.getElementById('receipt_img').addEventListener('change', handleReceiptImgChange, { passive: false });
+    function handleReceiptImgChange(){
+        let imgPath = $(this)[0].files[0].name;
+        if (typeof(FileReader) != "undefined") {
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                $('#receipt_img_preview').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(this.files[0]);
+        }
+        $('#receipt_img_path').html(imgPath);
+        $('.bank_transfer_modal').addClass('up_rec_img_ready');
+        $('#btn-upload-receipt').removeAttr('disabled');
+        $('#btn-upload-receipt').removeClass('btn-flat').addClass('btn-success');
+    }
+    document.getElementById('btn-upload-receipt').addEventListener('click', function(e) {
+        e.preventDefault();
+        let bar = $('#img_upload_progress');
+        let percent = $('#img_upload_progress_bar');
+
+        let id = $(this).attr("data-id");
+        if (!id) {
+            return false;
+        }
+        let title = $(this).attr("data-title");
+        let price = $(this).attr("data-price");
+        let mode = $(this).attr("data-mode");
+
+        let formData = new FormData();
+        formData.append("hash_id",'752850d2570756cdea4c260de647cec96f3b136b');
+        formData.append("description",title);
+        formData.append("price", price);
+        formData.append("mode", mode);
+        formData.append("track_id", id);
+        formData.append("receipt_img", $("#receipt_img")[0].files[0], $("#receipt_img")[0].files[0].value);
+        bar.removeClass('hide');
+        $.ajax({
+            xhr: function() {
+                let xhr = new window.XMLHttpRequest();
+                xhr.upload.addEventListener("progress", function(evt){
+                    if (evt.lengthComputable) {
+                        let percentComplete = evt.loaded / evt.total;
+                        percentComplete = parseInt(percentComplete * 100);
+                        //status.html( percentComplete + "%");
+                        percent.width(percentComplete + '%');
+                        percent.html(percentComplete + '%');
+                        if (percentComplete === 100) {
+                            bar.addClass('hide');
+                            percent.width('0%');
+                            percent.html('0%');
+                        }
+                    }
+                }, false);
+                return xhr;
+            },
+            url: ajaxUrl() + '/upload-receipt',
+            type: "POST",
+            async: true,
+            enctype: 'multipart/form-data',
+            processData: false,
+            contentType: false,
+            cache: false,
+            timeout: 60000,
+            dataType: false,
+            data: formData,
+            success: function(result) {
+                if( result.status == 200 ){
+                    $('#payment_modal').modal('hide');
+                    $('#paymentpro_modal').modal('hide');
+                    $('.bank_transfer_modal').modal('hide');
+
+                    $('#bank_transfer_modal_response_txt').html('Your receipt  has been uploaded successfully.');
+                    $('#bank_transfer_modal_response').modal('show');
+
+                    setTimeout(function () {
+                        $('#bank_transfer_modal_response').modal('hide');
+                    },2000);
+                    return false;
+                }
+            }
+        });
+    });
+</script>		<div class="modal fade mat_box" id="logged-out-modal" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><i class="fa fa-exclamation-circle"></i> Session Expired</h4>
+            </div>
+            <div class="modal-body">
+                <p>Your Session has been expired, please login again.</p>
+            </div>
+
+            <div class="modal-footer">
+                <a href="http://localhost/msp/discover" class="btn btn-default">Login</a>
+            </div>
+        </div>
+    </div>
+</div>		<div class="modal fade mat_box" id="verify_code" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="two_factor_title">
+                    A confirmation email has been sent.                </h5>
+            </div>
+            <form id="confirmation_code_form" class="confirmation_code_form" method="POST">
+                <div class="modal-body">
+                    <div id="confirmation_code_form_alert"></div>
+                    <span class="verfy_sett_email_phone_ico"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M21,13.34C20.37,13.12 19.7,13 19,13A6,6 0 0,0 13,19C13,19.34 13.03,19.67 13.08,20H3A2,2 0 0,1 1,18V6C1,4.89 1.89,4 3,4H19A2,2 0 0,1 21,6V13.34M23.5,17L18.5,22L15,18.5L16.5,17L18.5,19L22,15.5L23.5,17M3,6V8L11,13L19,8V6L11,11L3,6Z"></path></svg></span>
+                    <p id="two_factor_desc">
+                        We have sent an email that contains the confirmation code to enable Two-factor authentication.                    </p>
+                    <div class="form-group verfy_sett_email_phone">
+                        <input type="text" class="form-control" name="code" placeholder="Confirmation code">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-default">Cancel</button>
+                    <button id="confirmation_code_form_btn" type="submit" class="btn btn-main">Send</button>
+                </div>
+                <input type="hidden" id="confirmation_code_form_user_id" name="user_id" value="">
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade mat_box" id="verify_email_phone" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="verify_email_phone_title">
+                                    </h5>
+            </div>
+            <form id="verify_email_phone_form" class="verify_email_phone_form" method="POST">
+                <div class="modal-body">
+                    <div id="verify_email_phone_form_alert"></div>
+                    <span class="verfy_sett_email_phone_ico"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M17,19V5H7V19H17M17,1A2,2 0 0,1 19,3V21A2,2 0 0,1 17,23H7C5.89,23 5,22.1 5,21V3C5,1.89 5.89,1 7,1H17M9,7H15V9H9V7M9,11H13V13H9V11Z"></path></svg></span>
+                    <p id="verify_email_phone_desc">
+                                            </p>
+                    <div class="form-group verfy_sett_email_phone">
+                        <input type="text" class="form-control" name="code" placeholder="Confirmation code">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-default">Cancel</button>
+                    <button id="verify_email_phone_form_btn" type="submit" class="btn btn-main">Send</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>		
+<div class="modal fade" id="buy_album_modal" tabindex="-1" role="dialog" aria-labelledby="track_unreported" aria-hidden="true" data-id="0">
+    <div class="modal-dialog mat_box" role="document">
+        <div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Choose a payment method</h5>
+			</div>
+
+            <div class="modal-body">
+				<div class="pay_method">
+					                        <button class="btn" onclick="purchaseAlbumPaypal($(this))" id="btn-pro-paypal-payment" data-id="" data-title="" data-price="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#283593" d="M8.32,21.97C8.21,21.92 8.08,21.76 8.06,21.65C8.03,21.5 8,21.76 8.66,17.56C9.26,13.76 9.25,13.82 9.33,13.71C9.46,13.54 9.44,13.54 10.94,13.53C12.26,13.5 12.54,13.5 13.13,13.41C16.38,12.96 18.39,11.05 19.09,7.75C19.13,7.53 19.17,7.34 19.18,7.34C19.18,7.33 19.25,7.38 19.33,7.44C20.36,8.22 20.71,9.66 20.32,11.58C19.86,13.87 18.64,15.39 16.74,16.04C15.93,16.32 15.25,16.43 14.05,16.46C13.25,16.5 13.23,16.5 13,16.65C12.83,16.82 12.84,16.79 12.45,19.2C12.18,20.9 12.08,21.45 12.04,21.55C11.97,21.71 11.83,21.85 11.67,21.93L11.56,22H10C8.71,22 8.38,22 8.32,21.97V21.97M3.82,19.74C3.63,19.64 3.5,19.47 3.5,19.27C3.5,19 6.11,2.68 6.18,2.5C6.27,2.32 6.5,2.13 6.68,2.06L6.83,2H10.36C14.27,2 14.12,2 15,2.2C17.62,2.75 18.82,4.5 18.37,7.13C17.87,10.06 16.39,11.8 13.87,12.43C13,12.64 12.39,12.7 10.73,12.7C9.42,12.7 9.32,12.71 9.06,12.85C8.8,13 8.59,13.27 8.5,13.6C8.46,13.67 8.23,15.07 7.97,16.7C7.71,18.33 7.5,19.69 7.5,19.72L7.47,19.78H5.69C4.11,19.78 3.89,19.78 3.82,19.74V19.74Z"></path></svg>PayPal
+                        </button>
+                                                                <button class="btn" onclick="purchaseAlbumStripe($(this))" id="btn-pro-stripe-payment" data-id="" data-title="" data-price="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#6BBEA1" d="M20,8H4V6H20M20,18H4V12H20M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"></path></svg>Credit Card
+                        </button>
+                    
+                    				</div>
+            </div>
+        </div>
+    </div>
+</div>
+		<div class="modal fade" id="albums_success" role="dialog" aria-labelledby="albums" aria-hidden="true" data-id="{{t_id}}">
+			<div class="modal-dialog mat_box" role="document">
+				<div class="modal-content add_to_plist">
+					<div class="modal-body" style="background: #1b711e;">
+						<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+						<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve" width="50" height="50">
+<g>
+	<g>
+		<path fill="currentColor" d="M449.716,239.842c-0.543-7.535-7.082-13.191-14.628-12.661c-7.536,0.543-13.204,7.092-12.662,14.628
+			c0.337,4.655,0.506,9.431,0.506,14.191c0,109.061-88.726,197.787-197.786,197.787C116.086,453.787,27.36,365.06,27.36,256
+			S116.086,58.214,225.147,58.214c43.191,0,84.21,13.668,118.62,39.525c6.041,4.538,14.615,3.321,19.154-2.718
+			c4.54-6.04,3.323-14.616-2.717-19.154c-39.189-29.447-85.891-45.012-135.058-45.012C101.001,30.854,0,131.855,0,256
+			s101.001,225.145,225.147,225.145S450.292,380.146,450.292,256C450.292,250.586,450.097,245.15,449.716,239.842z"></path>
+	</g>
+</g>
+<g>
+	<g>
+		<path fill="currentColor" d="M496.395,61.77c-20.808-20.807-54.666-20.807-75.474,0l-197.11,197.108l-69.874-69.875
+			c-20.808-20.807-54.666-20.807-75.474,0c-20.808,20.808-20.808,54.666,0,75.474l120.341,120.341
+			c6.895,6.895,15.951,10.342,25.007,10.342c9.057,0,18.113-3.447,25.008-10.342l247.576-247.576
+			C517.201,116.435,517.201,82.579,496.395,61.77z M477.049,117.897L229.472,365.475c-3.12,3.12-8.2,3.12-11.32,0L97.811,245.133
+			c-10.141-10.141-10.141-26.64,0-36.781c5.07-5.072,11.729-7.606,18.39-7.606s13.321,2.535,18.39,7.606l71.882,71.882
+			c4.632,4.631,10.791,7.181,17.339,7.181c6.551,0,12.71-2.551,17.341-7.182L440.268,81.116c10.138-10.141,26.64-10.141,36.781,0
+			C487.189,91.257,487.189,107.756,477.049,117.897z"></path>
+	</g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+						<br><br>
+						<b>The track has been moved to following album.</b>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="queue_overlay" onclick="javascript:$(&#39;body&#39;).removeClass(&#39;data-queue-open&#39;);"></div>
+		<div class="sidenav_overlay" onclick="javascript:$(&#39;body&#39;).removeClass(&#39;side_open&#39;);"></div>
+		
+
+		<script>
+$(document).on('click', '#follow-user', function(event) {
+	$(this).toggleClass('btn-primary btn-success');
+	$(this).text("Following");
+	$(this).attr("id", "unfollow-user");
+	$.post('http://localhost/msp/endpoints/follow-user/add', {id: $(this).attr('data-user-id')});
+});
+
+$(function () {
+	setTimeout(function () {
+	    Fingerprint2.get(function (components) {
+	      $.post(ajaxUrl() + '/set-finger-print', {components: components});
+	    })  
+	}, 500);
+});
+
+$(document).on('click', '.comment_input', function(event){
+    $('#login_box').modal('show');
+});
+
+// unfollow user
+$(document).on('click', '#unfollow-user', function(event) {
+	$(this).toggleClass('btn-success btn-primary');
+	$(this).text("Follow");
+	$(this).attr("id", "follow-user");
+	$.post('http://localhost/msp/endpoints/follow-user/remove', {id: $(this).attr('data-user-id')});
+});
+function addToAlbum(id) {
+    getID = $('#albums').attr('data-id');
+    if (!getID) {
+        return false;
+    }
+    var playlists = "";
+    $(".select-albums-list").each(function (index, item) {
+        if ($(this).hasClass('active')) {
+            var albums = $(this).attr('data-id');
+
+            $('#playlists').find('.btn-mat').text("Please wait..");
+            $.get(ajaxUrl() + "/album/add-to-album", {album: albums, id: getID}, function (data) {
+                if (data.status == 200) {
+                    $('#albums_success').modal('show');
+                    $('#albums').modal('hide');
+                    setTimeout(function () {
+                        $('#albums').remove();
+                    }, 200);
+                    setTimeout(function () {
+                        $('#albums_success').modal('hide');
+                    }, 3000);
+                } else if (data.status == 300) {
+                    alert("Please select which album you want to add this song to.")
+                } else {
+                    $('#albums').modal('hide');
+                    setTimeout(function () {
+                        $('#albums').remove();
+                    }, 200);
+                }
+            });
+
+        }
+    });
+
+}
+function likeSong(id, type, element) {
+	if (!id || !type) {
+		return false;
+	}
+	if (type == 'track-page') {
+		if (element.attr('liked')) {
+			element.removeClass('track-liked').removeAttr('liked', 'true');
+			element.find('svg path').attr('fill', '#333');
+			element.find('span').html("Like");
+
+            $('#track_likes_count').attr('data-count',parseInt($('#track_likes_count').attr('data-count')) - 1);
+            $('#track_likes_count').html(parseInt($('#track_likes_count').attr('data-count')));
+
+            if( $('#dislike-track').hasClass('track-disliked') ){
+                $('#dislike-track-text').html("Disliked");
+                $('#dislike-track').addClass('track-disliked');
+            }
+            // $('#like-track').removeAttr('liked');
+            // $('#dislike-track').attr('disliked', 'true');
+
+		} else {
+			element.addClass('track-liked').attr('liked', 'true');
+            $('#dislike-track').removeAttr('disliked');
+			element.find('svg path').attr('fill', '#fff');
+			element.find('span').html("Liked");
+
+            $('#track_likes_count').attr('data-count',parseInt($('#track_likes_count').attr('data-count')) + 1);
+            $('#track_likes_count').html(parseInt($('#track_likes_count').attr('data-count')));
+
+            if( $('#dislike-track').hasClass('track-disliked') ){
+                $('#dislike-track').removeClass('track-disliked');
+                $('#dislike-track-text').html("Dislike");
+
+                $('#track_dislikes_count').attr('data-count',parseInt($('#track_dislikes_count').attr('data-count')) - 1);
+                $('#track_dislikes_count').html(parseInt($('#track_dislikes_count').attr('data-count')));
+            }
+
+		}
+	}
+	$.get('http://localhost/msp/endpoints/like-track', {id: id, type: type});
+}
+
+function dislikeSong(id, type, element) {
+    if (!id || !type) {
+        return false;
+    }
+    if (type == 'track-page') {
+        if (element.attr('disliked')) {
+            element.removeClass('track-disliked').removeAttr('disliked', 'true');
+            element.find('span').html("Dislike");
+
+            $('#track_dislikes_count').attr('data-count',parseInt($('#track_dislikes_count').attr('data-count')) - 1);
+            $('#track_dislikes_count').html(parseInt($('#track_dislikes_count').attr('data-count')));
+
+            if( $('#like-track').hasClass('track-liked') ){
+                $('#like-track-text').html("Liked");
+                $('#like-track').addClass('track-liked');
+            }
+            // $('#like-track').attr('liked', 'true');
+            // $('#dislike-track').removeAttr('disliked');
+
+        } else {
+            element.addClass('track-disliked').attr('disliked', 'true');
+            $('#like-track').removeAttr('liked');
+
+            element.find('span').html("Disliked");
+
+            $('#track_dislikes_count').attr('data-count',parseInt($('#track_dislikes_count').attr('data-count')) + 1);
+            $('#track_dislikes_count').html(parseInt($('#track_dislikes_count').attr('data-count')));
+
+            if( $('#like-track').hasClass('track-liked') ){
+                $('#like-track').removeClass('track-liked');
+                $('#like-track-text').html("Like");
+                $('#like-track svg path').attr('fill','currentColor');
+
+                $('#track_likes_count').attr('data-count',parseInt($('#track_likes_count').attr('data-count')) - 1);
+                $('#track_likes_count').html(parseInt($('#track_likes_count').attr('data-count')));
+            }
+
+        }
+    }
+    $.get('http://localhost/msp/endpoints/dislike-track', {id: id, type: type});
+}
+
+function loadMore(type, get_data) {
+	element = $("#load-more-button");
+	$default_text = element.html();
+	$track_id = 0;
+    views = 0;
+    let v_ids = [];
+	if (type == 'songs') {
+        $last_id = $('.feed_post:last-child').attr('data-id');
+		$append_div = '#user-feed-data';
+	} else if (type == 'recently_played') {
+		$last_id = $('.track_list:last').attr('data-time');
+		$append_div = '#recently_played';
+	} else if (type == 'comments') {
+		$last_id = $('.comment_item:last').attr('comment-id');
+		$append_div = '.comment_list';
+		$track_id = $('.comment_item:last').attr('comment-song-id')
+    } else if (type == 'blog_comments') {
+		$last_id = $('.comment_item:last').attr('comment-id');
+		$append_div = '.comment_list';
+		$track_id = $('.comment_item:last').attr('comment-song-id')
+    } else if (type == 'latest_music' || type == 'top_music') {
+		$last_id = $('#new-music .track_list:last').attr('data-id');
+		$append_div = '#new-music';
+	} else if (type == 'categories') {
+		$last_id = $('.list-recommended:last').attr('data-id');
+		$append_div = 'ul.s_list_songs';
+	} else if (type == 'followers') {
+        $last_id = $('.follower_list:last-child').attr('data-id');
+        $append_div = '#followers';
+    } else if (type == 'followings') {
+        $last_id = $('.following_list:last-child').attr('data-id');
+        $append_div = '#followings';
+    } else if (type == 'songs_search') {
+        $last_id = $('.song_search_list:last-child').attr('data-id');
+        $append_div = '#songs_search_result';
+    } else if (type == 'artists_search') {
+        $last_id = $('.artist_list:last-child').attr('data-id');
+        $append_div = '#artists_search_result';
+    } else if (type == 'albums_search') {
+        $last_id = $('.track_list:last-child').attr('data-id');
+        $append_div = '#albums_search_result';
+    } else if (type == 'playlists_search') {
+        $last_id = $('.playlist-p-list:last-child').attr('data-id');
+        $append_div = '#playlists_search_result';
+    } else if (type == 'store_albums') {
+        $last_id = $('.track_list:last-child').attr('data-id');
+        $append_div = '.store_albums';
+    } else if (type == 'store_songs') {
+        $last_id = $('.song_list:last-child').attr('data-id');
+        $append_div = '.store_songs';
+    } else if (type == 'blogs') {
+        $last_id = $('.blog_list').last().attr('data-id');
+        $append_div = '.blog_articles';
+    } else if (type == 'stations') {
+        $last_id = $('#new-music .track_list:last').attr('data-id');
+        $append_div = '#new-music';
+    }
+    else if(type == 'fame_page'){
+        $last_id = $('#fame_page_result .artist_lists:last').attr('data-id');
+        views   = $('#fame_page_result .artist_lists:last').attr('data_views');
+        $append_div = '#fame_page_result';
+        $('.artist_lists').each(function(i, obj) {
+            v_ids.push($(obj).attr('data_v_id'));
+        });
+    }
+
+
+	if (get_data == 'all' || get_data == 'liked' || get_data == 'spotlight') {
+		$last_id = $('.feed_post:last-child').attr('data-a-id');
+		type = 'activities';
+	}
+	if (get_data == 'playlists') {
+		$last_id = $('.playlist-p-list:last-child').attr('data-id');
+		type = 'playlists';
+	}
+	if (get_data == 'albums') {
+		$last_id = $('.album-p-list:last-child').attr('data-id');
+		type = 'albums';
+	}
+
+    if (get_data == 'stations') {
+        $last_id = $('.track_list:last-child').attr('data-id');
+        type = 'stations';
+    }
+
+    if (get_data == 'albums' && type == 'albums') {
+        $last_id = $('.track_list:last').attr('data-id');
+        type = 'albums';
+    }
+
+	element.text("Please wait..");
+
+    let geners = [];
+    let price = [];
+    let filter_type = null;
+    let current_tag = null;
+    if($('#current_tag').length > 0){
+        current_tag = $('#current_tag').val();
+    }
+    if($('#filter_type').length > 0){
+        filter_type = $('#filter_type').val();
+    }
+    if($('.song_category').length > 0){
+        $('.song_category').each(function(i, obj) {
+            if(this.checked){
+                geners.push($(obj).attr('data-category'));
+            }
+        });
+    }
+    if($( "#slider-range" ).length > 0){
+        price = $("#slider-range").slider("option").values;
+    }
+    let params = {'geners': geners, 'filter_type': filter_type,'current_tag': current_tag, 'price': price};
+
+	$.get(ajaxUrl() + '/load-more/' + type, {id: $last_id, userID: $('#user-id').val(), track_id: $track_id, get_data: get_data,params: params,views:views,v_ids:v_ids}, function(data) {
+		if (data.status == 200 && data.html.length > 0) {
+			$($append_div).append(data.html);
+		} else {
+			$default_text = "No more tracks found";
+			if (type == 'comments' || type == 'blog_comments') {
+				$default_text = "No more comments found";
+			} 
+			if (type == 'all') {
+				$default_text = "No more activities found";
+			} 
+			if (type == 'playlists' || type == 'playlists_search') {
+				$default_text = "No more playlists found";
+			}
+            if (type == 'followers') {
+                $default_text = "No more followers found";
+            }
+            if (type == 'followings') {
+                $default_text = "No more following found";
+            }
+            if (type == 'artists_search' || type == 'fame_page') {
+                $default_text = "No more artists found";
+            }
+            if (type == 'albums_search' || type == 'store_albums') {
+                $default_text = "No more albums found";
+            }
+            if (type == 'blogs_search' || type == 'blogs') {
+                $default_text = "No more articles found";
+            }
+            if (type == 'stations' ) {
+                $default_text = "No more stations found";
+            }
+        }
+		element.html($default_text);
+	});
+}
+
+$(document).on('click', '.amplitude-next', function(event) {
+	console.log($('#current-track').val());
+	
+});
+var is_sent = 0;
+$(function () {
+	var songsObject = [{
+        "name": "",
+        "artist": "",
+        "album": "",
+        "url": "",
+        "cover_art_url": ""
+	}];
+		Amplitude.init({
+	"songs": songsObject,
+    "callbacks": {
+		 'after_play': function(){
+		 	setTimeout(function () {
+		 		var song_seconds = Amplitude.getSongDuration();
+		 		if (song_seconds) {
+		 			$('body').attr('song-duration', song_seconds);
+		 		}
+			 	$('body').addClass('audio_playing');
+			 	$('body').addClass('player_running');
+			 	$('#play-pause').addClass('amplitude-playing');
+		 	}, 100);
+		 },
+		 'after_pause': function(){
+		 	$('body').removeClass('audio_playing');
+		 	$('#play-pause').removeClass('amplitude-playing');
+		 	$('body').removeClass('player_running');
+		 },
+		 'after_stop': function(){
+		 	if (parseInt($('.ss_track_play_pause').attr('data_is_ad')) > 0 && is_sent == 0) {
+		 		is_sent = 1;
+		 		song_id = $('#current-track').attr('value');
+		 		onTimesUp(song_id);
+		 		return false;
+		 	}
+		 	$('body').removeClass('audio_playing');
+		 	$('#play-pause').removeClass('amplitude-playing');
+		 	$('body').removeClass('player_running');
+		 	$('#light-wave').width('0px');
+		 }
+	 }
+});
+
+});
+
+const FULL_DASH_ARRAY = 283;
+const WARNING_THRESHOLD = 10;
+const ALERT_THRESHOLD = 5;
+
+const TIME_LIMIT = 10;
+let timePassed = 0;
+let timeLeft = TIME_LIMIT;
+let timerInterval = null;
+
+function onTimesUp(song_id) {
+	if (typeof wavesurfer != "undefined") {
+		wavesurfer.pause();
+	}
+	if (typeof Amplitude != "undefined") {
+		Amplitude.pause();
+		Amplitude.removeSong(0);
+	}
+	$('#queue-' + song_id).remove();
+	$(".song_controls").css("pointer-events","auto");
+    $(".song_progress").css("pointer-events","auto");
+    $(".song_progress_right").css("pointer-events","auto");
+    $(".ma_player_playlist").css("pointer-events","auto");
+    $("#waveform").css("pointer-events","auto");
+	playSong(song_id,0,'yes');
+	$('body').removeClass('player_running');
+    clearInterval(timerInterval);
+    goToAjaxLink('track/' + song_id);
+}
+
+function startTimer(song_id) {
+  $(".song_controls").css("pointer-events","none");
+  $(".song_progress").css("pointer-events","none");
+  $(".song_progress_right").css("pointer-events","none");
+  $(".ma_player_playlist").css("pointer-events","none");
+  $("#waveform").css("pointer-events","none");
+  timerInterval = setInterval(() => {
+    timePassed = timePassed += 1;
+    timeLeft = TIME_LIMIT - timePassed;
+    if (timeLeft >= 0) {
+    	document.getElementById("base-timer-label").innerHTML = formatTime(
+	      timeLeft
+	    );
+	    setCircleDasharray();
+    }
+    
+    if (timeLeft === 0) {
+    	song_id = "'"+song_id+"'";
+    	$(".pause_btn").replaceWith('<div class="pause_btn" onclick="onTimesUp('+song_id+')"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#f98f1d" d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M8,8L13,12L8,16M14,8H16V16H14"/></svg></div>');
+    }
+  }, 1000);
+}
+
+function formatTime(time) {
+  const minutes = Math.floor(time / 60);
+  let seconds = time % 60;
+
+  if (seconds < 10) {
+    seconds = `0${seconds}`;
+  }
+
+  return `${minutes}:${seconds}`;
+}
+
+function calculateTimeFraction() {
+  const rawTimeFraction = timeLeft / TIME_LIMIT;
+  return rawTimeFraction - (1 / TIME_LIMIT) * (1 - rawTimeFraction);
+}
+
+function setCircleDasharray() {
+  const circleDasharray = `${(
+    calculateTimeFraction() * FULL_DASH_ARRAY
+  ).toFixed(0)} 283`;
+  document
+    .getElementById("base-timer-path-remaining")
+    .setAttribute("stroke-dasharray", circleDasharray);
+}
+
+var songIndex = [];
+function playSong(id,audio_ad_id = 0,skip = '') {
+	if (typeof setPlayerInterval != 'undefined') {
+		clearInterval(setPlayerInterval);
+	}
+	if (!$('body').attr('first-play')) {
+		//Amplitude.removeSong(0);
+		$('body').attr('first-play', "true");
+				
+	}
+
+	if (Amplitude.getActiveSongMetadata().id) {
+		if (Amplitude.getActiveSongMetadata().id == id) {
+			Amplitude.play();
+			if ($('#page').attr('data-page') != 'track') {
+				goToAjaxLink('track/' + Amplitude.getActiveSongMetadata().id);
+			}
+			// $('#container_content').append('<a href="#" id="redirect-user" data-load="track/' + Amplitude.getActiveSongMetadata().id + '"></a>');
+			// $('#redirect-user').trigger('click');
+			if ($('body').attr('first-play')) {
+				if (skip != 'yes') {
+					return false;
+				}
+			}
+			
+		}
+	}
+
+	$('#bar_loading').show().animate({width:20 + 80 * Math.random() + "%"}, 200);
+	$.get('http://localhost/msp/endpoints/get-song-info', {id: id,audio_ad_id: audio_ad_id}, function(data) {
+		if (data.age == true) {
+			$('#age-restricted').modal('show');
+			$('#bar_loading').animate({width:"100%"}, 200).fadeOut(300, function() {
+	           $(this).width("0");
+	        });
+			return false;
+		}
+		$("#light-wave").stop(true);
+		$('.waveform-small').html("");
+		$('.ssong_comments.small-waves').addClass('hidden');
+		$('.mus_feeds_bodycoms').addClass('hidden');
+		$('.post-actions').addClass('hidden');
+		if (data.status == 200) {
+			$('body').attr('song-duration', data.duration);
+			if ($('.feed_post[data-id="' + data.songID + '"]:first').length > 0) {
+				if (data.songWaves.length > 0) {
+					$('.feed_post[data-id="' + data.songID + '"]:first').find('.waveform-small').html(data.songWaves);
+					$('#light-wave img').width($('#dark-wave').width() + 'px');
+				}
+				$('.feed_post[data-id="' + data.songID + '"]:first').find('.art-info').removeClass('hidden');
+				$('.feed_post[data-id="' + data.songID + '"]:first').find('.post-actions').removeClass('hidden');
+				$('.feed_post[data-id="' + data.songID + '"]:first').find('.ssong_comments').removeClass('hidden');
+				$('.feed_post[data-id="' + data.songID + '"]:first').find('.mus_feeds_bodycoms').removeClass('hidden');
+			    $('.feed_post[data-id="' + data.songID + '"]:first').find('.comment_list').html(data.comments);
+			    $('.feed_post[data-id="' + data.songID + '"]:first').find('.comment-waves').html(data.waves);
+				$('html,body').animate({
+			        scrollTop: $('.feed_post[data-id="' + data.songID + '"]:first').offset().top
+			    }, 'slow');
+			}
+			
+			$('body').addClass('player_running');
+		    if ($('#queue-' + id).length == 0) {
+				var songObject = {
+			        "name": data.songTitle,
+			        "artist": data.artistName,
+			        "album": data.albumName,
+			        "url": data.songURL,
+			        "cover_art_url": data.coverURL,
+			        "id": id,
+			        "u_id": data.songID,
+			        "data_load": 'track/' + id,
+			        "href": data.songPageURL,
+			        "duration": data.songDuration,
+			        "purchase": data.purchase,
+			        'price': data.price,
+			        "is_favoriated": data.is_favoriated,
+			        "showDemo": data.showDemo
+				};
+		    	var songIndex = Amplitude.addSong(songObject);
+				data.qID = songIndex;
+				songObject.qID = songIndex;
+				Amplitude.playSongAtIndex(songIndex);
+                if (data.is_ad != 'yes') {
+                    addToQueue(data, songObject, false);
+                    addView(data.songID);
+
+                }
+				$('.amplitude-song-container').removeClass('amplitude-playing');
+				//$('.amplitude-song-container[amplitude-song-index="' + songIndex + '"]').addClass('amplitude-playing');
+                $('#queue-list').find('.amplitude-song-container').last().addClass('amplitude-playing');
+		    } else { 
+		    	songIndex = $('#queue-' + id).attr('amplitude-song-index');
+		    	Amplitude.playSongAtIndex(songIndex);
+		    }
+		    $('.player-song-url').attr('href', data.songPageURL);
+			
+		    if (data.data_load != '') {
+		    	Amplitude.getActiveSongMetadata().data_load = '';
+		    	$('.player-song-url').attr('data-load', '');
+		    }
+		    else{
+		    	$('.player-song-url').attr('data-load', 'track/' + id);
+		    }
+			
+			$('#song-fav-button').html(data.favorite_button);
+			$('.ma_player').removeClass('closed');
+			if (data.is_ad == 'yes') {
+				document.querySelector(".pause_btn").innerHTML = `
+				<div class="base-timer">
+				  <svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><g class="base-timer__circle"><circle class="base-timer__path-elapsed" cx="50" cy="50" r="45"></circle><path id="base-timer-path-remaining" stroke-dasharray="283" class="base-timer__path-remaining" d="M 50, 50 m -45, 0 a 45,45 0 1,0 90,0 a 45,45 0 1,0 -90,0"></path></g></svg>
+				  <span id="base-timer-label" class="base-timer__label">${formatTime(
+				    timeLeft
+				  )}</span><p>to Skip Ad</p>
+				</div>
+				`;
+				startTimer(id);
+				$('.ss_track_play_pause').attr('data_is_ad', 1);
+			}
+		} else {
+			alert("Can't load the song, please try again later.")
+		}
+		$('#bar_loading').animate({width:"100%"}, 200).fadeOut(300, function() {
+           $(this).width("0");
+        });
+	});
+}
+
+function addToQueue(data, object, fetch) {
+    if (fetch == false) {
+        html = '<div class="song amplitude-song-container amplitude-play-pause" id="queue-' + object.id + '" onclick="playSong(\'' + object.id + '\')" amplitude-song-index="' + object.qID + '"><div class="song_icon_container"><img class="now-playing" src="'+ object.cover_art_url+'"/></div><span class="song_duration">' + object.duration + '</span><div class="song_meta_data"><span class="song_title">' + object.name + '</span><span class="song_artist">' + object.artist + '</span></div></div>';
+        $('#queue-list').append(html);
+    }
+    setTimeout(function () {
+        $.post('http://localhost/msp/endpoints/add-queue', {qdata: object});
+    }, 2000);
+}
+
+function registerCommentreplay(value, id, commentid, event, element) {
+    if (!value || !id || !commentid) {
+        return false;
+    }
+    if(event.which == 13) {
+        element.attr('disabled', "true");
+        $.post('http://localhost/msp/endpoints/register-comment-replay', {id: id, value: value, cid:commentid}, function(data) {
+            if (data.status == 300) {
+                $('#login_box').modal('show');
+            }
+            if (data.status == 200) {
+                $('.no-comments-found').remove();
+                $('.no-track-found').remove();
+                element.val("");
+                $('.comment-replay-list-' + commentid).append(data.html);
+                //window.init_emojioneArea();
+            }
+            element.removeAttr('disabled');
+        });
+    }
+
+}
+
+function deleteCommentReplay(element) {
+    mainElement = $('#delete-comment-replay');
+    comment_id = mainElement.attr('data-id');
+    mode = mainElement.attr('data-mode');
+    if (!comment_id) {
+        return false;
+    }
+    $('#delete-comment-replay').modal('hide');
+    $('.comment-replay-' + comment_id).slideUp('200', function () {
+        $(this).remove();
+    });
+    $.get('http://localhost/msp/endpoints/delete-comment-replay', {id: comment_id});
+}
+
+function registerComment(value, id, event, element) {
+	if (!value || !id) {
+		return false;
+	}
+    //fix
+	if(event.which == 13) {
+		element.attr('disabled', "true");
+		time = "";
+		timeSeconds = "";
+		if (Amplitude.getActiveSongMetadata().id == id) {
+			time = Amplitude.audio().currentTime;
+		    timeSeconds = $('.amplitude-song-played-progress').val();
+		}
+		wave = 0;
+		if ($('#light-wave').val()) {
+			wave = $('#light-wave').val();
+		}
+        $.post('http://localhost/msp/endpoints/register-comment', {id: id, value: value, timePercentage: timeSeconds, time: time, wave: wave}, function(data) {
+        	if (data.status == 300) {
+                $('#login_box').modal('show');
+            }
+        	if (data.status == 200) {
+        		$('.no-comments-found').remove();
+        		$('.no-track-found').remove();
+        		element.val("");
+        		$('.comment-waves').append(data.comment_wave);
+        		$('.comment-list-' + id).prepend(data.html);
+                //window.init_emojioneArea();
+        	}
+        	element.removeAttr('disabled');
+        });
+    }
+	
+} 
+
+$(document).on('mouseover', '.comment-on-wave', function(event) {
+	$(this).find('.comment-on-wave-data').css({
+		display: 'block',
+	});
+});
+$(document).on('mouseleave', '.comment-on-wave', function(event) {
+	$(this).find('.comment-on-wave-data').css({
+		display: 'none',
+	});
+});
+
+$('.comment-on-wave-data').on('hover', function(event) {
+	
+});
+
+function goToWave(secnods) {
+	setTimeout(function () {
+		Amplitude.skipTo(secnods, Amplitude.getActiveSongMetadata().qID);
+	}, 200);
+}
+
+function goTo(element) {
+	mainElement = element.parents('li');
+
+	if (Amplitude.getActiveSongMetadata().id != mainElement.attr('comment-song-id')) {
+		playSong(mainElement.attr('song-id'));
+	} 
+
+	setTimeout(function () {
+		Amplitude.skipTo(mainElement.attr('comment-seconds'), Amplitude.getActiveSongMetadata().qID);
+	}, 200);
+}
+function BloglikeComment(comment_id) {
+    if (!comment_id) {
+        return false;
+    }
+    var clickval = $('.comment_like[data-comment-id="'+comment_id+'"]').attr("onclick");
+    $('.comment_like[data-comment-id="'+comment_id+'"]').attr('onclick',clickval.replace('likeComment', 'UnlikeComment') );
+    $('.comment_like[data-comment-id="'+comment_id+'"] path').attr('fill','#e62117');
+    $.get('http://localhost/msp/endpoints/like-blog-comment', {id: comment_id});
+    let c = parseInt($('#comment_like_'+comment_id).html());
+    $('#comment_like_'+comment_id).html( c + 1);
+}
+function BlogUnlikeComment(comment_id) {
+    if (!comment_id) {
+        return false;
+    }
+    var clickval = $('.comment_like[data-comment-id="'+comment_id+'"]').attr("onclick");
+    $('.comment_like[data-comment-id="'+comment_id+'"]').attr('onclick',clickval.replace('UnlikeComment', 'likeComment') );
+    $('.comment_like[data-comment-id="'+comment_id+'"] path').attr('fill','currentColor');
+    $.get('http://localhost/msp/endpoints/unlike-blog-comment', {id: comment_id});
+    let c = parseInt($('#comment_like_'+comment_id).html());
+    $('#comment_like_'+comment_id).html( c - 1);
+}
+function BlogUnReportComment(comment_id,user_id) {
+    if (!comment_id) {
+        return false;
+    }
+    $('.blog_comment_report[data-comment-id="'+comment_id+'"]').show();
+    $('.blog_comment_report[data-comment-id="'+comment_id+'"]').css({'visibility':'inherit'});
+    $('.blog_comment_unreport[data-comment-id="'+comment_id+'"]').hide();
+    $.get(ajaxUrl() + '/blog-unreport-comment', {id: comment_id,uid: user_id}, function (data) {
+        if (data.status == 200) {
+            $('#blog_comment_unreported').modal('show');
+            setTimeout(function () {
+                $('#blog_comment_unreported').modal('hide');
+            }, 3000);
+        }
+    });
+}
+function deleteComment(element) {
+	mainElement = $('#delete-comment');
+    comment_id = mainElement.attr('data-id');
+    mode = mainElement.attr('data-mode');
+	if (!comment_id) {
+		return false;
+	}
+	$('#delete-comment').modal('hide');
+	$('.comment-' + comment_id).slideUp('200', function () {
+		$(this).remove();
+	});
+	if(mode == 'blog'){
+        $.get('http://localhost/msp/endpoints/delete-blog-comment', {id: comment_id});
+    }else{
+        $.get('http://localhost/msp/endpoints/delete-comment', {id: comment_id});
+    }
+}
+
+function likeComment(comment_id) {
+    if (!comment_id) {
+        return false;
+    }
+    var clickval = $('.comment_like[data-comment-id="'+comment_id+'"]').attr("onclick");
+    $('.comment_like[data-comment-id="'+comment_id+'"]').attr('onclick',clickval.replace('likeComment', 'UnlikeComment') );
+    $('.comment_like[data-comment-id="'+comment_id+'"] path').attr('fill','#e62117');
+    $.get('http://localhost/msp/endpoints/like-comment', {id: comment_id});
+    let c = parseInt($('#comment_like_'+comment_id).html());
+    $('#comment_like_'+comment_id).html( c + 1);
+}
+
+function UnlikeComment(comment_id) {
+    if (!comment_id) {
+        return false;
+    }
+    var clickval = $('.comment_like[data-comment-id="'+comment_id+'"]').attr("onclick");
+    $('.comment_like[data-comment-id="'+comment_id+'"]').attr('onclick',clickval.replace('UnlikeComment', 'likeComment') );
+    $('.comment_like[data-comment-id="'+comment_id+'"] path').attr('fill','currentColor');
+    $.get('http://localhost/msp/endpoints/unlike-comment', {id: comment_id});
+
+    let c = parseInt($('#comment_like_'+comment_id).html());
+    $('#comment_like_'+comment_id).html( c - 1);
+
+}
+
+function UnReportComment(comment_id,user_id) {
+    if (!comment_id) {
+        return false;
+    }
+    $('.comment_report[data-comment-id="'+comment_id+'"]').show();
+    $('.comment_report[data-comment-id="'+comment_id+'"]').css({'visibility':'inherit'});
+    $('.comment_unreport[data-comment-id="'+comment_id+'"]').hide();
+
+    $.get(ajaxUrl() + '/unreport-comment', {id: comment_id,uid: user_id}, function (data) {
+        if (data.status == 200) {
+            $('#comment_unreported').modal('show');
+            setTimeout(function () {
+                $('#comment_unreported').modal('hide');
+            }, 3000);
+        }
+    });
+
+}
+
+function UnReportTrack(track_id,user_id) {
+    if (!track_id) {
+        return false;
+    }
+    $('.track_report[data-track-id="'+track_id+'"]').show();
+    $('.track_report[data-track-id="'+track_id+'"]').css({'visibility':'inherit'});
+    $('.track_unreport[data-track-id="'+track_id+'"]').hide();
+
+    $.get(ajaxUrl() + '/unreport-track', {'id': track_id,'uid': user_id}, function (data) {
+        if (data.status == 200) {
+            $('#track_unreported').modal('show');
+            setTimeout(function () {
+                $('#track_unreported').modal('hide');
+            }, 3000);
+        }
+    });
+
+}
+
+function purchaseTrack(id, element) {
+	if (!id) {
+		return false;
+	}
+    var title = element.attr("data-title");
+    var price = element.attr("data-price");
+
+    $('#btn-paypal-payment').attr('data-id',id);
+    $('#btn-stripe-payment').attr('data-id',id);
+    $('#btn-bank-payment').attr('data-id',id);
+
+    $('#btn-paypal-payment').attr('data-title',title);
+    $('#btn-stripe-payment').attr('data-title',title);
+    $('#btn-bank-payment').attr('data-title',title);
+
+    $('#btn-paypal-payment').attr('data-price',price);
+    $('#btn-stripe-payment').attr('data-price',price);
+    $('#btn-bank-payment').attr('data-price',price);
+
+    getText = element.text();
+    element.attr('disabled', 'true');
+    element.text("Please wait..");
+    $.get('http://localhost/msp/endpoints/get-payment-model', {id: id}, function (data) {
+        if (data.status == 200) {
+            $('#login_box').modal('hide');
+            $('#payment_modal').modal('show');
+            element.text(getText);
+            element.removeAttr('disabled');
+        } else if (data.status == 300) {
+            $('#login_box').modal('show');
+            element.text(getText);
+            element.removeAttr('disabled');
+            $('#purchase-song').modal('hide');
+        } else {
+            element.text(getText);
+            element.removeAttr('disabled');
+            alert('Error found while creating the payment, please try again later.');
+        }
+    });
+}
+
+function purchaseTrackPaypal(element) {
+    var id = element.attr("data-id");
+    if (!id) {
+        return false;
+    }
+    getText = element.text();
+    element.attr('disabled', 'true');
+    element.text("Please wait..");
+    $.get('http://localhost/msp/endpoints/purchase', {id: id}, function (data) {
+    	if (data.status == 200) {
+    		location.href = data.url;
+    	} else if (data.status == 300) {
+    		$('#login_box').modal('show');
+    		element.text(getText);
+    		element.removeAttr('disabled');
+    		$('#purchase-song').modal('hide');
+    	} else {
+    		element.text(getText);
+    		element.removeAttr('disabled');
+    		alert('Error found while creating the payment, please try again later.');
+    	}
+    });
+}
+function registerBlogComment(value, id, event, element) {
+	if (!value || !id) {
+		return false;
+	}
+	if(event.which == 13) {
+		element.attr('disabled', "true");
+        $.post('http://localhost/msp/endpoints/register-blog-comment', {id: id, value: value}, function(data) {
+        	if (data.status == 300) {
+                $('#login_box').modal('show');
+            }
+        	if (data.status == 200) {
+        		$('.no-comments-found').remove();
+        		$('.no-track-found').remove();
+        		element.val("");
+        		$('.comment-list-' + id).prepend(data.html);
+        	}
+        	element.removeAttr('disabled');
+        });
+    }
+	
+} 
+function TrackReadMore() {
+    var dots = document.getElementById("dots");
+    var moreText = document.getElementById("more");
+    var btnText = document.getElementById("btn-track-load-more");
+
+    if (dots.style.display === "none") {
+        dots.style.display = "inline";
+        btnText.innerHTML = "Read more";
+        moreText.style.display = "none";
+    } else {
+        dots.style.display = "none";
+        btnText.innerHTML = "Read less";
+        moreText.style.display = "inline";
+    }
+}
+
+function purchaseTrackStripe(element) {
+    var id = element.attr("data-id");
+    if (!id) {
+        return false;
+    }
+    var stripe = Stripe('');
+    var title = element.attr("data-title");
+    var price = element.attr("data-price");
+    getText = element.text();
+    element.attr('disabled', 'true');
+    element.text("Please wait..");
+    var fd = new FormData();
+    fd.append('description', title);
+    fd.append('price', price);
+    fd.append('payType', 'track_purchase');
+    fd.append('trackID', id);
+    fd.append('hash_id', $('.main_session').val() );
+    fetch('http://localhost/msp/endpoints/new-stripe', {
+        method: 'POST',
+        body : fd
+    }).then(function(response) {
+        return response.json();
+    }).then(function(session) {
+        return stripe.redirectToCheckout({ sessionId: session.id });
+    }).then(function(result) {
+        // If redirectToCheckout fails due to a browser or network
+        // error, you should display the localized error message to your
+        // customer using error.message.
+        if (result.error) {
+            alert(result.error.message);
+        }
+    })
+        .catch(function(error) {
+            console.error('Error:', error);
+        });
+}
+
+function _purchaseTrackStripe(element) {
+    var id = element.attr("data-id");
+    if (!id) {
+        return false;
+    }
+    var title = element.attr("data-title");
+    var price = element.attr("data-price");
+
+    getText = element.text();
+    element.attr('disabled', 'true');
+    element.text("Please wait..");
+
+    let script = document.createElement('script');
+    script.src = 'https://checkout.stripe.com/checkout.js';
+    script.type = 'text/javascript';
+    script.onload = script.onreadystatechange = function() {
+        if ( !this.readyState || this.readyState === "loaded" || this.readyState === "complete" ) {
+            if (typeof StripeCheckout !== 'undefined'){
+                let handler = StripeCheckout.configure({
+                    key: '',
+                    image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+                    locale: 'english',
+                    token: function (token) {
+                        $.post('http://localhost/msp/endpoints/stripe', {
+                            stripeToken: token.id,
+                            description: title,
+                            price: price,
+                            payType: 'track_purchase',
+                            trackID: id
+                        }, function (data) {
+                            if (data.status == 200) {
+                                window.location = data.url;
+                            }else{
+                                alert(data.message);
+                            }
+                        });
+                    }
+                });
+                handler.open({
+                    name: 'Pranjali',
+                    description: title,
+                    currency: 'USD',
+                    amount: price * 100,
+                    opened: function () {
+
+                    },
+                    closed: function () {
+                        element.text("Credit Card");
+                        element.attr('disabled', 'false');
+                    }
+                });
+            }
+        }
+    };
+    let head  = document.getElementsByTagName('head')[0];
+    head.appendChild(script);
+
+    $(window).on('popstate', function() {
+        handler.close();
+
+    });
+}
+
+function purchaseTrackBank(element) {
+    var id = element.attr("data-id");
+    if (!id) {
+        return false;
+    }
+    var title = element.attr("data-title");
+    var price = element.attr("data-price");
+
+
+    $('#btn-upload-receipt').attr('data-id', id);
+    $('#btn-upload-receipt').attr('data-mode', 'track');
+    $('#btn-upload-receipt').attr('data-title', title);
+    $('#btn-upload-receipt').attr('data-price', price);
+
+   // $('#bank_transfer_price').text('$' + getPrice());
+    //$('#bank_transfer_description').text(getDescription());
+    $('#receipt_img_path').html('');
+    $('#receipt_img_preview').attr('src', '');
+    $('.bank_transfer_modal').removeClass('up_rec_img_ready, up_rec_active');
+    $('.bank_transfer_modal').modal('show');
+}
+
+
+function purchaseAlbum(id, element) {
+    if (!id) {
+        return false;
+    }
+    getText = element.text();
+    element.attr('disabled', 'true');
+    element.text("Please wait..");
+    $('#buy_album_modal').attr('data-id', id);
+    $('#buy_album_modal').attr('data_price', element.attr('data_price'));
+    $('#buy_album_modal').modal('show');
+    element.text(getText);
+    element.removeAttr('disabled');
+}
+
+function purchaseAlbumPaypal(element) {
+    getText = element.text();
+    element.text("Please wait..");
+    element.attr('disabled', 'true');
+    id = $('#buy_album_modal').attr('data-id');
+    $.get('http://localhost/msp/endpoints/purchase-album', {id: id,type:'paypal'}, function (data) {
+        if (data.status == 200) {
+            location.href = data.url;
+        } else if (data.status == 300) {
+            $('#login_box').modal('show');
+            element.text(getText);
+            element.removeAttr('disabled');
+            $('#purchase-song').modal('hide');
+        } else {
+            element.text(getText);
+            element.removeAttr('disabled');
+            alert('Error found while creating the payment, please try again later.');
+        }
+    });
+}
+
+function purchaseAlbumBank(element) {
+
+    var title = "Buy Album";
+    var price = $('#buy_album_modal').attr('data_price');
+    id = $('#buy_album_modal').attr('data-id');
+
+
+    $('#btn-upload-receipt').attr('data-id', id);
+    $('#btn-upload-receipt').attr('data-mode', 'album');
+    $('#btn-upload-receipt').attr('data-title', title);
+    $('#btn-upload-receipt').attr('data-price', price);
+
+    // $('#bank_transfer_price').text('$' + getPrice());
+    //$('#bank_transfer_description').text(getDescription());
+    $('#receipt_img_path').html('');
+    $('#receipt_img_preview').attr('src', '');
+    $('.bank_transfer_modal').removeClass('up_rec_img_ready, up_rec_active');
+    $('#buy_album_modal').modal('hide');
+    $('.bank_transfer_modal').modal('show');
+}
+
+function purchaseAlbumStripe(element) {
+    var title = "Buy Album";
+    var price = $('#buy_album_modal').attr('data_price');
+    id = $('#buy_album_modal').attr('data-id');
+
+    getText = element.text();
+    element.attr('disabled', 'true');
+    element.text("Please wait..");
+
+    let script = document.createElement('script');
+    script.src = 'https://checkout.stripe.com/checkout.js';
+    script.type = 'text/javascript';
+    script.onload = script.onreadystatechange = function() {
+        if ( !this.readyState || this.readyState === "loaded" || this.readyState === "complete" ) {
+            if (typeof StripeCheckout !== 'undefined'){
+                let handler = StripeCheckout.configure({
+                    key: '',
+                    image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+                    locale: 'english',
+                    token: function (token) {
+                        $.post('http://localhost/msp/endpoints/purchase-album?type=stripe&id='+id, {
+                            stripeToken: token.id,
+                            description: title,
+                            price: price,
+                            payType: 'album',
+                            trackID: ''
+                        }, function (data) {
+                            if (data.status == 200) {
+                                window.location = data.url;
+                            }else{
+                                alert(data.message);
+                            }
+                        });
+                    }
+                });
+                handler.open({
+                    name: 'Pranjali',
+                    description: title,
+                    currency: 'USD',
+                    amount: price * 100,
+                    opened: function () {
+
+                    },
+                    closed: function () {
+                        element.text("Credit Card");
+                        element.attr('disabled', 'false');
+                    }
+                });
+            }
+        }
+    };
+    let head  = document.getElementsByTagName('head')[0];
+    head.appendChild(script);
+
+    $(window).on('popstate', function() {
+        handler.close();
+
+    });
+}
+
+function getUrl() {
+	var url = window.location.href;
+	return url.replace("http://localhost/msp", "");
+}
+
+function ajaxRedirect(url) {
+	if (!url) {
+		url = getUrl();
+	}
+	goToAjaxLink(url);
+}
+
+function favorite(id, element) {
+	if (element.hasClass('is_favoriated')) {
+		element.html('<path fill="#fff" d="M17,18L12,15.82L7,18V5H17M17,3H7A2,2 0 0,0 5,5V21L12,18L19,21V5C19,3.89 18.1,3 17,3Z" />');
+		element.removeClass("is_favoriated");
+		if (Amplitude.getActiveSongMetadata()) {
+			Amplitude.getActiveSongMetadata().is_favoriated = false;
+		}
+	} else {
+		element.addClass("is_favoriated");
+		element.html('<path fill="#ff9900" d="M17,3H7A2,2 0 0,0 5,5V21L12,18L19,21V5C19,3.89 18.1,3 17,3Z" />');
+		if (Amplitude.getActiveSongMetadata()) {
+			Amplitude.getActiveSongMetadata().is_favoriated = true;
+		}
+	}
+
+	$.get('http://localhost/msp/endpoints/favorite-track', {id: id});
+}
+
+function addToLists(id) {
+	getID = $('#playlists').attr('data-id');
+	if (!getID) {
+		return false;
+	}
+	var playlists = "";
+	$(".select-playlist-list").each(function (index, item) {
+		if ($(this).hasClass('active')) {
+			 playlists += $(this).attr('data-id') + ",";
+		}
+	});
+	if (playlists) {
+		$('#playlists').find('.btn-mat').text("Please wait..");
+		$.get(ajaxUrl() + "/playlist/add-to-playlist", {playlists: playlists, id: getID}, function (data) {
+			if (data.status == 200) {
+				$('#playlists').modal('hide');
+				setTimeout(function () {
+					$('#playlists').remove();
+				}, 200);
+			} else if (data.status == 300) {
+				alert("Please select which playlist you want to add this song to.")
+			} else {
+				$('#playlists').modal('hide');
+				setTimeout(function () {
+					$('#playlists').remove();
+				}, 200);
+			}
+		});
+	}
+}
+
+function blockUser(id, username, type) {
+	if (!id || !username) {
+		return false;
+	}
+	if (!confirm("Are you sure you want to block this user")) {
+		return false;
+	}
+	$.get('http://localhost/msp/endpoints/block-user/' + type, {id: id}, function (data) {
+		goToAjaxLink('user/' + username);
+	});
+}
+
+$(document).on('click', '#night_mode_toggle', function(event) {
+    mode = $(this).attr('data-mode');
+    $.post('http://localhost/msp/endpoints/?mode=' + mode, {}, function(data, textStatus, xhr) { /* pass */ });
+    if (mode !== 'night') {
+        $('body').append('<link rel="stylesheet" href="http://localhost/msp/themes/volcano/css/day.style.css" id="night-mode-css">');
+        $('#night_mode_toggle').attr('data-mode', 'night');
+        $('.switch .txt').text('Night mode');
+        $('.head_logo img').attr('src', 'http://localhost/msp/themes/volcano/img/logo-white.png');
+                    $('#dark-wave').css({'opacity':'0.5'});
+                $('#light-wave').css({'border-right':'1px solid rgb(191, 191, 191)'});
+    } else {
+        $('#night-mode-css').remove();
+        $('#night_mode_toggle').attr('data-mode', 'day');
+        $('.switch .txt').text('Day mode');
+        $('.head_logo img').attr('src', 'http://localhost/msp/themes/volcano/img/logo.png');
+                    $('#dark-wave').css({'opacity':'inherit'});
+                $('#light-wave').css({'border-right':'1px solid rgb(71, 71, 71)'});
+    }
+
+
+});
+
+$(document).ready(function() {
+    FastClick.attach(document.body);
+});
+
+function hide_announcement(id){
+    if (!id) { return false; }
+    $("#announcement-"+id).slideUp('fast',function(){
+        $(this).remove();
+        $.post('http://localhost/msp/endpoints/user/hide-announcement', {id: id}, function(data, textStatus, xhr) { /* pass */ });
+    })
+}
+</script>		<script src="./Discover_files/fingerprint2.min.js.download"></script>
+		<script src="./Discover_files/jquery.form.min.js.download"></script>
+		<script src="./Discover_files/popper.min.js.download"></script>
+		<script src="./Discover_files/bootstrap.min.js.download"></script>
+		<script src="./Discover_files/owl.carousel.min.js.download"></script>
+		<script src="./Discover_files/simplebar.min.js.download"></script>
+		<script src="./Discover_files/amplitude.min.js.download"></script>
+		<script src="./Discover_files/script.js.download"></script>
+		<script src="./Discover_files/Chart.min.js.download"></script>
+		<script src="./Discover_files/highcharts.js.download"></script>
+		<script src="./Discover_files/footer.js.download"></script>
+		<script src="./Discover_files/bootstrap-select.min.js.download"></script>
+		<script type="text/javascript" language="javascript" src="./Discover_files/jquery.dataTables.min.js.download"></script>
+		<script type="text/javascript" language="javascript" src="./Discover_files/dataTables.bootstrap4.min.js.download"></script>
+		<script src="./Discover_files/sweetalert2.js.download"></script>
+		<script src="./Discover_files/bootstrap-toggle.min.js.download"></script>
+		<input type="hidden" class="main_session" value="752850d2570756cdea4c260de647cec96f3b136b">
+        <script type="text/javascript">
+    (function (factory) {
+        if (typeof define === 'function' && define.amd) {
+            // AMD. Register as an anonymous module.
+            define(['jquery'], factory);
+        } else {
+            // Browser globals
+            factory(jQuery);
+        }
+    }(function ($) {
+        $.timeago = function(timestamp) {
+            if (timestamp instanceof Date) {
+                return inWords(timestamp);
+            } else if (typeof timestamp === "string") {
+                return inWords($.timeago.parse(timestamp));
+            } else if (typeof timestamp === "number") {
+                return inWords(new Date(timestamp));
+            } else {
+                return inWords($.timeago.datetime(timestamp));
+            }
+        };
+        var $t = $.timeago;
+
+        $.extend($.timeago, {
+            settings: {
+                refreshMillis: 60000,
+                allowPast: true,
+                allowFuture: false,
+                localeTitle: false,
+                cutoff: 0,
+                strings: {
+                    prefixAgo: null,
+                    prefixFromNow: null,
+                    suffixAgo: "ago",
+                    suffixFromNow: "from now",
+                    inPast: "any moment now",
+                    seconds: "Just now",
+                    minute: "about a minute ago",
+                    minutes: "%d minutes ago",
+                    hour: "about an hour ago",
+                    hours: "%d hours ago",
+                    day: "a day ago",
+                    days: "%d days ago",
+                    month: "about a month ago",
+                    months: "%d months ago",
+                    year: "about a year ago",
+                    years: "%d years ago",
+                    wordSeparator: " ",
+                    numbers: []
+                }
+            },
+
+            inWords: function(distanceMillis) {
+                if(!this.settings.allowPast && ! this.settings.allowFuture) {
+                    throw 'timeago allowPast and allowFuture settings can not both be set to false.';
+                }
+
+                var $l = this.settings.strings;
+                var prefix = $l.prefixAgo;
+                var suffix = $l.suffixAgo;
+                if (this.settings.allowFuture) {
+                    if (distanceMillis < 0) {
+                        prefix = $l.prefixFromNow;
+                        suffix = $l.suffixFromNow;
+                    }
+                }
+
+                if(!this.settings.allowPast && distanceMillis >= 0) {
+                    return this.settings.strings.inPast;
+                }
+
+                var seconds = Math.abs(distanceMillis) / 1000;
+                var minutes = seconds / 60;
+                var hours = minutes / 60;
+                var days = hours / 24;
+                var years = days / 365;
+
+                function substitute(stringOrFunction, number) {
+                    var string = $.isFunction(stringOrFunction) ? stringOrFunction(number, distanceMillis) : stringOrFunction;
+                    var value = ($l.numbers && $l.numbers[number]) || number;
+                    return string.replace(/%d/i, value);
+                }
+
+                var words = seconds < 45 && substitute($l.seconds, Math.round(seconds)) ||
+                    seconds < 90 && substitute($l.minute, 1) ||
+                    minutes < 45 && substitute($l.minutes, Math.round(minutes)) ||
+                    minutes < 90 && substitute($l.hour, 1) ||
+                    hours < 24 && substitute($l.hours, Math.round(hours)) ||
+                    hours < 42 && substitute($l.day, 1) ||
+                    days < 30 && substitute($l.days, Math.round(days)) ||
+                    days < 45 && substitute($l.month, 1) ||
+                    days < 365 && substitute($l.months, Math.round(days / 30)) ||
+                    years < 1.5 && substitute($l.year, 1) ||
+                    substitute($l.years, Math.round(years));
+
+                var separator = $l.wordSeparator || "";
+                if ($l.wordSeparator === undefined) { separator = " "; }
+
+                    return $.trim([prefix, words].join(separator));
+
+
+            },
+
+            parse: function(iso8601) {
+                var s = $.trim(iso8601);
+                s = s.replace(/\.\d+/,""); // remove milliseconds
+                s = s.replace(/-/,"/").replace(/-/,"/");
+                s = s.replace(/T/," ").replace(/Z/," UTC");
+                s = s.replace(/([\+\-]\d\d)\:?(\d\d)/," $1$2"); // -04:00 -> -0400
+                s = s.replace(/([\+\-]\d\d)$/," $100"); // +09 -> +0900
+                return new Date(s);
+            },
+            datetime: function(elem) {
+                var iso8601 = $t.isTime(elem) ? $(elem).attr("datetime") : $(elem).attr("title");
+                return $t.parse(iso8601);
+            },
+            isTime: function(elem) {
+                // jQuery's `is()` doesn't play well with HTML5 in IE
+                return $(elem).get(0).tagName.toLowerCase() === "time"; // $(elem).is("time");
+            }
+        });
+
+        // functions that can be called via $(el).timeago('action')
+        // init is default when no action is given
+        // functions are called with context of a single element
+        var functions = {
+            init: function(){
+                var refresh_el = $.proxy(refresh, this);
+                refresh_el();
+                var $s = $t.settings;
+                if ($s.refreshMillis > 0) {
+                    this._timeagoInterval = setInterval(refresh_el, $s.refreshMillis);
+                }
+            },
+            update: function(time){
+                var parsedTime = $t.parse(time);
+                $(this).data('timeago', { datetime: parsedTime });
+                if($t.settings.localeTitle) $(this).attr("title", parsedTime.toLocaleString());
+                refresh.apply(this);
+            },
+            updateFromDOM: function(){
+                $(this).data('timeago', { datetime: $t.parse( $t.isTime(this) ? $(this).attr("datetime") : $(this).attr("title") ) });
+                refresh.apply(this);
+            },
+            dispose: function () {
+                if (this._timeagoInterval) {
+                    window.clearInterval(this._timeagoInterval);
+                    this._timeagoInterval = null;
+                }
+            }
+        };
+
+        $.fn.timeago = function(action, options) {
+            var fn = action ? functions[action] : functions.init;
+            if(!fn){
+                throw new Error("Unknown function name '"+ action +"' for timeago");
+            }
+            // each over objects here and call the requested function
+            this.each(function(){
+                fn.call(this, options);
+            });
+            return this;
+        };
+
+        function refresh() {
+            var data = prepareData(this);
+            var $s = $t.settings;
+
+            if (!isNaN(data.datetime)) {
+                if ( $s.cutoff == 0 || Math.abs(distance(data.datetime)) < $s.cutoff) {
+                    $(this).text(inWords(data.datetime));
+                }
+            }
+            return this;
+        }
+
+        function prepareData(element) {
+            element = $(element);
+            if (!element.data("timeago")) {
+                element.data("timeago", { datetime: $t.datetime(element) });
+                var text = $.trim(element.text());
+                if ($t.settings.localeTitle) {
+                    element.attr("title", element.data('timeago').datetime.toLocaleString());
+                } else if (text.length > 0 && !($t.isTime(element) && element.attr("title"))) {
+                    element.attr("title", text);
+                }
+            }
+            return element.data("timeago");
+        }
+
+        function inWords(date) {
+            return $t.inWords(distance(date));
+        }
+
+        function distance(date) {
+            return (new Date().getTime() - date.getTime());
+        }
+
+        // fix for IE6 suckage
+        document.createElement("abbr");
+        document.createElement("time");
+    }));
+
+
+    $(function () {
+        setInterval(function () {
+
+                if ( $('.ajax-time').length > 0) {
+                    $('.ajax-time').timeago()
+                        .removeClass('.ajax-time');
+                }
+            },
+            500);
+    });
+</script>		<script>
+
+			
+            $('#rmjs-1').readmore({
+                speed: 75,
+                collapsedHeight: 190,
+                moreLink: '<a href="#" class="hash"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg> Read more</a>',
+				lessLink: '<a href="#" class="hash"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z" /></svg> Read less</a>',
+                afterToggle: function(trigger, element, expanded) {
+                    //if(! expanded) {
+                        // The "Close" link was clicked
+                        $('html, body').animate({scrollTop: element.offset().top}, {duration: 100});
+                    //}
+                }
+            });
+            var running = false;
+            $( document ).on( 'change', '#chat_message_upload_media_file', function(e){
+                if( running === true ){
+                    running = false;
+                    return false;
+                }
+                running = true;
+                var countFiles = $(this)[0].files.length;
+                var imgPath = $(this)[0].value;
+                var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
+
+                if(countFiles > 1) {
+                    M.toast({html: 'Please select Four Images only.'});
+                } else if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg") {
+
+                    let from = $( '#user-id' ).val();
+                    let formData = new FormData();
+                    formData.append( "media", $(this)[0].files[0],$(this)[0].files[0].value );
+                    formData.append( 'to' , $('#user-id').val() );
+                    formData.append( 'message_id' , window.message_id );
+
+                    var img = $('<img style="width: 300px;border-radius: 20px;">');
+                    //if (typeof(FileReader) != "undefined") {
+                    let reader = new FileReader();
+                    reader.onload = function(e) {
+                        img.attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL($(this)[0].files[0]);
+                    //}
+
+                    $('.lds-facebook').removeClass('hide');
+                    $('#btn_chat_f_send').addClass('hide');
+
+                    $( '.chat_message_upload_media_imgprogress' ).removeClass( 'hide' );
+                    $( '.chat_message_upload_media_imgstatus' ).removeClass( 'hide' );
+                    $.ajax({
+                        xhr: function() {
+                            let xhr = new window.XMLHttpRequest();
+                            xhr.upload.addEventListener("progress", function(evt){
+                                if (evt.lengthComputable) {
+                                    let percentComplete = evt.loaded / evt.total;
+                                    percentComplete = parseInt(percentComplete * 100);
+                                    //console.log( 'prog: ' + percentComplete + '%');
+                                    $( '#chat_message_upload_media_imgstatus' ).html( percentComplete + '%');
+                                    $( '.chat_message_upload_media_imgdeterminate' ).css({'width': percentComplete + '%'});
+                                    if (percentComplete === 100) {
+                                        $( '.chat_message_upload_media_imgprogress' ).addClass( 'hide' );
+                                        $( '.chat_message_upload_media_imgstatus' ).addClass( 'hide' );
+                                        $( '#chat_message_upload_media_imgstatus' ).html( '' );
+                                    }
+                                }
+                            }, false);
+                            return xhr;
+                        },
+                        beforeSend: function() {
+                            $('.messages').append('<div class="data_message" data-id="' + window.message_id + '"><div class="message to-user pull-right" data-id=""><div class="user-message"></div><div class="clear"></div></div><div class="clear"></div></div>');
+                            img.appendTo($('.data_message[data-id="' + window.message_id + '"]').find('.user-message'));
+                            $('.user-messages').scrollTop($('.user-messages')[0].scrollHeight);
+                            window.message_id = makeid();
+                        },
+                        url: 'http://localhost/msp/endpoints/messages/upload_media?hash_id=' + $('.main_session').val(),
+                        type: "POST",
+                        async: true,
+                        data: formData,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        timeout: 60000,
+                        dataType: false,
+                        success: function(data) {
+                            $('.data_message[data-id="' + data.message_id + '"]').replaceWith(data.message);
+                            running = false;
+                        }
+                    });
+
+                }else{
+                    M.toast({html: 'Please select only Images.'});
+                }
+            });
+
+            // update user last seen
+            function getRandomBetween(min, max) {
+                return min + Math.random() * (max - min);
+            }
+            function UpdateLastSeen() {
+                $.get('http://localhost/msp/endpoints/user/update_lastseen', { }, function () {
+                    setTimeout(UpdateLastSeen, getRandomBetween(60000, 120000));
+                });
+            }
+            setTimeout(UpdateLastSeen, getRandomBetween(60000, 120000));
+            function GetArtist(key,form = '') {
+            	$.post('http://localhost/msp/endpoints/tag_artist/tag', {key: key}, function(data, textStatus, xhr) {
+            		if (data.html) {
+            			if (form != '') {
+            				$('#group_chat_mbr_list_'+form).html(data.html);
+            			}
+            			else{
+            				$('.group_chat_mbr_list').html(data.html);
+            			}
+            		}
+            	});
+            }
+            function ApproveRequest(id) {
+            	$.post('http://localhost/msp/endpoints/tag_artist/approve', {id: id}, function(data, textStatus, xhr) {});
+            }
+            function DeclineRequest(id) {
+            	$.post('http://localhost/msp/endpoints/tag_artist/decline', {id: id}, function(data, textStatus, xhr) {});
+            }
+            function count_char(self,id) {
+			    $(self).limit("640", id);
+			}
+		</script>
+		<script src="./Discover_files/footer.js(1).download"></script>
+	
+</ink></ink><iframe name="__privateStripeMetricsController1810" frameborder="0" allowtransparency="true" scrolling="no" role="presentation" allow="payment *" src="./Discover_files/m-outer-27c67c0d52761104439bb051c7856ab1.html" aria-hidden="true" tabindex="-1" style="border: none !important; margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; visibility: hidden !important; position: fixed !important; height: 1px !important; pointer-events: none !important; user-select: none !important;"></iframe><div class="modal-backdrop fade show"></div></body></html>
